@@ -276,18 +276,8 @@ async function onload() {
       <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
     <div id="options">
       <table>
-        <tr>
-          <td><label for="country">iTunes Store Country:</label></td>
-          <td><select name="country">${ 
-            Object.keys(countries).map(c => `<option value="${c}" ${c === country ? "selected" : ""}>${countries[c]}</option>`).join('')
-          }</select></td>
-        </tr>
-        <tr>
-          <td><label for="country">Media type:</label></td>
-          <td><select name="entity">${ 
-            Object.keys(entities).map(e => `<option value="${e}" ${e === entity ? "selected" : ""}>${entities[e]}</option>`).join('')
-          }</select></td>
-        </tr>
+      <!-- Country dropdown removed -->
+      <!-- Media type dropdown removed -->
       </table>
     </div>
   </form><div id="results"></div>`
