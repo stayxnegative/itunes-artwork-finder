@@ -169,17 +169,25 @@ body {
 // entities object removed, not used
 
 function buildUrl(term, entity, country) {
-  const urlSearchParams = new URLSearchParams()
-  urlSearchParams.set('country', country)
-  urlSearchParams.set('limit', 25)
+  const urlSearchParams = new URLSearchParams();
+  urlSearchParams.set('country', country);
+  urlSearchParams.set('limit', 25);
   urlSearchParams.set('entity', entity);
-  let baseUrl = 'https://itunes.apple.com/search';
-  urlSearchParams.set('term', term);
-  return `${baseUrl}?${urlSearchParams}`;
+  // Check for artistId
+  if (arguments.length > 3 && arguments[3]) {
+    // If artistId is provided, use lookup endpoint
+    urlSearchParams.set('id', arguments[3]);
+    return `https://itunes.apple.com/lookup?${urlSearchParams}`;
+  } else {
+    urlSearchParams.set('term', term);
+    return `https://itunes.apple.com/search?${urlSearchParams}`;
+  }
 }
 
 async function fetchResults(term, entity, country) {
-  const url = buildUrl(term, entity, country)
+  // Accept optional artistId
+  const artistId = arguments.length > 3 ? arguments[3] : undefined;
+  const url = buildUrl(term, entity, country, artistId);
   const response = await fetch(url)
   if (!response.ok) {
     console.log(response)
@@ -189,35 +197,39 @@ async function fetchResults(term, entity, country) {
 }
 
 async function onload() {
-  const searchParams = new URLSearchParams(window.location.search)
-  const term = searchParams.get('term')
-  const country = searchParams.get('country') || 'us'
-  const entity = searchParams.get('entity') || 'album'
+  const searchParams = new URLSearchParams(window.location.search);
+  const term = searchParams.get('term');
+  const country = searchParams.get('country') || 'us';
+  const entity = searchParams.get('entity') || 'album';
+  const artistId = searchParams.get('artistId') || '';
 
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
     <div id="searchField">
-  <h1 style="text-align:center;">Artwork Finder</h1>
-      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
+      <h1 style="text-align:center;">Artwork Finder</h1>
+      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" />
+      <input type="text" name="artistId" value="${artistId}" placeholder="Artist ID (optional)" style="margin-left:1em; width:200px;" />
+      <input type="submit" value="Search" />
+    </div>
     <div id="options">
     </div>
-  </form><div id="results"></div>`
+  </form><div id="results"></div>`;
 
-  if (term == null || term.length == 0) {
-    return
+  if ((term == null || term.length == 0) && (!artistId || artistId.length == 0)) {
+    return;
   }
 
   const resultsDiv = document.getElementById('results')
   resultsDiv.innerHTML = `<div id="progress">Loading results...</div>`
 
-  let error
-  let results
+  let error;
+  let results;
   try {
-    results = await fetchResults(term, entity, country)
-    console.log(results)
+    results = await fetchResults(term, entity, country, artistId);
+    console.log(results);
   } catch(e) {
-    error = e.message
-    console.log(e)
+    error = e.message;
+    console.log(e);
   }
 
   if (results == null) {
