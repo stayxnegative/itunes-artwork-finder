@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>iTunes Artwork Finder</title>
+    <title>Artwork Finder</title>
     <style type="text/css">
 body {
   font-family: Helvetica, Arial, sans-serif;
@@ -77,7 +77,7 @@ body {
   box-sizing: border-box;
   padding: 0.5em;
   overflow: hidden;
-  box-shadow: 0 4px 24px 0 rgba(255,255,255,0.15);
+  /* box-shadow moved to hover */
 }
 
 @media(max-width: 1000px) {
@@ -122,6 +122,10 @@ body {
 
 .result:hover .links {
   visibility: visible;
+}
+
+.result:hover {
+  box-shadow: 0 4px 24px 0 rgba(255,255,255,0.15);
 }
 
 .result .links a {
