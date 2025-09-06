@@ -314,13 +314,23 @@ async function onload() {
       resultsDiv.innerHTML = `<div id="error">Sorry, no results.</div>`
     } else {
       resultsDiv.innerHTML = `${resultItems.map(result => {
-        const artworkUrl100 = result["artworkUrl100"]
-        const artworkUrl300 = artworkUrl100.replace('100x100', '300x300')
-        const artworkUrl600 = artworkUrl100.replace('100x100', '600x600-999')
-        const artworkUrl1200 = artworkUrl100.replace('100x100', '1500x1500-999')
-        const artworkUrl5000 = artworkUrl100.replace('100x100', '10000x10000-999')
-        
-        const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}` : (result['collectionName'] || result['trackName'])
+        const artworkUrl100 = result["artworkUrl100"];
+        // Helper to replace and clean up the URL
+        function fixArtworkUrl(url, size) {
+          let newUrl = url.replace('100x100', `${size}x${size}-999`);
+          // Remove 'bb' before '.jpg' if present
+          newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
+          // Ensure it ends with .jpg
+          if (!newUrl.endsWith('.jpg')) {
+            newUrl += '.jpg';
+          }
+          return newUrl;
+        }
+        const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
+        const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
+        const artworkUrl1200 = fixArtworkUrl(artworkUrl100, 1500);
+        const artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
+        const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}` : (result['collectionName'] || result['trackName']);
         return `<div class="result">
           <div class="artwork">
             <img src="${artworkUrl300}" />
@@ -331,7 +341,7 @@ async function onload() {
             </div>
           </div>
           <h2>${title}</h2>
-        </div>`
+        </div>`;
       }).join('')}`
     }
   }
