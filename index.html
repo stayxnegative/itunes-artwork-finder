@@ -203,7 +203,7 @@ async function onload() {
   <h1 style="text-align:center;">Artwork Finder</h1>
       <div style="position: relative; display: inline-block; width: 80%;">
         <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" />
-        <button type="button" onclick="this.previousElementSibling.value=''; this.previousElementSibling.focus();" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; cursor: pointer; padding: 0 10px;">✕</button>
+        <button type="button" onclick="this.previousElementSibling.value=''; this.previousElementSibling.focus();" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none !important; border: none; color: #fff; cursor: pointer; padding: 0 10px; -webkit-appearance: none;">✕</button>
       </div><input type="submit" value="Search" /></div>
     <div id="options">
     </div>
