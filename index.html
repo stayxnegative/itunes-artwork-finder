@@ -115,18 +115,15 @@ body {
 }
 
 .result .links {
-  position: absolute;
-  bottom: 0;
-  visibility: hidden;
+  position: static;
+  margin-top: 8px;
+  text-align: center;
   font-size: 8pt;
-  border: 2px solid #000000;
-  border-radius: 0.5em;
-  background: #272727;
-  box-shadow: 2px 4px 12px 0 rgba(255, 254, 254, 0.094);
+  visibility: visible;
 }
 
 .result:hover .links {
-  visibility: visible;
+  /* No longer needed, links always visible below artwork */
 }
 
 .result:hover {
@@ -264,11 +261,11 @@ async function onload() {
         return `<div class="result">
           <div class="artwork">
             <img src="${artworkUrl300}" />
-            <div class="links">
-              <a href="${artworkUrl600}" target="_blank">600</a>
-              <a href="${artworkUrl1200}" target="_blank">1500</a>
-              <a href="${artworkUrl5000}" target="_blank">HD</a>
-            </div>
+          </div>
+          <div class="links">
+            <a href="${artworkUrl600}" target="_blank">600</a>
+            <a href="${artworkUrl1200}" target="_blank">1500</a>
+            <a href="${artworkUrl5000}" target="_blank">HD</a>
           </div>
           <h2>${title}</h2>
         </div>`;
