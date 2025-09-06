@@ -152,101 +152,21 @@ body {
 'use strict'
 
 const countries = Object.freeze({
-  ae: 'United Arab Emirates',   ag: 'Antigua and Barbuda',              ai: 'Anguilla',
-  al: 'Albania',                am: 'Armenia',                          ao: 'Angola',
-  ar: 'Argentina',              at: 'Austria',                          au: 'Australia',
-  az: 'Azerbaijan',             bb: 'Barbados',                         be: 'Belgium',
-  bf: 'Burkina-Faso',           bg: 'Bulgaria',                         bh: 'Bahrain',
-  bj: 'Benin',                  bm: 'Bermuda',                          bn: 'Brunei Darussalam',
-  bo: 'Bolivia',                br: 'Brazil',                           bs: 'Bahamas',
-  bt: 'Bhutan',                 bw: 'Botswana',                         by: 'Belarus',
-  bz: 'Belize',                 ca: 'Canada',                           cg: 'Democratic Republic of the Congo',
-  ch: 'Switzerland',            cl: 'Chile',                            cn: 'China',
-  co: 'Colombia',               cr: 'Costa Rica',                       cv: 'Cape Verde',
-  cy: 'Cyprus',                 cz: 'Czech Republic',                   de: 'Germany',
-  dk: 'Denmark',                dm: 'Dominica',                         do: 'Dominican Republic',
-  dz: 'Algeria',                ec: 'Ecuador',                          ee: 'Estonia',
-  eg: 'Egypt',                  es: 'Spain',                            fi: 'Finland',
-  fj: 'Fiji',                   fm: 'Federated States of Micronesia',   fr: 'France',
-  gb: 'United Kingdom',         gd: 'Grenada',                          gh: 'Ghana',
-  gm: 'Gambia',                 gr: 'Greece',                           gt: 'Guatemala',
-  gw: 'Guinea Bissau',          gy: 'Guyana',                           hk: 'Hong Kong',
-  hn: 'Honduras',               hr: 'Croatia',                          hu: 'Hungary',
-  id: 'Indonesia',              ie: 'Ireland',                          il: 'Israel',
-  in: 'India',                  is: 'Iceland',                          it: 'Italy',
-  jm: 'Jamaica',                jo: 'Jordan',                           jp: 'Japan',
-  ke: 'Kenya',                  kg: 'Krygyzstan',                       kh: 'Cambodia',
-  kn: 'Saint Kitts and Nevis',  kr: 'South Korea',                      kw: 'Kuwait',
-  ky: 'Cayman Islands',         kz: 'Kazakhstan',                       la: 'Laos',
-  lb: 'Lebanon',                lc: 'Saint Lucia',                      lk: 'Sri Lanka',
-  lr: 'Liberia',                lt: 'Lithuania',                        lu: 'Luxembourg',
-  lv: 'Latvia',                 md: 'Moldova',                          mg: 'Madagascar',
-  mk: 'Macedonia',              ml: 'Mali',                             mn: 'Mongolia',
-  mo: 'Macau',                  mr: 'Mauritania',                       ms: 'Montserrat',
-  mt: 'Malta',                  mu: 'Mauritius',                        mw: 'Malawi',
-  mx: 'Mexico',                 my: 'Malaysia',                         mz: 'Mozambique',
-  na: 'Namibia',                ne: 'Niger',                            ng: 'Nigeria',
-  ni: 'Nicaragua',              nl: 'Netherlands',                      np: 'Nepal',
-  no: 'Norway',                 nz: 'New Zealand',                      om: 'Oman',
-  pa: 'Panama',                 pe: 'Peru',                             pg: 'Papua New Guinea',
-  ph: 'Philippines',            pk: 'Pakistan',                         pl: 'Poland',
-  pt: 'Portugal',               pw: 'Palau',                            py: 'Paraguay',
-  qa: 'Qatar',                  ro: 'Romania',                          ru: 'Russia',
-  sa: 'Saudi Arabia',           sb: 'Soloman Islands',                  sc: 'Seychelles',
-  se: 'Sweden',                 sg: 'Singapore',                        si: 'Slovenia',
-  sk: 'Slovakia',               sl: 'Sierra Leone',                     sn: 'Senegal',
-  sr: 'Suriname',               st: 'Sao Tome e Principe',              sv: 'El Salvador',
-  sz: 'Swaziland',              tc: 'Turks and Caicos Islands',         td: 'Chad',
-  th: 'Thailand',               tj: 'Tajikistan',                       tm: 'Turkmenistan',
-  tn: 'Tunisia',                tr: 'Turkey',                           tt: 'Republic of Trinidad and Tobago',
-  tw: 'Taiwan',                 tz: 'Tanzania',                         ua: 'Ukraine',
-  ug: 'Uganda',                 us: 'United States of America',         uy: 'Uruguay',
-  uz: 'Uzbekistan',             vc: 'Saint Vincent and the Grenadines', ve: 'Venezuela',
-  vg: 'British Virgin Islands', vn: 'Vietnam',                          ye: 'Yemen',
-  za: 'South Africa',           zw: 'Zimbabwe'
+  us: 'United States of America'
 })
 
 const entities = Object.freeze({
-  tvSeason: "TV Show",
-  movie: "Movie",
-  ebook: "iBook",
   album: "Album",
-  software: "App (iPhone or Universal)",
-  iPadSoftware: "App (iPad)",
-  macSoftware: "App (macOS)",
-  audiobook: "Audiobook",
-  podcast: "Podcast",
-  musicVideo: "Music Video",
-  id: "Movie ID",
-  idAlbum: "Album ID",
-  shortFilm: "Short Film"
 })
 
 function buildUrl(term, entity, country) {
   const urlSearchParams = new URLSearchParams()
   urlSearchParams.set('country', country)
   urlSearchParams.set('limit', 25)
-  if (entity == 'shortFilm') {
-    urlSearchParams.set('entity', 'movie')
-    urlSearchParams.set('attribute', 'shortFilmTerm')
-  } else {
-    urlSearchParams.set('entity', entity)
-  }
-
-  let baseUrl
-  switch (entity) {
-    case 'id':
-    case 'idAlbum': {
-      baseUrl = 'https://itunes.apple.com/lookup'
-      urlSearchParams.set('id', term)
-    } break
-    default: {
-      baseUrl = 'https://itunes.apple.com/search'
-      urlSearchParams.set('term', term)
-    } break
-  }
-
-  return `${baseUrl}?${urlSearchParams}`
+  urlSearchParams.set('entity', entity);
+  let baseUrl = 'https://itunes.apple.com/search';
+  urlSearchParams.set('term', term);
+  return `${baseUrl}?${urlSearchParams}`;
 }
 
 async function fetchResults(term, entity, country) {
@@ -266,10 +186,6 @@ async function onload() {
   const entity = searchParams.get('entity') || 'album'
 
   document.body.innerHTML = `
-    <div id="corner">
-      <a href="https://github.com/tzahola/itunes-artwork-finder">Fork on GitHub</a><br/>
-      <a href="Find%20iTunes%20Artwork.workflow.zip">Integrate into macOS Automator</a>
-    </div>
     <form id="searchForm" method="GET">
     <div id="searchField">
       <h1>iTunes Artwork Finder</h1>
@@ -322,7 +238,12 @@ async function onload() {
         const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
         const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
         const artworkUrl1200 = fixArtworkUrl(artworkUrl100, 1500);
-        const artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
+        // Integrate custom regex for artworkUrl5000
+        let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
+        artworkUrl5000 = artworkUrl5000.replace(
+          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
+          "https://a1.mzstatic.com/us/r1000/063/$1"
+        );
         const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}` : (result['collectionName'] || result['trackName']);
         return `<div class="result">
           <div class="artwork">
