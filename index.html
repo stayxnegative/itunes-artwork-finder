@@ -171,7 +171,7 @@ body {
 function buildUrl(term, entity, country) {
   const urlSearchParams = new URLSearchParams()
   urlSearchParams.set('country', country)
-  urlSearchParams.set('limit', 25)
+  urlSearchParams.set('limit', 40)
   urlSearchParams.set('entity', entity);
   let baseUrl = 'https://itunes.apple.com/search';
   urlSearchParams.set('term', term);
