@@ -188,33 +188,16 @@ async function onload() {
 
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
-      <div id="searchField" style="display:flex; flex-direction:column; align-items:center;">
-        <h1 style="text-align:center;">iTunes Artwork Finder</h1>
-        <div style="display:flex; width:100%; max-width:700px;">
-          <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="flex:2;" />
-          <input type="submit" value="Search" style="flex:1;" />
-          <button type="button" id="clearBtn" style="flex:1; margin-left:0.5em;">Clear</button>
-        </div>
-      </div>
-      <div id="options">
-        <table>
-        <!-- Country dropdown removed -->
-        <!-- Media type dropdown removed -->
-        </table>
-      </div>
-    </form><div id="results"></div>`
-
-  // Add clear button functionality
-  setTimeout(() => {
-    const clearBtn = document.getElementById('clearBtn');
-    const termInput = document.querySelector('input[name="term"]');
-    if (clearBtn && termInput) {
-      clearBtn.onclick = function() {
-        termInput.value = '';
-        termInput.focus();
-      };
-    }
-  }, 0);
+    <div id="searchField">
+  <h1 style="text-align:center;">iTunes Artwork Finder</h1>
+      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
+    <div id="options">
+      <table>
+      <!-- Country dropdown removed -->
+      <!-- Media type dropdown removed -->
+      </table>
+    </div>
+  </form><div id="results"></div>`
 
   if (term == null || term.length == 0) {
     return
