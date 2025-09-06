@@ -127,7 +127,7 @@ body {
 }
 
 .result:hover {
-  box-shadow: 0 4px 24px 0 rgba(255,255,255,0.15);
+  box-shadow: 0 4px 24px 0 rgba(101, 174, 251, 0.509);
 }
 
 .result .links a {
@@ -192,24 +192,6 @@ async function fetchResults(term, entity, country) {
 }
 
 async function onload() {
-  // Add clear button functionality for the input X button
-  setTimeout(() => {
-    const inputClearBtn = document.getElementById('inputClearBtn');
-    const termInput = document.querySelector('input[name="term"]');
-    if (inputClearBtn && termInput) {
-      // Hide button initially if input is empty
-      inputClearBtn.style.display = termInput.value ? 'block' : 'none';
-      // Show/hide button on input
-      termInput.addEventListener('input', function() {
-        inputClearBtn.style.display = this.value ? 'block' : 'none';
-      });
-      inputClearBtn.onclick = function() {
-        termInput.value = '';
-        termInput.focus();
-        inputClearBtn.style.display = 'none';
-      };
-    }
-  }, 0);
   const searchParams = new URLSearchParams(window.location.search)
   const term = searchParams.get('term')
   const country = searchParams.get('country') || 'us'
@@ -217,28 +199,12 @@ async function onload() {
 
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
-      <div id="searchField" style="position:relative; display:flex; flex-direction:column; align-items:center; width:100%; max-width:700px; margin:0 auto;">
-        <h1 style="text-align:center;">Artwork Finder</h1>
-        <div style="position:relative; width:100%; display:flex; align-items:center;">
-          <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="padding-right:2em; flex:1;" />
-          <button type="button" id="inputClearBtn" style="position:absolute; right:calc(1em + 8px); top:50%; transform:translateY(-50%); background:none; border:none; color:#fff; font-size:1em; width:1em; height:1em; line-height:1em; padding:0; cursor:pointer;">&#10006;</button>
-          <input type="submit" value="Search" style="margin-left:1em; position:relative; z-index:0;" />
-        </div>
-      </div>
-      <div id="options">
-      </div>
-    </form><div id="results"></div>`
-  // Add clear button functionality for the input X button
-  setTimeout(() => {
-    const inputClearBtn = document.getElementById('inputClearBtn');
-    const termInput = document.querySelector('input[name="term"]');
-    if (inputClearBtn && termInput) {
-      inputClearBtn.onclick = function() {
-        termInput.value = '';
-        termInput.focus();
-      };
-    }
-  }, 0);
+    <div id="searchField">
+  <h1 style="text-align:center;">Artwork Finder</h1>
+      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
+    <div id="options">
+    </div>
+  </form><div id="results"></div>`
 
   if (term == null || term.length == 0) {
     return
