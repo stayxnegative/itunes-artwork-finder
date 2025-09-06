@@ -200,32 +200,12 @@ async function onload() {
 
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
-      <div id="searchField" style="position:relative; display:flex; align-items:center; gap:0.5em;">
-        <h1 style="text-align:center; width:100%;">Artwork Finder</h1>
-        <div style="position:relative; flex:1;">
-          <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="padding-right:2em; width:100%;" />
-          <button type="button" id="clearXBtn" style="position:absolute; right:0.5em; top:50%; transform:translateY(-50%); display:none; background:none; border:none; color:#fff; font-size:1.2em; cursor:pointer;">&#10006;</button>
-        </div>
-        <button type="submit" style="flex-shrink:0;">Search</button>
-      </div>
-      <div id="options"></div>
-    </form><div id="results"></div>`
-
-  // Show/hide clear button and clear text on click
-  setTimeout(() => {
-    const termInput = document.querySelector('input[name="term"]');
-    const clearBtn = document.getElementById('clearXBtn');
-    function toggleClearBtn() {
-      clearBtn.style.display = termInput.value.length > 0 ? 'inline' : 'none';
-    }
-    termInput.addEventListener('input', toggleClearBtn);
-    toggleClearBtn();
-    clearBtn.onclick = function() {
-      termInput.value = '';
-      termInput.focus();
-      toggleClearBtn();
-    };
-  }, 0);
+    <div id="searchField">
+  <h1 style="text-align:center;">Artwork Finder</h1>
+      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
+    <div id="options">
+    </div>
+  </form><div id="results"></div>`
 
   if (term == null || term.length == 0) {
     return
@@ -273,7 +253,15 @@ async function onload() {
           /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
           "https://a1.mzstatic.com/us/r1000/063/$1"
         );
-        const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}` : (result['collectionName'] || result['trackName']);
+        // Get release year
+        let year = '';
+        if (result['releaseDate']) {
+          const d = new Date(result['releaseDate']);
+          if (!isNaN(d.getFullYear())) {
+            year = ` (${d.getFullYear()})`;
+          }
+        }
+        const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}${year}` : (result['collectionName'] || result['trackName']);
         return `<div class="result">
           <div class="artwork">
             <img src="${artworkUrl300}" />
