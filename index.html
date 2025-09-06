@@ -61,10 +61,13 @@ body {
 .result {
   flex-basis: 10%;
   box-sizing: border-box;
-  padding: 0.5em;
-  margin: 0.5em;
+  padding: 1.5em 1em 1em 1em;
+  margin: 1em;
   overflow: hidden;
-  /* box-shadow moved to hover */
+  border-radius: 1em;
+  background: #181818;
+  border: 1px solid #232323;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
 @media(max-width: 1000px) {
@@ -112,7 +115,8 @@ body {
 }
 
 .result:hover {
-  box-shadow: 0 4px 24px 0 rgba(69, 122, 180, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(69, 122, 180, 0.25);
+  transform: translateY(-4px) scale(1.03);
 }
 
 .result .links a {
