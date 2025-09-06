@@ -169,12 +169,19 @@ body {
 // entities object removed, not used
 
 function buildUrl(term, entity, country) {
-  const urlSearchParams = new URLSearchParams()
-  urlSearchParams.set('country', country)
-  urlSearchParams.set('limit', 25)
+  const urlSearchParams = new URLSearchParams();
+  urlSearchParams.set('country', country);
+  urlSearchParams.set('limit', 25);
   urlSearchParams.set('entity', entity);
-  let baseUrl = 'https://itunes.apple.com/search';
-  urlSearchParams.set('term', term);
+  let baseUrl;
+  // If term is a number, treat as artistId and use lookup endpoint
+  if (/^\d+$/.test(term)) {
+    baseUrl = 'https://itunes.apple.com/lookup';
+    urlSearchParams.set('id', term);
+  } else {
+    baseUrl = 'https://itunes.apple.com/search';
+    urlSearchParams.set('term', term);
+  }
   return `${baseUrl}?${urlSearchParams}`;
 }
 
