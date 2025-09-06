@@ -318,7 +318,7 @@
             const artworkUrl300 = artworkUrl100.replace('100x100', '300x300')
             const artworkUrl600 = artworkUrl100.replace('100x100', '600x600-999.jpg')
             const artworkUrl1500 = artworkUrl100.replace('100x100', '1500x1500-999.jpg')
-            const artworkUrl5000 = artworkUrl100.replace('100x100', '5000x5000-999.jpg').replace('https', 'http').replace(/is\d-ssl/, 'a1').replace('image', 'us').replace('thumb', 'r1000/063').replace('5000x5000-999.jpg', '')
+            const artworkUrl5000 = artworkUrl100.replace('100x100', '5000x5000-999.jpg')
 
             const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}` : (result['collectionName'] || result['trackName'])
             return `<div class="result">
