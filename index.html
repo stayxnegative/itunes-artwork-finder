@@ -10,13 +10,6 @@ body {
   color: #fff;
 }
 
-#corner {
-  font-size: 8pt;
-  position: absolute;
-  top: 1em;
-  left: 1em;
-}
-
 #searchForm {
   max-width: 50em;
   margin: 3em auto;
@@ -192,6 +185,19 @@ async function onload() {
     <div id="options">
     </div>
   </form><div id="results"></div>`
+
+  // Clear the search input after submit
+  setTimeout(() => {
+    const searchForm = document.getElementById('searchForm');
+    const termInput = document.querySelector('input[name="term"]');
+    if (searchForm && termInput) {
+      searchForm.addEventListener('submit', function(e) {
+        setTimeout(() => {
+          termInput.value = '';
+        }, 10);
+      });
+    }
+  }, 0);
 
   if (term == null || term.length == 0) {
     return
