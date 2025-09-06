@@ -219,8 +219,8 @@ async function onload() {
     <form id="searchForm" method="GET">
       <div id="searchField" style="position:relative;">
         <h1 style="text-align:center;">Artwork Finder</h1>
-        <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="padding-right:2em;" />
-  <button type="button" id="inputClearBtn" style="position:absolute; right:1em; top:50%; transform:translateY(-50%); background:none; border:none; color:#fff; font-size:1em; width:1.5em; height:1.5em; line-height:1.5em; padding:0; cursor:pointer;">&#10006;</button>
+  <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="padding-right:2em; position:relative;" />
+  <button type="button" id="inputClearBtn" style="position:absolute; right:0.5em; top:50%; transform:translateY(-50%); background:none; border:none; color:#fff; font-size:1em; width:1em; height:1em; line-height:1em; padding:0; cursor:pointer;">&#10006;</button>
         <input type="submit" value="Search" />
       </div>
       <div id="options">
