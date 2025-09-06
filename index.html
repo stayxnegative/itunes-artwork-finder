@@ -201,7 +201,10 @@ async function onload() {
     <form id="searchForm" method="GET">
     <div id="searchField">
   <h1 style="text-align:center;">Artwork Finder</h1>
-      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
+      <div style="position: relative; display: inline-block; width: 80%;">
+        <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" />
+        <button type="button" onclick="this.previousElementSibling.value=''; this.previousElementSibling.focus();" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; cursor: pointer; padding: 0 10px;">✕</button>
+      </div><input type="submit" value="Search" /></div>
     <div id="options">
     </div>
   </form><div id="results"></div>`
