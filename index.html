@@ -325,7 +325,6 @@
             const artworkUrl5000 = artworkUrl100.replace(
               'https', 'http'
             ).replace(/is\d-ssl/, 'a1').replace('image', 'us').replace('thumb', 'r1000/063').replace('/60x60bb.jpg', '')
-            const releaseDate = new Date(album.releaseDate)
 
             const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}` : (result['collectionName'] || result['trackName'])
             return `<div class="result">
