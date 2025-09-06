@@ -9,7 +9,6 @@ body {
   background: #000000;
   color: #fff;
 }
-}
 
 #corner {
   font-size: 8pt;
@@ -56,16 +55,7 @@ body {
   color: #828282;
 }
 
-#options {
-  display: flex;
-  margin-top: 3em;
-  justify-content: flex-end;
-  font-size: 10pt;
-}
-
-#options select {
-  width: 20em;
-}
+/* #options removed, not used */
 
 #results {
   margin: 3em;
@@ -160,17 +150,13 @@ body {
 #progress {
   color: #ddd;
 }
-    </style>
+  </style>
     <script type="text/javascript">
 'use strict'
 
-const countries = Object.freeze({
-  us: 'United States of America'
-})
+// countries object removed, not used
 
-const entities = Object.freeze({
-  album: "Album",
-})
+// entities object removed, not used
 
 function buildUrl(term, entity, country) {
   const urlSearchParams = new URLSearchParams()
