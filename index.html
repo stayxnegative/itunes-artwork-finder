@@ -189,8 +189,11 @@ async function onload() {
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
     <div id="searchField">
-  <h1 style="text-align:center;">iTunes Artwork Finder</h1>
-      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
+      <h1 style="text-align:center;">iTunes Artwork Finder</h1>
+      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" />
+      <input type="submit" value="Search" />
+      <button type="button" id="clearBtn" style="margin-left:1em;">Clear</button>
+    </div>
     <div id="options">
       <table>
       <!-- Country dropdown removed -->
@@ -198,6 +201,18 @@ async function onload() {
       </table>
     </div>
   </form><div id="results"></div>`
+
+  // Add clear button functionality
+  setTimeout(() => {
+    const clearBtn = document.getElementById('clearBtn');
+    const termInput = document.querySelector('input[name="term"]');
+    if (clearBtn && termInput) {
+      clearBtn.onclick = function() {
+        termInput.value = '';
+        termInput.focus();
+      };
+    }
+  }, 0);
 
   if (term == null || term.length == 0) {
     return
