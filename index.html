@@ -25,11 +25,6 @@ body {
 
 #searchForm input {
   -webkit-appearance: none;
-  appearance: none;
-  ::placeholder {
-    color: #fff;
-    opacity: 1;
-  }
   outline: none;
   box-sizing: border-box;
   font-size: 18pt;
@@ -168,6 +163,21 @@ body {
 #progress {
   color: #ddd;
 }
+
+footer {
+  margin: 1em 0;
+  text-align: center;
+  font-size: 10pt;
+}
+
+footer a {
+  color: #97f19d;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
   </style>
     <script type="text/javascript">
 'use strict'
@@ -283,5 +293,13 @@ async function onload() {
 }
     </script>
   </head>
-  <body onload="onload()"></body>
+  <body onload="onload()">
+    <footer style="margin: 1em 0;">
+      &copy; <span id="year"></span>
+      <a href="https://art.tyrrtechinc.com">Tyrrtech Media</a>
+    </footer>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
