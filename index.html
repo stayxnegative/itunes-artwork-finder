@@ -178,23 +178,82 @@ async function onload() {
   const entity = searchParams.get('entity') || 'album'
 
   document.body.innerHTML = `
-    <form id="searchForm" method="GET">
+    <form id="searchForm">
     <div id="searchField">
-  <h1 style="text-align:center;">Artwork Finder</h1>
-      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
-    <div id="options">
+      <h1 style="text-align:center;">Artwork Finder</h1>
+      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" />
+      <input type="submit" value="Search" />
     </div>
-  </form><div id="results"></div>`
+    <div id="options"></div>
+  </form><div id="results"></div>`;
 
-  // Clear the search input after submit
   setTimeout(() => {
     const searchForm = document.getElementById('searchForm');
     const termInput = document.querySelector('input[name="term"]');
-    if (searchForm && termInput) {
-      searchForm.addEventListener('submit', function(e) {
-        setTimeout(() => {
-          termInput.value = '';
-        }, 10);
+    const resultsDiv = document.getElementById('results');
+    if (searchForm && termInput && resultsDiv) {
+      searchForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const term = termInput.value.trim();
+        if (!term) {
+          resultsDiv.innerHTML = '';
+          return;
+        }
+        resultsDiv.innerHTML = `<div id="progress">Loading results...</div>`;
+        let error, results;
+        try {
+          results = await fetchResults(term, 'album', 'us');
+        } catch (e) {
+          error = e.message;
+        }
+        if (results == null) {
+          resultsDiv.innerHTML = `<div id="error"><p>Sorry, some error occured while loading the results...</p>${error !== null ? `<p>(${error})</p>` : ""}</div>`;
+        } else {
+          const resultItems = results["results"];
+          if (resultItems === null || !Array.isArray(resultItems) || resultItems.length === 0) {
+            resultsDiv.innerHTML = `<div id="error">Sorry, no results.</div>`;
+          } else {
+            resultsDiv.innerHTML = `${resultItems.map(result => {
+              const artworkUrl100 = result["artworkUrl100"];
+              function fixArtworkUrl(url, size) {
+                let newUrl = url.replace('100x100', `${size}x${size}-999`);
+                newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
+                if (!newUrl.endsWith('.jpg')) {
+                  newUrl += '.jpg';
+                }
+                return newUrl;
+              }
+              const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
+              const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
+              const artworkUrl1200 = fixArtworkUrl(artworkUrl100, 1500);
+              let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
+              artworkUrl5000 = artworkUrl5000.replace(
+                /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
+                "https://a1.mzstatic.com/us/r1000/063/$1"
+              );
+              let year = '';
+              if (result['releaseDate']) {
+                const d = new Date(result['releaseDate']);
+                if (!isNaN(d.getFullYear())) {
+                  year = ` (${d.getFullYear()})`;
+                }
+              }
+              const title = `${result['artistName']} - ${result['collectionName']}${year}`;
+              return `<div class="result">
+                <div class="artwork">
+                  <img src="${artworkUrl300}" />
+                  <div class="links">
+                    <a href="${artworkUrl600}" target="_blank">600</a>
+                    <a href="${artworkUrl1200}" target="_blank">1500</a>
+                    <a href="${artworkUrl5000}" target="_blank">HD</a>
+                  </div>
+                </div>
+                <h2>${title}</h2>
+              </div>`;
+            }).join('')}`;
+          }
+        }
+        termInput.value = '';
       });
     }
   }, 0);
