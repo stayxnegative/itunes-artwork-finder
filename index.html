@@ -169,19 +169,12 @@ body {
 // entities object removed, not used
 
 function buildUrl(term, entity, country) {
-  const urlSearchParams = new URLSearchParams();
-  urlSearchParams.set('country', country);
-  urlSearchParams.set('limit', 25);
+  const urlSearchParams = new URLSearchParams()
+  urlSearchParams.set('country', country)
+  urlSearchParams.set('limit', 25)
   urlSearchParams.set('entity', entity);
-  let baseUrl;
-  // If term is a number, treat as artistId and use lookup endpoint
-  if (/^\d+$/.test(term)) {
-    baseUrl = 'https://itunes.apple.com/lookup';
-    urlSearchParams.set('id', term);
-  } else {
-    baseUrl = 'https://itunes.apple.com/search';
-    urlSearchParams.set('term', term);
-  }
+  let baseUrl = 'https://itunes.apple.com/search';
+  urlSearchParams.set('term', term);
   return `${baseUrl}?${urlSearchParams}`;
 }
 
@@ -234,64 +227,49 @@ async function onload() {
     if (resultItems === null || !Array.isArray(resultItems) || resultItems.length === 0) {
       resultsDiv.innerHTML = `<div id="error">Sorry, no results.</div>`
     } else {
-      // If artistId lookup, show artist info card if present
-      if (/^\d+$/.test(term) && resultItems.length > 0 && resultItems[0].wrapperType === 'artist') {
-        const artist = resultItems[0];
-        resultsDiv.innerHTML = `
-          <div class="result">
-            <h2>${artist.artistName}</h2>
-            <div style="text-align:center; margin:1em 0; color:#aaa;">Artist ID: ${artist.artistId}</div>
-            <div style="text-align:center; color:#ccc;">${artist.primaryGenreName ? artist.primaryGenreName : ''}</div>
-            <div style="text-align:center; margin-top:1em;">
-              <a href="${artist.artistLinkUrl}" target="_blank" style="color:#97f19d; font-weight:bold; text-decoration:underline;">View on iTunes</a>
+      resultsDiv.innerHTML = `${resultItems.map(result => {
+        const artworkUrl100 = result["artworkUrl100"];
+        // Helper to replace and clean up the URL
+        function fixArtworkUrl(url, size) {
+          let newUrl = url.replace('100x100', `${size}x${size}-999`);
+          // Remove 'bb' before '.jpg' if present
+          newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
+          // Ensure it ends with .jpg
+          if (!newUrl.endsWith('.jpg')) {
+            newUrl += '.jpg';
+          }
+          return newUrl;
+        }
+        const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
+        const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
+        const artworkUrl1200 = fixArtworkUrl(artworkUrl100, 1500);
+        // Integrate custom regex for artworkUrl5000
+        let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
+        artworkUrl5000 = artworkUrl5000.replace(
+          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
+          "https://a1.mzstatic.com/us/r1000/063/$1"
+        );
+        // Get release year
+        let year = '';
+        if (result['releaseDate']) {
+          const d = new Date(result['releaseDate']);
+          if (!isNaN(d.getFullYear())) {
+            year = ` (${d.getFullYear()})`;
+          }
+        }
+        const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}${year}` : (result['collectionName'] || result['trackName']);
+        return `<div class="result">
+          <div class="artwork">
+            <img src="${artworkUrl300}" />
+            <div class="links">
+              <a href="${artworkUrl600}" target="_blank">600</a>
+              <a href="${artworkUrl1200}" target="_blank">1500</a>
+              <a href="${artworkUrl5000}" target="_blank">HD</a>
             </div>
           </div>
-        `;
-      } else {
-        resultsDiv.innerHTML = `${resultItems.map(result => {
-          const artworkUrl100 = result["artworkUrl100"];
-          // Helper to replace and clean up the URL
-          function fixArtworkUrl(url, size) {
-            let newUrl = url.replace('100x100', `${size}x${size}-999`);
-            // Remove 'bb' before '.jpg' if present
-            newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
-            // Ensure it ends with .jpg
-            if (!newUrl.endsWith('.jpg')) {
-              newUrl += '.jpg';
-            }
-            return newUrl;
-          }
-          const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
-          const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
-          const artworkUrl1200 = fixArtworkUrl(artworkUrl100, 1500);
-          // Integrate custom regex for artworkUrl5000
-          let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
-          artworkUrl5000 = artworkUrl5000.replace(
-            /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
-            "https://a1.mzstatic.com/us/r1000/063/$1"
-          );
-          // Get release year
-          let year = '';
-          if (result['releaseDate']) {
-            const d = new Date(result['releaseDate']);
-            if (!isNaN(d.getFullYear())) {
-              year = ` (${d.getFullYear()})`;
-            }
-          }
-          const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}${year}` : (result['collectionName'] || result['trackName']);
-          return `<div class="result">
-            <div class="artwork">
-              <img src="${artworkUrl300}" />
-              <div class="links">
-                <a href="${artworkUrl600}" target="_blank">600</a>
-                <a href="${artworkUrl1200}" target="_blank">1500</a>
-                <a href="${artworkUrl5000}" target="_blank">HD</a>
-              </div>
-            </div>
-            <h2>${title}</h2>
-          </div>`;
-        }).join('')}`
-      }
+          <h2>${title}</h2>
+        </div>`;
+      }).join('')}`
     }
   }
 }
