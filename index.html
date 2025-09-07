@@ -235,7 +235,26 @@ async function onload() {
     <form id="searchForm" method="GET">
     <div id="searchField">
       <h1 id="title" style="text-align:center;cursor:pointer;">Artwork Finder</h1>
-      <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
+      <div style="position:relative;display:inline-block;width:70%;max-width:400px;">
+        <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
+        <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
+      </div>
+      <input type="submit" value="Search" />
+  // Add clear button functionality
+  const searchInput = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('clearBtn');
+  if (clearBtn && searchInput) {
+    clearBtn.addEventListener('click', function() {
+      searchInput.value = "";
+      searchInput.focus();
+    });
+    // Hide clear button if input is empty
+    function toggleClearBtn() {
+      clearBtn.style.display = searchInput.value ? "block" : "none";
+    }
+    searchInput.addEventListener('input', toggleClearBtn);
+    toggleClearBtn();
+  }
     <div id="options">
     </div>
   </form><div id="results"></div>`
