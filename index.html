@@ -294,8 +294,8 @@ function buildUrl(term, entity, country) {
   urlSearchParams.set('country', country)
   urlSearchParams.set('limit', 40)
   urlSearchParams.set('entity', entity);
-  if (typeof media !== 'undefined' && media) {
-    urlSearchParams.set('media', media);
+  if (typeof window !== 'undefined' && window.attribute && window.attribute.length > 0) {
+    urlSearchParams.set('attribute', window.attribute);
   }
   let baseUrl = 'https://itunes.apple.com/search';
   urlSearchParams.set('term', term);
@@ -317,27 +317,36 @@ async function onload() {
   const term = searchParams.get('term');
   const country = searchParams.get('country') || 'us';
   let entity = 'album';
+  let attribute = '';
   let searchTerm = term;
   // Map prefixes to iTunes API entities
-  const prefixMap = {
-    'musicartist:': 'musicArtist',
-    'musictrack:': 'musicTrack',
-    'album:': 'album',
-    'song:': 'song',
-    'audiobookauthor:': 'audiobookAuthor',
-    'audiobook:': 'audiobook',
-    'ebook:': 'ebook'
+  const entityMap = {
+  'album:': 'album',
+  'song:': 'song',
+  'audiobook:': 'audiobook',
+  'ebook:': 'ebook'
   };
-  // Special handling for musicArtist and audiobookAuthor: set media as well
-  let media = undefined;
+  // Map attribute prefixes to iTunes API attributes
+  const attributeMap = {
+  'artist:': 'artistTerm',
+  'title:': 'titleTerm',
+  'author:': 'authorTerm'
+  };
   if (term) {
-    const lowerTerm = term.toLowerCase();
-    for (const prefix in prefixMap) {
-      if (lowerTerm.startsWith(prefix)) {
-        entity = prefixMap[prefix];
-        searchTerm = term.replace(new RegExp('^' + prefix, 'i'), '').trim();
-        if (entity === 'musicArtist') media = 'music';
-        if (entity === 'audiobookAuthor') media = 'audiobook';
+    let lowerTerm = term.toLowerCase();
+    for (const entityPrefix in entityMap) {
+      if (lowerTerm.startsWith(entityPrefix)) {
+        entity = entityMap[entityPrefix];
+        searchTerm = term.replace(new RegExp('^' + entityPrefix, 'i'), '').trim();
+        lowerTerm = searchTerm.toLowerCase();
+        // Check for attribute prefix
+        for (const attrPrefix in attributeMap) {
+          if (lowerTerm.startsWith(attrPrefix)) {
+            attribute = attributeMap[attrPrefix];
+            searchTerm = searchTerm.replace(new RegExp('^' + attrPrefix, 'i'), '').trim();
+            break;
+          }
+        }
         break;
       }
     }
@@ -393,6 +402,7 @@ async function onload() {
 
   let error
   let results
+  window.attribute = attribute;
   try {
     results = await fetchResults(searchTerm, entity, country)
     console.log(results)
