@@ -333,12 +333,12 @@ async function onload() {
   'audiobook:': 'audiobook',
   'ebook:': 'ebook'
   };
-  // Map country code prefixes (now using / instead of :)
+  // Map country code prefixes
   const countryMap = {
-  'uk/': 'gb',
-  'us/': 'us',
-  'ca/': 'ca',
-  'au/': 'au'
+  'uk:': 'gb',
+  'us:': 'us',
+  'ca:': 'ca',
+  'au:': 'au'
   };
   if (term) {
     let lowerTerm = term.toLowerCase();
