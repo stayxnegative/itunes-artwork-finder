@@ -377,7 +377,7 @@ async function onload() {
         }
         let displayTitle = result['collectionName'];
         if (entity === 'album' && /\bEP\b/i.test(result['collectionName'])) {
-          displayTitle = result['collectionName'].replace(/\bEP\b/i, '').trim();
+          displayTitle = result['collectionName'].replace(/\s*-?\s*EP\b/i, '').trim();
           displayTitle += ' [EP]';
         }
         const title = entity === 'album' ? `${result['artistName']} - ${displayTitle}${year}` : (result['collectionName'] || result['trackName']);
