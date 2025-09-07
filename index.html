@@ -262,13 +262,7 @@ function buildUrl(term, entity, country) {
   urlSearchParams.set('country', country);
   urlSearchParams.set('limit', 40);
   urlSearchParams.set('entity', entity);
-  let baseUrl;
-  // Switch baseUrl based on entity
-  if (["ebook", "audiobook"].includes(entity)) {
-    baseUrl = 'https://itunes.apple.com/look';
-  } else {
-    baseUrl = 'https://itunes.apple.com/search';
-  }
+  const baseUrl = 'https://itunes.apple.com/search';
   urlSearchParams.set('term', term);
   return `${baseUrl}?${urlSearchParams}`;
 }
