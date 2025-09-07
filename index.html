@@ -234,11 +234,19 @@ async function onload() {
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
     <div id="searchField">
-  <h1 style="text-align:center;">Artwork Finder</h1>
+      <h1 id="title" style="text-align:center;cursor:pointer;">Artwork Finder</h1>
       <input type="text" name="term" value="${term || ""}" placeholder="Enter search term here" /><input type="submit" value="Search" /></div>
     <div id="options">
     </div>
   </form><div id="results"></div>`
+
+  // Add click event to title to reload and clear form
+  const titleEl = document.getElementById('title');
+  if (titleEl) {
+    titleEl.addEventListener('click', function() {
+      window.location.href = window.location.pathname;
+    });
+  }
 
   if (term == null || term.length == 0) {
     return
