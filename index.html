@@ -319,6 +319,7 @@ async function onload() {
   let entity = 'album';
   let attribute = '';
   let searchTerm = term;
+  let countryCode = country;
   // Map attribute prefixes to iTunes API attributes and their default entities
   const attributeEntityMap = {
   'artist:': { entity: 'album', attribute: 'artistTerm' },
@@ -332,13 +333,30 @@ async function onload() {
   'audiobook:': 'audiobook',
   'ebook:': 'ebook'
   };
+  // Map country code prefixes (now using / instead of :)
+  const countryMap = {
+  'uk/': 'gb',
+  'us/': 'us',
+  'ca/': 'ca',
+  'au/': 'au'
+  };
   if (term) {
     let lowerTerm = term.toLowerCase();
     let entityFound = false;
+    // Check for country prefix
+    for (const countryPrefix in countryMap) {
+      if (lowerTerm.startsWith(countryPrefix)) {
+        countryCode = countryMap[countryPrefix];
+        searchTerm = term.replace(new RegExp('^' + countryPrefix, 'i'), '').trim();
+        lowerTerm = searchTerm.toLowerCase();
+        break;
+      }
+    }
+    // Check for entity prefix
     for (const entityPrefix in entityMap) {
       if (lowerTerm.startsWith(entityPrefix)) {
         entity = entityMap[entityPrefix];
-        searchTerm = term.replace(new RegExp('^' + entityPrefix, 'i'), '').trim();
+        searchTerm = searchTerm.replace(new RegExp('^' + entityPrefix, 'i'), '').trim();
         lowerTerm = searchTerm.toLowerCase();
         entityFound = true;
         break;
@@ -409,7 +427,7 @@ async function onload() {
   let results
   window.attribute = attribute;
   try {
-    results = await fetchResults(searchTerm, entity, country)
+    results = await fetchResults(searchTerm, entity, countryCode)
     console.log(results)
   } catch(e) {
     error = e.message
