@@ -294,6 +294,9 @@ function buildUrl(term, entity, country) {
   urlSearchParams.set('country', country)
   urlSearchParams.set('limit', 40)
   urlSearchParams.set('entity', entity);
+  if (typeof media !== 'undefined' && media) {
+    urlSearchParams.set('media', media);
+  }
   let baseUrl = 'https://itunes.apple.com/search';
   urlSearchParams.set('term', term);
   return `${baseUrl}?${urlSearchParams}`;
@@ -325,12 +328,16 @@ async function onload() {
     'audiobook:': 'audiobook',
     'ebook:': 'ebook'
   };
+  // Special handling for musicArtist and audiobookAuthor: set media as well
+  let media = undefined;
   if (term) {
     const lowerTerm = term.toLowerCase();
     for (const prefix in prefixMap) {
       if (lowerTerm.startsWith(prefix)) {
         entity = prefixMap[prefix];
         searchTerm = term.replace(new RegExp('^' + prefix, 'i'), '').trim();
+        if (entity === 'musicArtist') media = 'music';
+        if (entity === 'audiobookAuthor') media = 'audiobook';
         break;
       }
     }
