@@ -315,12 +315,25 @@ async function onload() {
   const country = searchParams.get('country') || 'us';
   let entity = 'album';
   let searchTerm = term;
-  if (/^audiobook:/i.test(term)) {
-    entity = 'audiobook';
-    searchTerm = term.replace(/^audiobook:/i, '').trim();
-  } else if (/^ebook:/i.test(term)) {
-    entity = 'ebook';
-    searchTerm = term.replace(/^ebook:/i, '').trim();
+  // Map prefixes to iTunes API entities
+  const prefixMap = {
+    'musicartist:': 'musicArtist',
+    'musictrack:': 'musicTrack',
+    'album:': 'album',
+    'song:': 'song',
+    'audiobookauthor:': 'audiobookAuthor',
+    'audiobook:': 'audiobook',
+    'ebook:': 'ebook'
+  };
+  if (term) {
+    const lowerTerm = term.toLowerCase();
+    for (const prefix in prefixMap) {
+      if (lowerTerm.startsWith(prefix)) {
+        entity = prefixMap[prefix];
+        searchTerm = term.replace(new RegExp('^' + prefix, 'i'), '').trim();
+        break;
+      }
+    }
   }
 
   document.body.innerHTML = `
