@@ -253,17 +253,14 @@ body {
     <script type="text/javascript">
 'use strict'
 
-const entities = Object.freeze({
-  album: "Album",
-  audiobook: "Audiobook",
-  ebook: "iBook"
-  // ...add other entities as needed...
-});
+// countries object removed, not used
+
+// entities object removed, not used
 
 function buildUrl(term, entity, country) {
-  const urlSearchParams = new URLSearchParams();
-  urlSearchParams.set('country', country);
-  urlSearchParams.set('limit', 40);
+  const urlSearchParams = new URLSearchParams()
+  urlSearchParams.set('country', country)
+  urlSearchParams.set('limit', 40)
   urlSearchParams.set('entity', entity);
   let baseUrl = 'https://itunes.apple.com/search';
   urlSearchParams.set('term', term);
@@ -284,7 +281,15 @@ async function onload() {
   const searchParams = new URLSearchParams(window.location.search);
   const term = searchParams.get('term');
   const country = searchParams.get('country') || 'us';
-  const entity = searchParams.get('entity') || 'album';
+  let entity = 'album';
+  let searchTerm = term;
+  if (/^audiobook:/i.test(term)) {
+    entity = 'audiobook';
+    searchTerm = term.replace(/^audiobook:/i, '').trim();
+  } else if (/^ebook:/i.test(term)) {
+    entity = 'ebook';
+    searchTerm = term.replace(/^ebook:/i, '').trim();
+  }
 
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
@@ -337,7 +342,7 @@ async function onload() {
   let error
   let results
   try {
-    results = await fetchResults(term, entity, country)
+    results = await fetchResults(searchTerm, entity, country)
     console.log(results)
   } catch(e) {
     error = e.message
