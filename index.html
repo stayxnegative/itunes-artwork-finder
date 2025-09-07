@@ -63,10 +63,28 @@ body {
   min-width: 0;
 }
 
-#searchField input[type="submit"] {
+#searchForm input[type=submit] {
+  background: #3a3a3a;
+  color: #ffffff;
+  border-radius: 0 0.5em 0.5em 0;
+  border-left: 0;
+  font-size: 18pt;
+  font-weight: bold;
+  padding: 0.5em 1.2em;
   margin-left: 0.25em;
   margin-top: 0;
   width: auto;
+  transition: background 0.2s, color 0.2s;
+}
+
+#searchForm input[type=submit]:hover {
+  background: #212121;
+  color: #97f19d;
+}
+
+#searchForm input[type=submit]:active {
+  background: #0b0b0b;
+  color: #828282;
 }
 
 @media (max-width: 600px) {
