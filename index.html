@@ -226,20 +226,26 @@ async function fetchResults(term, entity, country) {
 }
 
 async function onload() {
-  const searchParams = new URLSearchParams(window.location.search)
-  const term = searchParams.get('term')
-  const country = searchParams.get('country') || 'us'
-  const entity = searchParams.get('entity') || 'album'
+  const searchParams = new URLSearchParams(window.location.search);
+  const term = searchParams.get('term');
+  const country = searchParams.get('country') || 'us';
+  const entity = searchParams.get('entity') || 'album';
 
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
-    <div id="searchField">
-      <h1 id="title" style="text-align:center;cursor:pointer;">Artwork Finder</h1>
-      <div style="position:relative;display:inline-block;width:70%;max-width:400px;">
-        <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-        <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
+      <div id="searchField">
+        <h1 id="title" style="text-align:center;cursor:pointer;">Artwork Finder</h1>
+        <div style="position:relative;display:inline-block;width:70%;max-width:400px;">
+          <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
+          <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
+        </div>
+        <input type="submit" value="Search" />
       </div>
-      <input type="submit" value="Search" />
+      <div id="options"></div>
+    </form>
+    <div id="results"></div>
+  `;
+
   // Add clear button functionality
   const searchInput = document.getElementById('searchInput');
   const clearBtn = document.getElementById('clearBtn');
@@ -248,16 +254,12 @@ async function onload() {
       searchInput.value = "";
       searchInput.focus();
     });
-    // Hide clear button if input is empty
     function toggleClearBtn() {
       clearBtn.style.display = searchInput.value ? "block" : "none";
     }
     searchInput.addEventListener('input', toggleClearBtn);
     toggleClearBtn();
   }
-    <div id="options">
-    </div>
-  </form><div id="results"></div>`
 
   // Add click event to title to reload and clear form
   const titleEl = document.getElementById('title');
