@@ -379,6 +379,21 @@ async function onload() {
           /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
           "https://a1.mzstatic.com/us/r1000/063/$1"
         );
+        // For ebooks, create a new artworkUrl1467x2200
+        let artworkUrl1467x2200 = '';
+        if (entity === 'ebook') {
+          artworkUrl1467x2200 = artworkUrl100.replace('100x100', '1467x2200');
+          artworkUrl1467x2200 = artworkUrl1467x2200.replace(/bb(?=\.jpg)/, '');
+          // Ensure -999 before .jpg
+          artworkUrl1467x2200 = artworkUrl1467x2200.replace(/(1467x2200)(?!-999)(?=\.jpg)/, '$1-999');
+          // If .jpg is missing, add -999.jpg
+          if (!artworkUrl1467x2200.endsWith('.jpg')) {
+            if (!/-999$/.test(artworkUrl1467x2200)) {
+              artworkUrl1467x2200 += '-999';
+            }
+            artworkUrl1467x2200 += '.jpg';
+          }
+        }
         // Get release year
         let year = '';
         if (result['releaseDate']) {
@@ -402,6 +417,11 @@ async function onload() {
         if (entity === 'audiobook') {
           linksHtml = `
             <a href="${artworkUrl3000}" target="_blank">3000</a>
+            <a href="${artworkUrl5000}" target="_blank">HD</a>
+          `;
+        } else if (entity === 'ebook') {
+          linksHtml = `
+            <a href="${artworkUrl1467x2200}" target="_blank">2200</a>
             <a href="${artworkUrl5000}" target="_blank">HD</a>
           `;
         } else {
