@@ -517,11 +517,14 @@ setupAlbumModal();
 
 // After results are rendered, intercept artwork links
 function setupArtworkLinks() {
-  document.querySelectorAll('.result .links a').forEach(a => {
-    a.addEventListener('click', function(e) {
+  const resultsDiv = document.getElementById('results');
+  if (!resultsDiv) return;
+  resultsDiv.addEventListener('click', function(e) {
+    const a = e.target.closest('.result .links a');
+    if (a) {
       e.preventDefault();
       showAlbumModal(a.href);
-    });
+    }
   });
 }
     </script>
