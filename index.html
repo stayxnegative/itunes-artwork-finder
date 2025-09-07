@@ -283,6 +283,7 @@ async function onload() {
   const country = searchParams.get('country') || 'us';
   const entity = searchParams.get('entity') || 'album';
 
+  // Remove dropdown, search both albums and audiobooks
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
       <div id="searchField">
@@ -332,79 +333,83 @@ async function onload() {
   resultsDiv.innerHTML = `<div id="progress">Loading results...</div>`
 
   let error
-  let results
+  let albumResults, audiobookResults
   try {
-    results = await fetchResults(term, entity, country)
-    console.log(results)
+    albumResults = await fetchResults(term, 'album', country)
+    audiobookResults = await fetchResults(term, 'audiobook', country)
+    console.log(albumResults, audiobookResults)
   } catch(e) {
     error = e.message
     console.log(e)
   }
 
-  if (results == null) {
-    resultsDiv.innerHTML = `<div id="error"><p>Sorry, some error occured while loading the results...</p>${error !== null ? `<p>(${error})</p>` : ""}</div>`
+  function renderItems(results, entityType) {
+    if (!results || !results.results || !Array.isArray(results.results) || results.results.length === 0) return '';
+    return results.results.map(result => {
+      // ...existing code for artworkUrl, year, title...
+      // Helper to replace and clean up the URL
+      function fixArtworkUrl(url, size) {
+        let newUrl = url.replace('100x100', `${size}x${size}-999`);
+        newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
+        if (!newUrl.endsWith('.jpg')) {
+          newUrl += '.jpg';
+        }
+        return newUrl;
+      }
+      const artworkUrl100 = result["artworkUrl100"];
+      const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
+      const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
+      const artworkUrl1500 = fixArtworkUrl(artworkUrl100, 1500);
+      const artworkUrl3000 = fixArtworkUrl(artworkUrl100, 3000);
+      let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
+      artworkUrl5000 = artworkUrl5000.replace(
+        /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
+        "https://a1.mzstatic.com/us/r1000/063/$1"
+      );
+      let year = '';
+      if (result['releaseDate']) {
+        const d = new Date(result['releaseDate']);
+        if (!isNaN(d.getFullYear())) {
+          year = ` (${d.getFullYear()})`;
+        }
+      }
+      let displayTitle = result['collectionName'] || result['trackName'] || '';
+      if (entityType === 'album') {
+        if (/\bEP\b/i.test(displayTitle)) {
+          displayTitle = displayTitle.replace(/\s*-?\s*EP\b/i, '').trim();
+          displayTitle += ' [EP]';
+        } else if (/\bSingle\b/i.test(displayTitle)) {
+          displayTitle = displayTitle.replace(/\s*-?\s*Single\b/i, '').trim();
+          displayTitle += ' [Single]';
+        }
+      }
+      const title = entityType === 'album'
+        ? `${result['artistName']} - ${displayTitle}${year}`
+        : `${result['artistName'] || ''} - ${displayTitle}${year}`;
+      return `<div class="result">
+        <div class="artwork">
+          <img src="${artworkUrl300}" />
+        </div>
+        <div class="links">
+          <a href="${artworkUrl600}" target="_blank">600</a>
+          <a href="${artworkUrl1500}" target="_blank">1500</a>
+          <a href="${artworkUrl3000}" target="_blank">3000</a>
+          <a href="${artworkUrl5000}" target="_blank">HD</a>
+        </div>
+        <h2>${title}</h2>
+      </div>`;
+    }).join('');
+  }
+
+  let html = '';
+  html += renderItems(albumResults, 'album');
+  html += renderItems(audiobookResults, 'audiobook');
+
+  if (!html) {
+    resultsDiv.innerHTML = `<div id="error">Sorry, no results.</div>`;
   } else {
-    const resultItems = results["results"]
-    if (resultItems === null || !Array.isArray(resultItems) || resultItems.length === 0) {
-      resultsDiv.innerHTML = `<div id="error">Sorry, no results.</div>`
-    } else {
-      resultsDiv.innerHTML = `${resultItems.map(result => {
-        const artworkUrl100 = result["artworkUrl100"];
-        // Helper to replace and clean up the URL
-        function fixArtworkUrl(url, size) {
-          let newUrl = url.replace('100x100', `${size}x${size}-999`);
-          // Remove 'bb' before '.jpg' if present
-          newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
-          // Ensure it ends with .jpg
-          if (!newUrl.endsWith('.jpg')) {
-            newUrl += '.jpg';
-          }
-          return newUrl;
-        }
-        const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
-        const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
-        const artworkUrl1500 = fixArtworkUrl(artworkUrl100, 1500);
-        const artworkUrl3000 = fixArtworkUrl(artworkUrl100, 3000);
-        // Integrate custom regex for artworkUrl5000
-        let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
-        artworkUrl5000 = artworkUrl5000.replace(
-          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
-          "https://a1.mzstatic.com/us/r1000/063/$1"
-        );
-        // Get release year
-        let year = '';
-        if (result['releaseDate']) {
-          const d = new Date(result['releaseDate']);
-          if (!isNaN(d.getFullYear())) {
-            year = ` (${d.getFullYear()})`;
-          }
-        }
-        let displayTitle = result['collectionName'];
-        if (entity === 'album') {
-          if (/\bEP\b/i.test(result['collectionName'])) {
-            displayTitle = displayTitle.replace(/\s*-?\s*EP\b/i, '').trim();
-            displayTitle += ' [EP]';
-          } else if (/\bSingle\b/i.test(result['collectionName'])) {
-            displayTitle = displayTitle.replace(/\s*-?\s*Single\b/i, '').trim();
-            displayTitle += ' [Single]';
-          }
-        }
-        const title = entity === 'album' ? `${result['artistName']} - ${displayTitle}${year}` : (result['collectionName'] || result['trackName']);
-        return `<div class="result">
-          <div class="artwork">
-            <img src="${artworkUrl300}" />
-          </div>
-          <div class="links">
-            <a href="${artworkUrl600}" target="_blank">600</a>
-            <a href="${artworkUrl1500}" target="_blank">1500</a>
-            <a href="${artworkUrl3000}" target="_blank">3000</a>
-            <a href="${artworkUrl5000}" target="_blank">HD</a>
-          </div>
-          <h2>${title}</h2>
-        </div>`;
-      }).join('')}`
-      handleCardSelection();
-    }
+    resultsDiv.innerHTML = html;
+    handleCardSelection();
   }
 }
 
