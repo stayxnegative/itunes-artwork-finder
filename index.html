@@ -398,15 +398,26 @@ async function onload() {
           }
         }
         const title = entity === 'album' ? `${result['artistName']} - ${displayTitle}${year}` : (result['collectionName'] || result['trackName']);
+        let linksHtml = '';
+        if (entity === 'audiobook') {
+          linksHtml = `
+            <a href="${artworkUrl3000}" target="_blank">3000</a>
+            <a href="${artworkUrl5000}" target="_blank">HD</a>
+          `;
+        } else {
+          linksHtml = `
+            <a href="${artworkUrl600}" target="_blank">600</a>
+            <a href="${artworkUrl1500}" target="_blank">1500</a>
+            <a href="${artworkUrl3000}" target="_blank">3000</a>
+            <a href="${artworkUrl5000}" target="_blank">HD</a>
+          `;
+        }
         return `<div class="result">
           <div class="artwork">
             <img src="${artworkUrl300}" />
           </div>
           <div class="links">
-            <a href="${artworkUrl600}" target="_blank">600</a>
-            <a href="${artworkUrl1500}" target="_blank">1500</a>
-            <a href="${artworkUrl3000}" target="_blank">3000</a>
-            <a href="${artworkUrl5000}" target="_blank">HD</a>
+            ${linksHtml}
           </div>
           <h2>${title}</h2>
         </div>`;
