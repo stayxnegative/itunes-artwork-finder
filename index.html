@@ -249,65 +249,6 @@ body {
 #progress {
   color: #ddd;
 }
-
-/* Modal styles */
-#albumModal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 9999;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-}
-#albumModal.active {
-  display: flex;
-}
-#albumModal .modal-content {
-  background: #181818;
-  border-radius: 1em;
-  box-shadow: 0 8px 24px rgba(40,40,40,0.35);
-  padding: 2em 2em 1.5em 2em;
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#albumModal .modal-content img {
-  max-width: 80vw;
-  max-height: 60vh;
-  border-radius: 0.5em;
-  margin-bottom: 1em;
-}
-#albumModal .close-btn {
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  font-size: 2em;
-  color: #888;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1;
-}
-#albumModal .download-btn {
-  background: #3a3a3a;
-  color: #ffffff;
-  border-radius: 0.5em;
-  border: 2px solid #8b8b8b;
-  font-weight: bold;
-  font-size: 18pt;
-  padding: 0.5em 1.5em;
-  transition: background 0.2s, color 0.2s;
-  margin-top: 1em;
-  cursor: pointer;
-}
-#albumModal .download-btn:hover {
-  background: #212121;
-  color: #97f19d;
-}
   </style>
     <script type="text/javascript">
 'use strict'
@@ -463,7 +404,6 @@ async function onload() {
         </div>`;
       }).join('')}`
       handleCardSelection();
-      setupArtworkLinks();
     }
   }
 }
@@ -475,56 +415,6 @@ function handleCardSelection() {
       document.querySelectorAll('.result.selected').forEach(sel => sel.classList.remove('selected'));
       card.classList.add('selected');
     });
-  });
-}
-
-// Add modal HTML to body
-if (!document.getElementById('albumModal')) {
-  const modalDiv = document.createElement('div');
-  modalDiv.id = 'albumModal';
-  modalDiv.innerHTML = `<div class="modal-content">
-    <button class="close-btn" title="Close">&#10006;</button>
-    <img src="" alt="Album Art" />
-    <button class="download-btn">Download</button>
-  </div>`;
-  document.body.appendChild(modalDiv);
-}
-
-function showAlbumModal(imgUrl) {
-  const modal = document.getElementById('albumModal');
-  const img = modal.querySelector('img');
-  img.src = imgUrl;
-  modal.classList.add('active');
-}
-function hideAlbumModal() {
-  const modal = document.getElementById('albumModal');
-  modal.classList.remove('active');
-}
-function setupAlbumModal() {
-  const modal = document.getElementById('albumModal');
-  modal.querySelector('.close-btn').onclick = hideAlbumModal;
-  modal.querySelector('.download-btn').onclick = function() {
-    const img = modal.querySelector('img');
-    const link = document.createElement('a');
-    link.href = img.src;
-    link.download = img.src.split('/').pop();
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-}
-setupAlbumModal();
-
-// After results are rendered, intercept artwork links
-function setupArtworkLinks() {
-  const resultsDiv = document.getElementById('results');
-  if (!resultsDiv) return;
-  resultsDiv.addEventListener('click', function(e) {
-    const a = e.target.closest('.result .links a');
-    if (a) {
-      e.preventDefault();
-      showAlbumModal(a.href);
-    }
   });
 }
     </script>
