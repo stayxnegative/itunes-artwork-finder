@@ -235,6 +235,38 @@ body {
   color: #ffffff;
 }
 
+/* Audiobook buttons: 3000 and HD */
+.result.audiobook .links a:nth-child(1) {
+  background: #e6baff;
+}
+.result.audiobook .links a:nth-child(2) {
+  background: #baffd6;
+}
+.result.audiobook .links a:nth-child(1):hover {
+  background: #a36ad6;
+  color: #fff;
+}
+.result.audiobook .links a:nth-child(2):hover {
+  background: #1ad68b;
+  color: #fff;
+}
+
+/* Ebook buttons: 2200 and HD */
+.result.ebook .links a:nth-child(1) {
+  background: #ffe6ba;
+}
+.result.ebook .links a:nth-child(2) {
+  background: #bae6ff;
+}
+.result.ebook .links a:nth-child(1):hover {
+  background: #d6a36a;
+  color: #fff;
+}
+.result.ebook .links a:nth-child(2):hover {
+  background: #6ad6a3;
+  color: #fff;
+}
+
 #error, #progress {
   text-align: center;
   flex-basis: 100%;
@@ -432,7 +464,7 @@ async function onload() {
             <a href="${artworkUrl5000}" target="_blank">HD</a>
           `;
         }
-        return `<div class="result">
+        return `<div class="result${entity === 'audiobook' ? ' audiobook' : (entity === 'ebook' ? ' ebook' : '')}">
           <div class="artwork">
             <img src="${artworkUrl300}" />
           </div>
