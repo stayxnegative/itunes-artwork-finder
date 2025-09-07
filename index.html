@@ -23,6 +23,20 @@ body {
   padding: 0 3em;
 }
 
+#searchField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#searchField > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #searchForm input {
   -webkit-appearance: none;
   outline: none;
@@ -48,6 +62,7 @@ body {
   background: #3a3a3a;
   color: #ffffff;
   border-radius: 0 0.5em 0.5em 0;
+  margin-top: 1em;
 }
 
 #searchForm input[type=submit]:active {
@@ -253,6 +268,7 @@ async function onload() {
     clearBtn.addEventListener('click', function() {
       searchInput.value = "";
       searchInput.focus();
+      clearBtn.style.display = "none";
     });
     function toggleClearBtn() {
       clearBtn.style.display = searchInput.value ? "block" : "none";
