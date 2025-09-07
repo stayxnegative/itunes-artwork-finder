@@ -292,7 +292,7 @@ body {
 function buildUrl(term, entity, country) {
   const urlSearchParams = new URLSearchParams()
   urlSearchParams.set('country', country)
-  urlSearchParams.set('limit', 40)
+  urlSearchParams.set('limit', 50)
   urlSearchParams.set('entity', entity);
   if (typeof window !== 'undefined' && window.attribute && window.attribute.length > 0) {
     urlSearchParams.set('attribute', window.attribute);
