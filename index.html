@@ -30,11 +30,19 @@ body {
   justify-content: center;
 }
 
-#searchField > div {
-  width: 100%;
+#searchField .input-row {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+}
+
+#searchField .input-row > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 70%;
+  max-width: 400px;
 }
 
 #searchForm input {
@@ -57,12 +65,13 @@ body {
 }
 
 #searchForm input[type=submit] {
-  width: 20%;
+  margin-top: 0;
+  margin-left: 0.5em;
+  width: auto;
   border-left: 0;
   background: #3a3a3a;
   color: #ffffff;
   border-radius: 0 0.5em 0.5em 0;
-  margin-top: 1em;
 }
 
 #searchForm input[type=submit]:active {
@@ -250,11 +259,13 @@ async function onload() {
     <form id="searchForm" method="GET">
       <div id="searchField">
         <h1 id="title" style="text-align:center;cursor:pointer;">Artwork Finder</h1>
-        <div style="position:relative;display:inline-block;width:70%;max-width:400px;">
-          <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-          <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
+        <div class="input-row">
+          <div>
+            <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
+            <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
+          </div>
+          <input type="submit" value="Search" />
         </div>
-        <input type="submit" value="Search" />
       </div>
       <div id="options"></div>
     </form>
