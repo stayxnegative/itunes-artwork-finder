@@ -376,9 +376,14 @@ async function onload() {
           }
         }
         let displayTitle = result['collectionName'];
-        if (entity === 'album' && /\bEP\b/i.test(result['collectionName'])) {
-          displayTitle = result['collectionName'].replace(/\s*-?\s*EP\b/i, '').trim();
-          displayTitle += ' [EP]';
+        if (entity === 'album') {
+          if (/\bEP\b/i.test(result['collectionName'])) {
+            displayTitle = displayTitle.replace(/\s*-?\s*EP\b/i, '').trim();
+            displayTitle += ' [EP]';
+          } else if (/\bSingle\b/i.test(result['collectionName'])) {
+            displayTitle = displayTitle.replace(/\s*-?\s*Single\b/i, '').trim();
+            displayTitle += ' [Single]';
+          }
         }
         const title = entity === 'album' ? `${result['artistName']} - ${displayTitle}${year}` : (result['collectionName'] || result['trackName']);
         return `<div class="result">
