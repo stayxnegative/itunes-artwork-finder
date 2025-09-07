@@ -319,35 +319,40 @@ async function onload() {
   let entity = 'album';
   let attribute = '';
   let searchTerm = term;
-  // Map prefixes to iTunes API entities
+  // Map attribute prefixes to iTunes API attributes and their default entities
+  const attributeEntityMap = {
+  'artist:': { entity: 'album', attribute: 'artistTerm' },
+  'title:': { entity: 'album', attribute: 'titleTerm' },
+  'author:': { entity: 'audiobook', attribute: 'authorTerm' }
+  };
+  // Map entity prefixes to iTunes API entities
   const entityMap = {
   'album:': 'album',
   'song:': 'song',
   'audiobook:': 'audiobook',
   'ebook:': 'ebook'
   };
-  // Map attribute prefixes to iTunes API attributes
-  const attributeMap = {
-  'artist:': 'artistTerm',
-  'title:': 'titleTerm',
-  'author:': 'authorTerm'
-  };
   if (term) {
     let lowerTerm = term.toLowerCase();
+    let entityFound = false;
     for (const entityPrefix in entityMap) {
       if (lowerTerm.startsWith(entityPrefix)) {
         entity = entityMap[entityPrefix];
         searchTerm = term.replace(new RegExp('^' + entityPrefix, 'i'), '').trim();
         lowerTerm = searchTerm.toLowerCase();
-        // Check for attribute prefix
-        for (const attrPrefix in attributeMap) {
-          if (lowerTerm.startsWith(attrPrefix)) {
-            attribute = attributeMap[attrPrefix];
-            searchTerm = searchTerm.replace(new RegExp('^' + attrPrefix, 'i'), '').trim();
-            break;
-          }
-        }
+        entityFound = true;
         break;
+      }
+    }
+    // If no entity prefix, check for attribute prefix and map to default entity
+    if (!entityFound) {
+      for (const attrPrefix in attributeEntityMap) {
+        if (lowerTerm.startsWith(attrPrefix)) {
+          entity = attributeEntityMap[attrPrefix].entity;
+          attribute = attributeEntityMap[attrPrefix].attribute;
+          searchTerm = searchTerm.replace(new RegExp('^' + attrPrefix, 'i'), '').trim();
+          break;
+        }
       }
     }
   }
