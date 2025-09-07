@@ -375,7 +375,12 @@ async function onload() {
             year = ` (${d.getFullYear()})`;
           }
         }
-        const title = entity === 'album' ? `${result['artistName']} - ${result['collectionName']}${year}` : (result['collectionName'] || result['trackName']);
+        let displayTitle = result['collectionName'];
+        if (entity === 'album' && /\bEP\b/i.test(result['collectionName'])) {
+          displayTitle = result['collectionName'].replace(/\bEP\b/i, '').trim();
+          displayTitle += ' [EP]';
+        }
+        const title = entity === 'album' ? `${result['artistName']} - ${displayTitle}${year}` : (result['collectionName'] || result['trackName']);
         return `<div class="result">
           <div class="artwork">
             <img src="${artworkUrl300}" />
