@@ -253,16 +253,19 @@ body {
     <script type="text/javascript">
 'use strict'
 
-// countries object removed, not used
-
-// entities object removed, not used
+const entities = Object.freeze({
+  album: "Album",
+  audiobook: "Audiobook",
+  ebook: "iBook"
+  // ...add other entities as needed...
+});
 
 function buildUrl(term, entity, country) {
   const urlSearchParams = new URLSearchParams();
   urlSearchParams.set('country', country);
   urlSearchParams.set('limit', 40);
   urlSearchParams.set('entity', entity);
-  const baseUrl = 'https://itunes.apple.com/search';
+  let baseUrl = 'https://itunes.apple.com/search';
   urlSearchParams.set('term', term);
   return `${baseUrl}?${urlSearchParams}`;
 }
@@ -279,19 +282,9 @@ async function fetchResults(term, entity, country) {
 
 async function onload() {
   const searchParams = new URLSearchParams(window.location.search);
-  let term = searchParams.get('term');
-  let country = searchParams.get('country') || 'us';
-  let entity = searchParams.get('entity') || 'album';
-
-  // Recognize entity from input
-  if (term) {
-    const entityMatch = term.match(/\b(album|idalbum|ebook|audiobook)\b/i);
-    if (entityMatch) {
-      entity = entityMatch[1].toLowerCase();
-      // Remove entity keyword from term
-      term = term.replace(/\b(album|idalbum|ebook|audiobook)\b/i, '').trim();
-    }
-  }
+  const term = searchParams.get('term');
+  const country = searchParams.get('country') || 'us';
+  const entity = searchParams.get('entity') || 'album';
 
   document.body.innerHTML = `
     <form id="searchForm" method="GET">
