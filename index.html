@@ -21,6 +21,8 @@ body {
   max-width: 50em;
   margin: 3em auto;
   padding: 0 3em;
+  border-radius: 0.75em;
+  background: #181818;
 }
 
 #searchField {
@@ -66,25 +68,21 @@ body {
 #searchForm input[type=submit] {
   background: #3a3a3a;
   color: #ffffff;
-  border-radius: 0 0.5em 0.5em 0;
-  border-left: 0;
-  font-size: 18pt;
+  border-radius: 0.5em;
+  border: 2px solid #8b8b8b;
   font-weight: bold;
-  padding: 0.5em 1.2em;
+  font-size: 18pt;
+  padding: 0.5em 1.5em;
+  transition: background 0.2s, color 0.2s;
   margin-left: 0.25em;
   margin-top: 0;
   width: auto;
-  transition: background 0.2s, color 0.2s;
 }
 
 #searchForm input[type=submit]:hover {
   background: #212121;
   color: #97f19d;
-}
-
-#searchForm input[type=submit]:active {
-  background: #0b0b0b;
-  color: #828282;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
