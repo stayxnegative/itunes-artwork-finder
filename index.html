@@ -298,12 +298,34 @@ body {
 
 /* Move all mobile-specific styles to the end for higher specificity */
 @media only screen and (max-width: 600px) {
+  #searchForm {
+    max-width: 100vw !important;
+    margin: 2em auto !important;
+    padding: 0 0.5em !important;
+    border-radius: 0.5em !important;
+  }
+  #searchField .input-row {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
   #searchField .input-row > div {
-    max-width: 100% !important;
+    width: 80% !important;
+    max-width: 500px !important;
+  }
+  #searchForm input[type=submit] {
+    width: auto !important;
+    margin-left: 0.5em !important;
+    margin-top: 0 !important;
+    padding: 0.4em 1em !important;
+    font-size: 14pt !important;
   }
   #searchForm input[name=term] {
     font-size: 16pt !important;
     padding: 0.5em !important;
+    min-width: 0 !important;
+    width: 100% !important;
   }
   #results {
     margin: 0.2em !important;
@@ -332,29 +354,6 @@ body {
     height: 100% !important;
     object-fit: contain !important;
     background: #f0f0f0 !important;
-  }
-  #searchForm {
-    max-width: 98vw !important;
-    margin: 2em auto !important;
-    padding: 0 1em !important;
-    border-radius: 0.5em !important;
-  }
-  #searchField .input-row {
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-  }
-  #searchField .input-row > div {
-    width: 70% !important;
-    max-width: 400px !important;
-  }
-  #searchForm input[type=submit] {
-    width: auto !important;
-    margin-left: 0.5em !important;
-    margin-top: 0 !important;
-    padding: 0.5em 1.5em !important;
-    font-size: 16pt !important;
   }
 }
 @media only screen and (max-width: 430px) {
