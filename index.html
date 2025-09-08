@@ -601,6 +601,21 @@ async function onload() {
   }
 }
 
+// Prevent form reload and handle search via JS
+  const searchForm = document.getElementById('searchForm');
+  if (searchForm) {
+    searchForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const term = searchInput.value.trim();
+      if (term) {
+        // Use the same logic as the initial load
+        // You may want to parse entity/country/attribute from input if needed
+        // For now, use defaults
+        window.location.search = '?term=' + encodeURIComponent(term);
+      }
+    });
+  }
+
 // Add JS to handle album card selection
 function handleCardSelection() {
   document.querySelectorAll('.result').forEach(card => {
