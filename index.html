@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.5, maximum-scale=2.0">
   <meta http-equiv="Content-Language" content="en">
     <title>Artwork Finder</title>
+    <link rel="stylesheet" href="interactive-close-btn.css">
     <style type="text/css">
 body {
   font-family: Helvetica, Arial, sans-serif;
@@ -290,39 +291,6 @@ body {
 #progress {
   color: #ddd;
 }
-
-/* Interactive close button effect for clearBtn */
-#clearBtn {
-  position: absolute;
-  right: 0.3em;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 1.2em;
-  cursor: pointer;
-  line-height: 1;
-  color: #888;
-  width: 1.6em;
-  height: 1.6em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.3s, background 0.3s, box-shadow 0.3s;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(0,0,0,0);
-}
-#clearBtn:hover {
-  color: #fff;
-  background: #e74c3c;
-  box-shadow: 0 0 8px 2px #e74c3c44;
-  transform: translateY(-50%) scale(1.15) rotate(-15deg);
-}
-#clearBtn:active {
-  background: #c0392b;
-  box-shadow: 0 0 12px 4px #c0392b66;
-  transform: translateY(-50%) scale(0.95) rotate(0deg);
-}
   </style>
     <script type="text/javascript">
 'use strict'
@@ -438,7 +406,12 @@ async function onload() {
         <div class="input-row">
           <div>
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-            <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
+            <button type="button" class="clear-btn" id="clearBtn" aria-label="Clear">
+              <span class="bar bar1"></span>
+              <span class="bar bar2"></span>
+              <span class="circle circle1"></span>
+              <span class="circle circle2"></span>
+            </button>
           </div>
           <input type="submit" value="Search" />
         </div>

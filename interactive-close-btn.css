@@ -1,0 +1,56 @@
+/* Interactive Close Button Effect (Prismic #17)
+   Source: https://codepen.io/mariusgnicula/pen/MpzOoP
+   Applied to .clear-btn (the clear 'x' button)
+*/
+.clear-btn {
+  position: relative;
+  width: 2em;
+  height: 2em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.clear-btn .bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.2em;
+  height: 0.18em;
+  background: #fff;
+  border-radius: 0.09em;
+  transition: background 0.3s, transform 0.3s;
+}
+.clear-btn .bar1 {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.clear-btn .bar2 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.clear-btn .circle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.5em;
+  height: 0.5em;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 0.3s, transform 0.3s;
+}
+.clear-btn .circle1 {
+  transform: translate(-50%, -50%) scale(1);
+}
+.clear-btn .circle2 {
+  transform: translate(-50%, -50%) scale(0.8);
+}
+.clear-btn:hover .bar {
+  background: #ff4c4c;
+}
+.clear-btn:hover .circle {
+  background: #ff4c4c;
+  transform: translate(-50%, -50%) scale(1.2);
+}
