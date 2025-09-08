@@ -10,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.5, maximum-scale=2.0">
   <meta http-equiv="Content-Language" content="en">
     <title>Artwork Finder</title>
-    <link rel="stylesheet" href="interactive-close-btn.css">
     <style type="text/css">
 body {
   font-family: Helvetica, Arial, sans-serif;
@@ -291,7 +290,65 @@ body {
 #progress {
   color: #ddd;
 }
-  </style>
+
+/* Interactive close button effect for clear button */
+.clear-btn {
+  position: relative;
+  width: 2em;
+  height: 2em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+.clear-btn .bar {
+  position: absolute;
+  width: 1.4em;
+  height: 0.18em;
+  background: #888;
+  border-radius: 0.09em;
+  transition: all 0.3s cubic-bezier(.4,2,.3,.7);
+}
+.clear-btn .bar1 {
+  transform: rotate(45deg);
+}
+.clear-btn .bar2 {
+  transform: rotate(-45deg);
+}
+.clear-btn .circle {
+  position: absolute;
+  width: 0.5em;
+  height: 0.5em;
+  background: #e74c3c;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  transition: all 0.3s cubic-bezier(.4,2,.3,.7);
+  opacity: 0.7;
+}
+.clear-btn:hover {
+  background: rgba(231,76,60,0.08);
+}
+.clear-btn:hover .bar {
+  background: #e74c3c;
+}
+.clear-btn:hover .bar1 {
+  transform: rotate(45deg) scaleX(1.2);
+}
+.clear-btn:hover .bar2 {
+  transform: rotate(-45deg) scaleX(1.2);
+}
+.clear-btn:hover .circle {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 1;
+  background: #fff;
+  box-shadow: 0 0 8px #e74c3c;
+}
+    </style>
     <script type="text/javascript">
 'use strict'
 
@@ -406,11 +463,10 @@ async function onload() {
         <div class="input-row">
           <div>
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-            <button type="button" class="clear-btn" id="clearBtn" aria-label="Clear">
+            <button type="button" class="clear-btn" id="clearBtn" title="Clear">
               <span class="bar bar1"></span>
               <span class="bar bar2"></span>
-              <span class="circle circle1"></span>
-              <span class="circle circle2"></span>
+              <span class="circle"></span>
             </button>
           </div>
           <input type="submit" value="Search" />
