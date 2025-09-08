@@ -357,6 +357,10 @@ body {
   }
 }
 @media only screen and (orientation: landscape) {
+  /* Remove any landscape-specific overrides for #searchForm and its inputs so they inherit regular mobile styles */
+  #searchForm, #searchForm input, #searchForm input[type=submit], #searchField .input-row > div {
+    all: unset !important;
+  }
   html, body {
     margin: 0 !important;
     padding: 0 !important;
@@ -364,8 +368,15 @@ body {
     overflow-x: hidden !important;
     background: url('images/background.jpg') no-repeat center center !important;
     background-size: cover !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
   }
   #results {
+    width: 100% !important;
     margin: 0.2em 0 !important;
     padding: 0 !important;
   }
