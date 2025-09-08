@@ -356,6 +356,56 @@ body {
     background: #f0f0f0 !important;
   }
 }
+@media only screen and (max-width: 600px) and (orientation: landscape) {
+  #results {
+    margin: 0.2em !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+  }
+  .result {
+    width: 45vw !important;
+    max-width: 220px !important;
+    margin: 1em 0.5em !important;
+    padding: 0.3em 0.1em !important;
+    min-width: 160px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .result .artwork {
+    width: 100% !important;
+    max-width: 160px !important;
+    padding-bottom: 100% !important;
+    position: relative !important;
+  }
+  .result .artwork img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    background: #f0f0f0 !important;
+  }
+  .result .links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 0.3em !important;
+    width: 100% !important;
+    margin-top: 0.5em !important;
+  }
+  .result .links a {
+    padding: 0.4em 0.7em !important;
+    font-size: 9pt !important;
+    min-width: 60px !important;
+    flex: 1 1 40%;
+    box-sizing: border-box;
+  }
+}
 
     </style>
     <script type="text/javascript">
