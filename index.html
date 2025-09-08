@@ -463,16 +463,16 @@ async function onload() {
         <div class="input-row">
           <div>
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-            <button type="button" class="clear-btn" id="clearBtn" title="Clear">
-              <span class="bar bar1"></span>
-              <span class="bar bar2"></span>
-              <span class="circle"></span>
-            </button>
           </div>
           <input type="submit" value="Search" />
         </div>
       </div>
       <div id="options"></div>
+      <button type="button" class="clear-btn" id="clearBtn" title="Clear">
+        <span class="bar bar1"></span>
+        <span class="bar bar2"></span>
+        <span class="circle"></span>
+      </button>
     </form>
     <div id="results"></div>
   `;
