@@ -85,57 +85,12 @@ body {
   margin-left: 0.25em;
   margin-top: 0;
   width: auto;
-  position: relative;
-  transition: box-shadow 0.3s, background 0.3s, color 0.3s, transform 0.3s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  background: #222;
-  color: #fff;
-  border: groove 2px #444;
-  overflow: hidden;
 }
 
 #searchForm input[type=submit]:hover {
-  background: #444;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(68, 68, 68, 0.5);
-  transform: translateX(4px) scale(1.05);
-}
-
-#searchForm button[type="submit"] {
-  position: relative;
-  transition: box-shadow 0.3s, background 0.3s, color 0.3s, transform 0.3s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  background: #222;
-  color: #fff;
-  border: groove 2px #444;
-  overflow: hidden;
-}
-
-#searchForm button[type="submit"]:hover {
-  background: #444;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(68, 68, 68, 0.5);
-  transform: translateX(4px) scale(1.05);
-}
-
-#searchForm button[type="submit"]:after {
-  content: '';
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  background: none;
-  border: none;
-  transform: translateY(-50%);
-  opacity: 0;
-  transition: opacity 0.3s, right 0.3s;
-}
-
-#searchForm button[type="submit"]:hover:after {
-  opacity: 1;
-  right: 8px;
-  background: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'18\' height=\'18\'><path d=\'M2 9h14M11 6l5 3-5 3\' stroke=\'#fff\' stroke-width=\'2\' fill=\'none\'/></svg>') no-repeat center center;
+  background: #212121;
+  color: #97f19d;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -600,21 +555,6 @@ async function onload() {
     }
   }
 }
-
-// Prevent form reload and handle search via JS
-  const searchForm = document.getElementById('searchForm');
-  if (searchForm) {
-    searchForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const term = searchInput.value.trim();
-      if (term) {
-        // Use the same logic as the initial load
-        // You may want to parse entity/country/attribute from input if needed
-        // For now, use defaults
-        window.location.search = '?term=' + encodeURIComponent(term);
-      }
-    });
-  }
 
 // Add JS to handle album card selection
 function handleCardSelection() {
