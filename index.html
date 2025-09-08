@@ -356,40 +356,15 @@ body {
     background: #f0f0f0 !important;
   }
 }
-@media only screen and (orientation: landscape) {
-  body {
-    width: 100vw !important;
-    min-width: 100vw !important;
-    max-width: 100vw !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow-x: hidden !important;
-  }
+/* Remove mobile landscape-specific styles */
+/* @media only screen and (orientation: landscape) {
   #results {
-    width: 100vw !important;
-    margin: 0.2em 0 !important;
-    padding: 0 !important;
-  }
-  #searchForm {
-    margin: 1em 0 !important;
-    padding: 0 1em !important;
-  }
-  #searchField .input-row {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-  #searchField .input-row > div {
-    width: 100% !important;
-    max-width: none !important;
-  }
-  #searchForm input[name=term] {
-    font-size: 16pt !important;
-    padding: 0.4em !important;
-  }
-  #searchForm input[type=submit] {
-    width: 100% !important;
-    padding: 0.4em 0 !important;
-    margin-top: 0.5em !important;
+    margin: 0.2em !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
   }
   .result {
     width: 48vw !important;
@@ -419,7 +394,7 @@ body {
     background: #f0f0f0 !important;
   }
   .result h2 {
-    font-size: 10pt !important;
+    font-size: 12pt !important;
     margin-top: 0.15em !important;
     margin-bottom: 0.08em !important;
     max-width: 90vw !important;
@@ -441,7 +416,7 @@ body {
     flex: 1 1 40%;
     box-sizing: border-box;
   }
-}
+} */
 
 #title {
   margin-bottom: 1.75em;
