@@ -290,6 +290,39 @@ body {
 #progress {
   color: #ddd;
 }
+
+/* Interactive close button effect for clearBtn */
+#clearBtn {
+  position: absolute;
+  right: 0.3em;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  line-height: 1;
+  color: #888;
+  width: 1.6em;
+  height: 1.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s, background 0.3s, box-shadow 0.3s;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0);
+}
+#clearBtn:hover {
+  color: #fff;
+  background: #e74c3c;
+  box-shadow: 0 0 8px 2px #e74c3c44;
+  transform: translateY(-50%) scale(1.15) rotate(-15deg);
+}
+#clearBtn:active {
+  background: #c0392b;
+  box-shadow: 0 0 12px 4px #c0392b66;
+  transform: translateY(-50%) scale(0.95) rotate(0deg);
+}
   </style>
     <script type="text/javascript">
 'use strict'
