@@ -509,6 +509,7 @@ async function onload() {
           }
         }
         const title = entity === 'album' ? `${result['artistName']} - ${displayTitle}${year}` : (result['collectionName'] || result['trackName']);
+        let viewUrl = result['collectionViewUrl'] || result['trackViewUrl'] || result['artistViewUrl'] || result['viewUrl'] || '#';
         let linksHtml = '';
         if (entity === 'audiobook') {
           linksHtml = `
@@ -535,7 +536,7 @@ async function onload() {
           <div class="links">
             ${linksHtml}
           </div>
-          <h2>${title}</h2>
+          <h2><a href="${viewUrl}" target="_blank" style="color:inherit;text-decoration:underline;">${title}</a></h2>
         </div>`;
       }).join('')}`
       handleCardSelection();
