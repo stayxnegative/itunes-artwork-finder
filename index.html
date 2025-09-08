@@ -101,6 +101,41 @@ body {
     font-size: 16pt;
     padding: 0.5em;
   }
+  #results {
+    margin: 1em;
+  }
+  .result {
+    flex-basis: 100%;
+    margin: 0.5em 0;
+    padding: 1em 0.5em;
+  }
+  .result h2 {
+    font-size: 14pt;
+  }
+  .result .links a {
+    padding: 0.8em 1.2em;
+    font-size: 11pt;
+  }
+}
+
+@media (max-width: 375px) { /* iPhone SE/mini */
+  #searchForm input[name=term] {
+    font-size: 14pt;
+  }
+  .result h2 {
+    font-size: 12pt;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) { /* iPad */
+  .result {
+    flex-basis: 48%;
+    margin: 1em;
+    padding: 1em;
+  }
+  .result h2 {
+    font-size: 16pt;
+  }
 }
 
 #results {
