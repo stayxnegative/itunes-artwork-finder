@@ -610,8 +610,6 @@ async function onload() {
           /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png)$/,
           "https://a1.mzstatic.com/us/r1000/063/$1"
         );
-        // Always use .jpg for artworkUrl5000
-        artworkUrl5000 = artworkUrl5000.replace(/\.png$/, '.jpg');
         // For ebooks, create a new artworkUrl1467x2200
         let artworkUrl1467x2200 = '';
         if (entity === 'ebook') {
