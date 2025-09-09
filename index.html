@@ -502,10 +502,17 @@ async function onload() {
   }
 
   document.body.innerHTML = `
-    <header id="customHeader">
-      <img src="images/tyrrtech.png" alt="Tyrrtech Logo" id="tyrrtechLogo" />
-    </header>
-    <form id="searchForm" method="GET">
+  <div id="customHeader"></div>
+  <form id="searchForm" method="GET">
+/* Custom header with logo background above title */
+#customHeader {
+  width: 100%;
+  height: 100px;
+  background: url('images/tyrrtech.png') center top no-repeat;
+  background-size: contain;
+  margin: 0 auto;
+  padding: 0;
+}
       <div id="searchField">
         <h1 id="title" style="text-align:center;cursor:pointer;">Artwork Finder</h1>
         <div class="input-row">
