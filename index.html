@@ -502,10 +502,28 @@ async function onload() {
   }
 
   document.body.innerHTML = `
+    <header id="customHeader">
+      <img src="images/tyrrtech.png" alt="Tyrrtech Logo" id="tyrrtechLogo" />
+    </header>
     <form id="searchForm" method="GET">
       <div id="searchField">
         <h1 id="title" style="text-align:center;cursor:pointer;">Artwork Finder</h1>
         <div class="input-row">
+/* Custom header with scaled logo above title */
+#customHeader {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 40px 0 0 0;
+  background: none;
+}
+#tyrrtechLogo {
+  width: 120px;
+  height: auto;
+  display: inline-block;
+  margin-bottom: -10px;
+  margin-top: 0;
+}
           <div>
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
             <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
