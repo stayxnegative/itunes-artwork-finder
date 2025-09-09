@@ -14,7 +14,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Artwork Finder">
-    <style type="text/css">
+  <link rel="stylesheet" href="styles.css">
+  <style type="text/css">
 body {
   font-family: Helvetica, Arial, sans-serif;
   background: url('images/background.jpg') no-repeat center center fixed;
@@ -502,7 +503,7 @@ async function onload() {
   }
 
   document.body.innerHTML = `
-    <div id="customHeader"></div>
+    <header class="site-header"></header>
     <form id="searchForm" method="GET">
       <div id="searchField">
         <h1 id="title" style="text-align:center;cursor:pointer;">Artwork Finder</h1>
@@ -518,15 +519,6 @@ async function onload() {
     </form>
     <div id="results"></div>
   `;
-/* Custom header with logo background above title */
-#customHeader {
-  width: 100%;
-  height: 100px;
-  background: url('images/tyrrtech.png') center top no-repeat;
-  background-size: contain;
-  margin: 0 auto;
-  padding: 0;
-}
 
   // Add clear button functionality
   const searchInput = document.getElementById('searchInput');
