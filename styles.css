@@ -1,6 +1,6 @@
 .site-logo {
   width: 100%;
-  height: 40px;
+  height: 80px;
   background: url('images/tyrrtech logo.png') center top no-repeat;
   background-size: contain;
   margin: 0;
@@ -10,7 +10,7 @@
 /* Custom header for branding above Artwork Finder */
 .site-header {
   width: 100%;
-  height: 200px;
+  height: 100px;
   background: url('images/tyrrtech.png') center top no-repeat;
   background-size: contain;
   margin: 0;
