@@ -441,6 +441,11 @@ async function onload() {
   let attribute = '';
   let searchTerm = term;
   let countryCode = country;
+  let usePng = false;
+  if (term && term.toLowerCase().includes('.png')) {
+    usePng = true;
+    searchTerm = searchTerm.replace(/\.png/gi, '').trim();
+  }
   // Map attribute prefixes to iTunes API attributes and their default entities
   const attributeEntityMap = {
   'artist:': { entity: 'album', attribute: 'artistTerm' },
@@ -589,6 +594,10 @@ async function onload() {
           if (!newUrl.endsWith('.jpg')) {
             newUrl += '.jpg';
           }
+          // If .png search parameter is used, convert .jpg to .png
+          if (usePng) {
+            newUrl = newUrl.replace(/\.jpg$/, '.png');
+          }
           return newUrl;
         }
         const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
@@ -598,7 +607,7 @@ async function onload() {
         // Integrate custom regex for artworkUrl5000
         let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
         artworkUrl5000 = artworkUrl5000.replace(
-          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.jpg$/,
+          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png)$/,
           "https://a1.mzstatic.com/us/r1000/063/$1"
         );
         // For ebooks, create a new artworkUrl1467x2200
@@ -614,6 +623,9 @@ async function onload() {
               artworkUrl1467x2200 += '-999';
             }
             artworkUrl1467x2200 += '.jpg';
+          }
+          if (usePng) {
+            artworkUrl1467x2200 = artworkUrl1467x2200.replace(/\.jpg$/, '.png');
           }
         }
         // Get release year
