@@ -568,7 +568,7 @@ async function onload() {
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
             <button id="clearBtn" type="button">&#10006;</button>
           </div>
-          <input type="submit" value="Search" />
+          <input id="submitBtn" type="submit" value="Search" />
         </div>
       </div>
       <div id="options"></div>
@@ -579,6 +579,7 @@ async function onload() {
   // Add clear button functionality
   const searchInput = document.getElementById('searchInput');
   const clearBtn = document.getElementById('clearBtn');
+  const submitBtn = document.getElementById('submitBtn');
   if (clearBtn && searchInput) {
     clearBtn.addEventListener('click', function() {
       searchInput.value = "";
@@ -594,6 +595,18 @@ async function onload() {
     }
     searchInput.addEventListener('input', toggleClearBtn);
     toggleClearBtn();
+  }
+
+  // Add submit button effect
+  if (submitBtn) {
+    const form = document.getElementById('searchForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitBtn.value = "✓";
+      setTimeout(function() {
+        form.submit();
+      }, 700);
+    });
   }
 
   // Add click event to title to reload and clear form
