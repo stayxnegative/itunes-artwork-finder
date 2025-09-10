@@ -528,38 +528,6 @@ async function fetchResults(term, entity, country) {
 }
 
 async function onload() {
-  // Enforce clear button styles on mobile via JS
-  function enforceClearBtnMobileStyles() {
-    if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {
-      clearBtn.style.background = '#232323';
-      clearBtn.style.border = '2px solid #fff';
-      clearBtn.style.color = '#e53935';
-      clearBtn.style.boxShadow = '0 2px 8px 0 rgba(120,120,120,0.15)';
-      clearBtn.style.transition = 'background 0.4s, color 0.4s, border 0.4s';
-      clearBtn.style.borderRadius = '50%';
-      clearBtn.style.fontSize = '1em';
-      clearBtn.style.width = '2em';
-      clearBtn.style.height = '2em';
-      clearBtn.style.minWidth = '2em';
-      clearBtn.style.minHeight = '2em';
-      clearBtn.style.display = searchInput.value ? 'block' : 'none';
-      clearBtn.style.alignItems = 'center';
-      clearBtn.style.justifyContent = 'center';
-      clearBtn.style.padding = '0';
-      clearBtn.style.zIndex = '2';
-      if (clearBtn.classList.contains('checkmark')) {
-        clearBtn.style.background = 'none';
-        clearBtn.style.border = 'none';
-        clearBtn.style.color = '#97f19d';
-        clearBtn.style.boxShadow = 'none';
-        clearBtn.style.transition = 'none';
-      }
-    }
-  }
-  enforceClearBtnMobileStyles();
-  searchInput.addEventListener('input', enforceClearBtnMobileStyles);
-  clearBtn.addEventListener('click', enforceClearBtnMobileStyles);
-  window.addEventListener('resize', enforceClearBtnMobileStyles);
   const searchParams = new URLSearchParams(window.location.search);
   const term = searchParams.get('term');
   const country = searchParams.get('country') || 'us';
