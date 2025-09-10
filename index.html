@@ -439,13 +439,15 @@ async function onload() {
   const country = searchParams.get('country') || 'us';
   let entity = 'album';
   let attribute = '';
-  let searchTerm = term;
   let countryCode = country;
+  // Detect .png anywhere in the original term
   let usePng = false;
-  if (term && term.toLowerCase().includes('.png')) {
+  let rawTerm = term || "";
+  if (rawTerm.toLowerCase().includes('.png')) {
     usePng = true;
-    searchTerm = searchTerm.replace(/\.png/gi, '').trim();
+    rawTerm = rawTerm.replace(/\.png/gi, '').trim();
   }
+  let searchTerm = rawTerm;
   // After country/entity/attribute prefix parsing, remove .png again if present
   if (searchTerm && searchTerm.toLowerCase().includes('.png')) {
     searchTerm = searchTerm.replace(/\.png/gi, '').trim();
@@ -484,14 +486,14 @@ async function onload() {
   'in:': 'in',
   'za:': 'za'
   };
-  if (term) {
-    let lowerTerm = term.toLowerCase();
+  if (searchTerm) {
+    let lowerTerm = searchTerm.toLowerCase();
     let entityFound = false;
     // Check for country prefix
     for (const countryPrefix in countryMap) {
       if (lowerTerm.startsWith(countryPrefix)) {
         countryCode = countryMap[countryPrefix];
-        searchTerm = term.replace(new RegExp('^' + countryPrefix, 'i'), '').trim();
+        searchTerm = searchTerm.replace(new RegExp('^' + countryPrefix, 'i'), '').trim();
         lowerTerm = searchTerm.toLowerCase();
         break;
       }
