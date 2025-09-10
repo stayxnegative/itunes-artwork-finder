@@ -17,107 +17,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Artwork Finder">
   <link rel="stylesheet" href="styles.css">
-  <style type="text/css">
-body {
-  font-family: Helvetica, Arial, sans-serif;
-  background: url('images/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-}
-
-#searchForm {
-  max-width: 50em;
-  margin: 3em auto;
-  padding: 0 3em;
-  border-radius: 0.75em;
-  box-shadow: none;
-  border: none;
-  /* background: #181818; */
-}
-
-#searchField {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#searchField .input-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-#searchField .input-row > div {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 0.75em;
-  border: none;
-}
-
-#searchForm input {
-  -webkit-appearance: none;
-  appearance: none;
-  outline: none;
-  box-sizing: border-box;
-  font-size: 18pt;
-  margin: 0;
-  padding: 0.5em;
-  border: 3px groove #8b8b8b;
-  font-weight: bold;
-  background: #000;
-  color: #fff;
-  border-radius: 0.5em;
-  box-shadow: inset 0 4px 24px 0 rgba(120,120,120,0.25);
-}
-
-#searchForm input[name=term] {
-  width: 100%;
-  min-width: 0;
-}
-
-#searchForm input[type=submit] {
-  background: #3a3a3a;
-  color: #ffffff;
-  border-radius: 0.5em;
-  border: 2px solid #8b8b8b;
-  font-weight: bold;
-  font-size: 18pt;
-  padding: 0.5em 1.5em;
-  transition: background 0.2s, color 0.2s;
-  margin-left: 0.25em;
-  margin-top: 0;
-  width: auto;
-}
-
-#searchForm input[type=submit]:hover {
-  background: #212121;
-  color: #97f19d;
-  cursor: pointer;
-}
-
-@media (min-width: 601px) and (max-width: 1024px) { /* iPad */
-  .result {
-    flex-basis: 48%;
-    margin: 1em;
-    padding: 1em;
-  }
-  .result h2 {
-    font-size: 16pt;
-  }
-}
-
-#results {
-  margin: 3em;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .result {
   flex-basis: 10%;
   box-sizing: border-box;
@@ -135,6 +34,8 @@ body {
   flex-direction: column;
   justify-content: flex-start;
 }
+    <link rel="stylesheet" href="styles.custom.css">
+    <script src="script.custom.js"></script>
 
 .result.selected {
   box-shadow: 0px 12px 18px 0 rgba(200, 200, 200, 0.25), 0 8px 24px 0 rgba(40,40,40,0.35), inset 0 2px 12px 0 rgba(120,120,120,0.18);
