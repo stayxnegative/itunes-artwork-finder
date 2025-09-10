@@ -17,6 +17,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Artwork Finder">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="submit-button.css">
   <style type="text/css">
 body {
   font-family: Helvetica, Arial, sans-serif;
@@ -536,7 +537,7 @@ async function onload() {
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
             <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
           </div>
-          <input type="submit" value="Search" />
+          <button type="submit" id="searchSubmit"><span>Search</span></button>
         </div>
       </div>
       <div id="options"></div>
