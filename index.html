@@ -583,7 +583,11 @@ async function onload() {
     clearBtn.addEventListener('click', function() {
       searchInput.value = "";
       searchInput.focus();
-      clearBtn.style.display = "none";
+      clearBtn.innerHTML = "&#10003;";
+      setTimeout(function() {
+        clearBtn.innerHTML = "&#10006;";
+        clearBtn.style.display = "none";
+      }, 700);
     });
     function toggleClearBtn() {
       clearBtn.style.display = searchInput.value ? "block" : "none";
