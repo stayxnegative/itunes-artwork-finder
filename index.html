@@ -49,17 +49,20 @@ body {
   width: 100%;
 }
 
-#searchField .input-row > div {
-  position: relative;
+/* Input row and flex container for search/clear/submit */
+#searchField .input-flex {
   display: flex;
   align-items: center;
   width: 100%;
   max-width: 400px;
-  border-radius: 0.75em;
+  gap: 0.5em;
+  background: none;
   border: none;
+  border-radius: 0.75em;
 }
 
-#searchForm input {
+/* Search input styling */
+#searchForm input[type="text"] {
   -webkit-appearance: none;
   appearance: none;
   outline: none;
@@ -73,33 +76,64 @@ body {
   color: #fff;
   border-radius: 0.5em;
   box-shadow: inset 0 4px 24px 0 rgba(120,120,120,0.25);
+  flex: 1 1 auto;
 }
 
-#searchForm input[name=term] {
-  width: 100%;
-  min-width: 0;
-}
-
-#searchForm input[type=submit] {
-  background: #3a3a3a;
-  color: #ffffff;
-  border-radius: 0.5em;
-  border: 2px solid #8b8b8b;
-  font-weight: bold;
-  font-size: 18pt;
-  padding: 0.5em 1.5em;
-  transition: background 0.2s, color 0.2s;
-  margin-left: 0.25em;
-  margin-top: 0;
-  width: auto;
-}
-
-#searchForm input[type=submit]:hover {
-  background: #212121;
-  color: #97f19d;
+#clearBtn {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 1.2em;
   cursor: pointer;
+  line-height: 1;
+  color: #888;
+  margin-left: 0.3em;
 }
 
+#submitBtn {
+  width: 150px;
+  height: 50px;
+  background: none;
+  border: 4px solid #ff304f;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: 100ms;
+  font-size: 18pt;
+  font-weight: bold;
+  margin-left: 0.5em;
+}
+#submitBtn span {
+  position: absolute;
+  color: #002651;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+#submitBtn:focus {
+  outline: none;
+  border: 2px solid #1e2a78;
+  width: 50px;
+  border-left: 4px solid #1e2a78;
+  border-bottom: 4px solid #1e2a78;
+  animation: spin 2s 500ms forwards;
+}
+#submitBtn:focus span {
+  color: transparent;
+}
+@keyframes spin {
+  80% {
+    border: 4px solid transparent;
+    border-left: 4px solid #303a52;
+  }
+  100% {
+    transform: rotate(1080deg);
+    border: 4px solid #303a52;
+  }
+}
 @media (min-width: 601px) and (max-width: 1024px) { /* iPad */
   .result {
     flex-basis: 48%;
@@ -532,11 +566,11 @@ async function onload() {
       <div id="searchField">
         <h1 id="title" style="text-align:center;cursor:pointer;">iTunes Artwork Finder</h1>
         <div class="input-row">
-          <div>
-            <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-            <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
+          <div class="input-flex">
+            <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" />
+            <button id="clearBtn" type="button">&#10006;</button>
+            <button id="submitBtn" type="submit"><span>Search</span></button>
           </div>
-          <input type="submit" value="Search" />
         </div>
       </div>
       <div id="options"></div>
