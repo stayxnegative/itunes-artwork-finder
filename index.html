@@ -582,25 +582,12 @@ async function onload() {
     console.log(e)
   }
 
-  // Fallback: if artist: search returns no results, retry with general search
-  let triedFallback = false;
-  if (entity === 'album' && attribute === 'artistTerm' && (results == null || !results.results || results.results.length === 0)) {
-    // Remove artist: prefix and retry as general search
-    let fallbackTerm = term.replace(/^\s*artist:/i, '').replace(/\.png/gi, '').trim();
-    try {
-      results = await fetchResults(fallbackTerm, 'album', countryCode);
-      triedFallback = true;
-    } catch(e) {
-      error = e.message;
-    }
-  }
-
   if (results == null) {
     resultsDiv.innerHTML = `<div id="error"><p>Sorry, some error occured while loading the results...</p>${error !== null ? `<p>(${error})</p>` : ""}</div>`
   } else {
     const resultItems = results["results"]
     if (resultItems === null || !Array.isArray(resultItems) || resultItems.length === 0) {
-      resultsDiv.innerHTML = `<div id="error">Sorry, no results.${triedFallback ? '<br>(Tried general search as fallback)' : ''}</div>`
+      resultsDiv.innerHTML = `<div id="error">Sorry, no results.</div>`
     } else {
       resultsDiv.innerHTML = `${resultItems.map(result => {
         const artworkUrl100 = result["artworkUrl100"];
