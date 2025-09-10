@@ -622,9 +622,8 @@ async function onload() {
       <div id="searchField">
         <h1 id="title" style="text-align:center;cursor:pointer;">iTunes Artwork Finder</h1>
         <div class="input-row">
-          <div>
+          <div id="inputWrapper">
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-            <button id="clearBtn" type="button">&#10006;</button>
           </div>
           <input id="submitBtn" type="submit" value="Search" />
         </div>
@@ -634,28 +633,31 @@ async function onload() {
     <div id="results"></div>
   `;
 
-  // Add clear button functionality
+  // Create clear button via JS and add functionality
   const searchInput = document.getElementById('searchInput');
-  const clearBtn = document.getElementById('clearBtn');
+  const inputWrapper = document.getElementById('inputWrapper');
   const submitBtn = document.getElementById('submitBtn');
-  if (clearBtn && searchInput) {
-    clearBtn.addEventListener('click', function() {
-      searchInput.value = "";
-      searchInput.focus();
-        clearBtn.innerHTML = "&#10003;";
-        clearBtn.classList.add('checkmark');
-        setTimeout(function() {
-          clearBtn.innerHTML = "&#10006;";
-          clearBtn.classList.remove('checkmark');
-          clearBtn.style.display = "none";
-        }, 1200);
-    });
-    function toggleClearBtn() {
-      clearBtn.style.display = searchInput.value ? "block" : "none";
-    }
-    searchInput.addEventListener('input', toggleClearBtn);
-    toggleClearBtn();
+  let clearBtn = document.createElement('button');
+  clearBtn.id = 'clearBtn';
+  clearBtn.type = 'button';
+  clearBtn.innerHTML = '&#10006;';
+  inputWrapper.appendChild(clearBtn);
+  clearBtn.style.display = searchInput.value ? "block" : "none";
+  clearBtn.addEventListener('click', function() {
+    searchInput.value = "";
+    searchInput.focus();
+    clearBtn.innerHTML = "&#10003;";
+    clearBtn.classList.add('checkmark');
+    setTimeout(function() {
+      clearBtn.innerHTML = "&#10006;";
+      clearBtn.classList.remove('checkmark');
+      clearBtn.style.display = "none";
+    }, 1200);
+  });
+  function toggleClearBtn() {
+    clearBtn.style.display = searchInput.value ? "block" : "none";
   }
+  searchInput.addEventListener('input', toggleClearBtn);
 
   // Add submit button effect
   if (submitBtn) {
