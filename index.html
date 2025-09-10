@@ -421,7 +421,9 @@ function buildUrl(term, entity, country) {
     urlSearchParams.set('attribute', window.attribute);
   }
   let baseUrl = 'https://itunes.apple.com/search';
-  urlSearchParams.set('term', term);
+  // Encode spaces as plus (+) per iTunes API requirements
+  let encodedTerm = term.replace(/ /g, '+');
+  urlSearchParams.set('term', encodedTerm);
   return `${baseUrl}?${urlSearchParams}`;
 }
 
