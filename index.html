@@ -591,7 +591,7 @@ async function onload() {
   } else {
     const resultItems = results["results"]
     if (resultItems === null || !Array.isArray(resultItems) || resultItems.length === 0) {
-      resultsDiv.innerHTML = `<div id="error">Sorry, no results.</div>`
+      resultsDiv.innerHTML = `<div id="error">Sorry, no results...</div>`
     } else {
       resultsDiv.innerHTML = `${resultItems.map(result => {
         const artworkUrl100 = result["artworkUrl100"];
