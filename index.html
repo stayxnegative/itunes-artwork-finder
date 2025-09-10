@@ -59,6 +59,31 @@ body {
   border: none;
 }
 
+#clearBtn {
+  position: absolute;
+  right: 0.3em;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #232323;
+  border: 2px solid #8b8b8b;
+  color: #97f19d;
+  font-size: 1.2em;
+  border-radius: 0.5em;
+  padding: 0.35em 0.7em;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(120,120,120,0.15);
+  min-width: 2.2em;
+  z-index: 2;
+}
+#clearBtn:hover {
+  background: #212121;
+  color: #fff;
+  border-color: #97f19d;
+}
+}
+
 #searchForm input {
   -webkit-appearance: none;
   appearance: none;
@@ -534,7 +559,7 @@ async function onload() {
         <div class="input-row">
           <div>
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-            <button id="clearBtn" type="button" style="position:absolute;right:0.3em;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.2em;cursor:pointer;line-height:1;color:#888;">&#10006;</button>
+            <button id="clearBtn" type="button">&#10006;</button>
           </div>
           <input type="submit" value="Search" />
         </div>
