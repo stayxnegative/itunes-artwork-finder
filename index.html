@@ -446,6 +446,10 @@ async function onload() {
     usePng = true;
     searchTerm = searchTerm.replace(/\.png/gi, '').trim();
   }
+  // After country/entity/attribute prefix parsing, remove .png again if present
+  if (searchTerm && searchTerm.toLowerCase().includes('.png')) {
+    searchTerm = searchTerm.replace(/\.png/gi, '').trim();
+  }
   // Map attribute prefixes to iTunes API attributes and their default entities
   const attributeEntityMap = {
   'artist:': { entity: 'album', attribute: 'artistTerm' },
