@@ -84,11 +84,16 @@ body {
   padding: 0;
   z-index: 2;
 }
+  #clearBtn.checkmark {
+    background: none !important;
+    border: none !important;
+    color: #97f19d !important;
+    box-shadow: none !important;
+  }
 #clearBtn:hover {
-  background: none !important;
-  color: #97f19d !important;
-  border: none !important;
-  content: "\2713" !important;
+  background: #212121 !important;
+  color: #fff !important;
+  border-color: #97f19d !important;
 }
 
 #searchForm input {
@@ -585,11 +590,13 @@ async function onload() {
     clearBtn.addEventListener('click', function() {
       searchInput.value = "";
       searchInput.focus();
-      clearBtn.innerHTML = "&#10003;";
-      setTimeout(function() {
-        clearBtn.innerHTML = "&#10006;";
-        clearBtn.style.display = "none";
-      }, 700);
+        clearBtn.innerHTML = "&#10003;";
+        clearBtn.classList.add('checkmark');
+        setTimeout(function() {
+          clearBtn.innerHTML = "&#10006;";
+          clearBtn.classList.remove('checkmark');
+          clearBtn.style.display = "none";
+        }, 700);
     });
     function toggleClearBtn() {
       clearBtn.style.display = searchInput.value ? "block" : "none";
