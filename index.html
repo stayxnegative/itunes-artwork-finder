@@ -92,30 +92,47 @@ body {
   transition: none !important;
 }
   @media only screen and (max-width: 600px) {
-    #clearBtn {
+    #clearBtn,
+    #clearBtn:hover,
+    #clearBtn:active,
+    #clearBtn:focus {
       background: #232323 !important;
       border: 2px solid #fff !important;
       color: #e53935 !important;
+      box-shadow: 0 2px 8px 0 rgba(120,120,120,0.15) !important;
+      transition: background 0.4s, color 0.4s, border 0.4s !important;
     }
-    button#clearBtn.checkmark {
+    button#clearBtn.checkmark,
+    button#clearBtn.checkmark:hover,
+    button#clearBtn.checkmark:active,
+    button#clearBtn.checkmark:focus {
       background: none !important;
       border: none !important;
       color: #97f19d !important;
       box-shadow: none !important;
       transition: none !important;
     }
-    #submitBtn.submit-checkmark {
+    #submitBtn,
+    #submitBtn:hover,
+    #submitBtn:active,
+    #submitBtn:focus {
+      background: #3a3a3a !important;
+      color: #fff !important;
+      border: 2px solid #8b8b8b !important;
+      border-radius: 0.5em !important;
+      font-weight: bold !important;
+      font-size: 18pt !important;
+      transition: background 0.4s, color 0.4s, border 0.4s !important;
+    }
+    #submitBtn.submit-checkmark,
+    #submitBtn.submit-checkmark:hover,
+    #submitBtn.submit-checkmark:active,
+    #submitBtn.submit-checkmark:focus {
       background: none !important;
       border: none !important;
       color: #97f19d !important;
       box-shadow: none !important;
       transition: none !important;
-    }
-    #searchForm input[type=submit]:hover {
-      background: #212121 !important;
-      color: #97f19d !important;
-      border-color: #97f19d !important;
-      cursor: pointer !important;
     }
   }
   #submitBtn.submit-checkmark {
