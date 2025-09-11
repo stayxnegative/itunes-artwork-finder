@@ -504,10 +504,36 @@ button#submitBtn:disabled:hover {
 }
 
 @media(max-width: 600px) {
+
+  .result.selected {
+    box-shadow:
+      0 0 0 4px rgba(255,255,255,0.18), /* glass border, more visible */
+      0 4px 16px 0 rgba(31,38,135,0.28),
+      0 -4px 16px 0 rgba(255,0,128,0.12),   /* top pink */
+      4px 0 16px 0 rgba(0,255,255,0.12),    /* right cyan */
+      0 4px 16px 0 rgba(255,255,0,0.12),    /* bottom yellow */
+      -4px 0 16px 0 rgba(0,255,128,0.12),   /* left green */
+      4px 4px 24px 0 rgba(128,0,255,0.12),  /* bottom right purple */
+      -4px -4px 24px 0 rgba(255,128,0,0.12);/* top left orange */
+    z-index: 2;
+  }
   .result {
     flex-basis: 100%;
   }
-}
+
+  .result:hover {
+    box-shadow:
+      0 0 0 4px rgba(255,255,255,0.18), /* glass border, more visible */
+      0 4px 16px 0 rgba(31,38,135,0.28),
+      0 -4px 16px 0 rgba(255,0,128,0.12),   /* top pink */
+      4px 0 16px 0 rgba(0,255,255,0.12),    /* right cyan */
+      0 4px 16px 0 rgba(255,255,0,0.12),    /* bottom yellow */
+      -4px 0 16px 0 rgba(0,255,128,0.12),   /* left green */
+      4px 4px 24px 0 rgba(128,0,255,0.12),  /* bottom right purple */
+      -4px -4px 24px 0 rgba(255,128,0,0.12);/* top left orange */
+    transform: translateY(-4px) scale(1.03);
+    z-index: 2;
+  }
 
 .result h2 {
   font-size: 11pt;
