@@ -20,6 +20,18 @@
   <link rel="stylesheet" href="modal.css">
   <link rel="preload" as="image" href="images/background.jpg">
   <style type="text/css">
+@media only screen and (max-width: 600px) {
+  button#clearBtn.touch-active {
+    background: #212121 !important;
+    color: #fff !important;
+    border-color: #e53935 !important;
+  }
+  button#submitBtn.touch-active {
+    background: #212121 !important;
+    color: #97f19d !important;
+    border-color: #97f19d !important;
+  }
+}
 @media (min-width: 1001px) {
   #results {
     justify-content: center;
@@ -843,6 +855,21 @@ async function fetchResults(term, entity, country) {
 }
 
 async function onload() {
+  // Add touch effect for submit and clear buttons on mobile
+  function addTouchEffect(btn, hoverClass) {
+    if (!btn) return;
+    btn.addEventListener('touchstart', function() {
+      btn.classList.add(hoverClass);
+    });
+    btn.addEventListener('touchend', function() {
+      btn.classList.remove(hoverClass);
+    });
+    btn.addEventListener('touchcancel', function() {
+      btn.classList.remove(hoverClass);
+    });
+  }
+  addTouchEffect(document.getElementById('clearBtn'), 'touch-active');
+  addTouchEffect(document.getElementById('submitBtn'), 'touch-active');
   const searchParams = new URLSearchParams(window.location.search);
   const term = searchParams.get('term');
   const country = searchParams.get('country') || 'us';
