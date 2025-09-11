@@ -1,0 +1,55 @@
+/* Modal styles for large album art popup */
+#artworkModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+#artworkModal .modal-content {
+  background: #181818;
+  border-radius: 1em;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.45);
+  padding: 2em;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+#artworkModal .modal-artwork {
+  max-width: 400px;
+  max-height: 400px;
+  width: 80vw;
+  height: auto;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 16px 0 rgba(120,120,120,0.25);
+  margin-bottom: 1em;
+}
+#artworkModal .modal-title {
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+#artworkModal .modal-close {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: #232323;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5em;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+  z-index: 2;
+}
