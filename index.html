@@ -20,58 +20,52 @@
   <style type="text/css">
 @media (min-width: 1001px) {
   #results {
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1em;
   }
   .result {
-    flex: 0 0 auto !important;
-    width: 320px !important;
-    max-width: 320px !important;
-    min-width: 320px !important;
+    flex-basis: 10%;
+    margin: 1em;
+    padding: 0.6em 0.4em 0.3em 0.4em;
     box-sizing: border-box;
-    margin: 1em !important;
-    padding: 0.6em 0.4em 0.3em 0.4em !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 200px;
+    max-width: 400px;
   }
   .result .artwork {
-    width: 100% !important;
-    max-width: 320px !important;
-    min-width: 320px !important;
-    height: 320px !important;
-    padding-bottom: 0 !important;
-    position: relative !important;
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
   }
   .result .artwork img {
-    width: 100% !important;
-    max-width: 320px !important;
-    min-width: 320px !important;
-    height: 320px !important;
-    object-fit: cover !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   .result .links {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 0.5em !important;
-    margin-top: 8px !important;
-    margin-bottom: 0.1em !important;
-    font-size: 8pt !important;
-    position: static !important;
-    visibility: visible !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    margin-top: 8px;
+    margin-bottom: 0.1em;
+    font-size: 8pt;
+    position: static;
+    visibility: visible;
   }
   .result .links a {
-    flex: 0 0 auto !important;
-    padding: 0.45em 0.8em !important;
-    font-size: 0.95em !important;
-    white-space: nowrap !important;
+    flex: 0 0 auto;
+    padding: 0.45em 0.8em;
+    font-size: 0.95em;
+    white-space: nowrap;
   }
 }
 html {
