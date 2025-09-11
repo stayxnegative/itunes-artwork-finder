@@ -99,14 +99,17 @@
   z-index: 9999;
 }
 #artworkModal .modal-content {
-  background: linear-gradient(135deg, #232323 0%, #353535 35%, #3a3a3a 65%, #181818 85%, #464646 100%);
+  background: linear-gradient(135deg, #232323 0%, #181818 100%);
   border-radius: 1em;
   border: 1px solid #353535;
   box-shadow:
-    0 8px 32px 0 rgba(0,0,0,0.45),
-    0 2px 8px 0 rgba(120,120,120,0.15),
+    0 16px 48px 0 rgba(0,0,0,0.65),
+    0 4px 24px 0 rgba(120,120,120,0.25),
+    0 1em 3em 0 rgba(80,80,80,0.28),
     0 0.5em 2em 0 rgba(80,80,80,0.18),
     inset 0 2px 12px 0 rgba(120,120,120,0.18);
+  transform: translateY(-12px) scale(1.04);
+  transition: box-shadow 0.3s, transform 0.3s;
   padding: 2em;
   max-width: 90vw;
   max-height: 90vh;
@@ -144,4 +147,10 @@
   height: 2em;
   cursor: pointer;
   z-index: 2;
+  transition: background 0.4s, color 0.4s, border 0.4s;
+}
+#artworkModal .modal-close:hover {
+  background: #212121 !important;
+  color: #fff !important;
+  border-color: #e53935 !important;
 }
