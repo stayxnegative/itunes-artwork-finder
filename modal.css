@@ -135,10 +135,11 @@
   margin-bottom: 0.5em;
 }
 #artworkModal .modal-close {
-  position: absolute;
-  top: 0.1em;
-  right: 0.5em;
+  position: fixed;
+  top: 2em;
+  right: 2em;
   margin: 0;
+  z-index: 99999;
   background: #232323;
   color: #e53935;
   border: 2px solid #fff;
