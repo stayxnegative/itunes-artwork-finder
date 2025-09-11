@@ -1096,8 +1096,8 @@ async function onload() {
             artworkUrl3000Audiobook = artworkUrl3000Audiobook.replace(/\.jpg$/, '.png');
           }
           linksHtml = `
-            <a href="${artworkUrl3000Audiobook}" target="_blank">3000</a>
-            <a href="${artworkUrl5000}" target="_blank">HD</a>
+            <a href="${artworkUrl3000Audiobook}" download>3000</a>
+            <a href="${artworkUrl5000}" download>HD</a>
           `;
         } else if (entity === 'ebook') {
           let artworkUrl1467x2200Ebook = artworkUrl1467x2200;
@@ -1105,15 +1105,15 @@ async function onload() {
             artworkUrl1467x2200Ebook = artworkUrl1467x2200Ebook.replace(/\.jpg$/, '.png');
           }
           linksHtml = `
-            <a href="${artworkUrl1467x2200Ebook}" target="_blank">2200</a>
-            <a href="${artworkUrl5000}" target="_blank">HD</a>
+            <a href="${artworkUrl1467x2200Ebook}" download>2200</a>
+            <a href="${artworkUrl5000}" download>HD</a>
           `;
         } else {
           linksHtml = `
-            <a href="${artworkUrl600}" target="_blank">600</a>
-            <a href="${artworkUrl1500}" target="_blank">1500</a>
-            <a href="${artworkUrl3000}" target="_blank">3000</a>
-            <a href="${artworkUrl5000}" target="_blank">HD</a>
+            <a href="${artworkUrl600}" download>600</a>
+            <a href="${artworkUrl1500}" download>1500</a>
+            <a href="${artworkUrl3000}" download>3000</a>
+            <a href="${artworkUrl5000}" download>HD</a>
           `;
         }
         return `<div class="result${entity === 'audiobook' ? ' audiobook' : (entity === 'ebook' ? ' ebook' : '')}">
