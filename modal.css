@@ -136,9 +136,9 @@
 }
 #artworkModal .modal-close {
   position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0.5em;
+  top: 1.2em;
+  right: 1.2em;
+  margin: 0;
   background: #232323;
   color: #e53935;
   border: 2px solid #fff;
@@ -147,7 +147,7 @@
   width: 2em;
   height: 2em;
   cursor: pointer;
-  z-index: 2;
+  z-index: 20;
   transition: background 0.4s, color 0.4s, border 0.4s;
 }
 #artworkModal .modal-close:hover {
