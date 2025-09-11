@@ -1145,6 +1145,8 @@ async function onload() {
           } else {
             largeSrc = img.src.replace(/300x300|300x300-999|300x300\.jpg|300x300\.png/, '10000x10000-999.jpg');
           }
+          // Remove any duplicate -999.jpg at the end
+          largeSrc = largeSrc.replace(/(-999\.jpg)+$/, '-999.jpg');
           // If .png search parameter is used, ensure .png extension
           if (window.usePng) {
             largeSrc = largeSrc.replace(/\.jpg(-999)?\.png$/, '.png').replace(/\.jpg$/, '.png');
