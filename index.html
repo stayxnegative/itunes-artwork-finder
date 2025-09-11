@@ -1136,17 +1136,19 @@ async function onload() {
           // Find parent card and extract info
           const card = img.closest('.result');
           const title = card.querySelector('h2 a') ? card.querySelector('h2 a').textContent : '';
-          const largeSrc = img.src.replace(/300x300|300x300-999|300x300\.jpg|300x300\.png/, '1500x1500-999');
-          // Use HD link if available
-          let hdLink = '';
-          const hdA = card.querySelector('.links a:last-child');
-          if (hdA && hdA.href && /HD/i.test(hdA.textContent)) {
-            hdLink = hdA.href;
+          // Get the original artworkUrl100 from the card's image src
+          let artworkUrl100 = img.src.replace(/(\d+)x\1-999.*$/, '100x100');
+          // Generate 10000x10000-999.jpg URL
+          let largeSrc = '';
+          if (typeof fixArtworkUrl === 'function') {
+            largeSrc = fixArtworkUrl(artworkUrl100, 10000);
+          } else {
+            largeSrc = img.src.replace(/300x300|300x300-999|300x300\.jpg|300x300\.png/, '10000x10000-999.jpg');
           }
           const modal = document.getElementById('artworkModal');
           modal.innerHTML = `<div class="modal-content">
             <button class="modal-close" title="Close">&#10006;</button>
-            <img class="modal-artwork" src="${hdLink || largeSrc}" alt="Album Art" />
+            <img class="modal-artwork" src="${largeSrc}" alt="Album Art" />
             <div class="modal-title">${title}</div>
           </div>`;
           modal.style.display = 'flex';
