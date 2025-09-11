@@ -1025,28 +1025,14 @@ async function onload() {
     } else {
       resultsDiv.innerHTML = `${resultItems.map(result => {
         const artworkUrl100 = result["artworkUrl100"];
-        // Detect extension from original URL
-        let extMatch = artworkUrl100.match(/\.(jpg|png|webp|tif)($|\?)/i);
-        let ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
-        // Helper to replace and clean up the URL
-        function fixArtworkUrl(url, size, overrideExt) {
-          let newUrl = url.replace('100x100', `${size}x${size}-999`);
-          // Remove 'bb' before extension if present
-          newUrl = newUrl.replace(/bb(?=\.(jpg|png|webp|tif))/i, '');
-          // Ensure it ends with the correct extension
-          let finalExt = overrideExt || ext;
-          if (!newUrl.endsWith('.' + finalExt)) {
-            newUrl = newUrl.replace(/\.(jpg|png|webp|tif)($|\?)/i, '.' + finalExt);
-            if (!newUrl.endsWith('.' + finalExt)) {
-              newUrl += '.' + finalExt;
-            }
-          }
-          // If .png search parameter is used, convert to .png
-          if (usePng) {
-            newUrl = newUrl.replace(/\.(jpg|webp|tif)$/i, '.png');
-            finalExt = 'png';
-          }
-          return newUrl;
+        // Helper to replace only the size segment, preserving bb and extension
+        function fixArtworkUrl(url, size) {
+          // Match the size segment (e.g., 100x100, 300x300-999bb, etc)
+          return url.replace(/\/(\d+x\d+(-999)?bb?)(?=\.)?/i, `/${size}x${size}bb`)
+            .replace(/(\.(jpg|png|webp|tif))($|\?)/i, function(m, ext) {
+              if (usePng) return '.png';
+              return ext;
+            });
         }
         const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
         const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
