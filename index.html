@@ -1025,19 +1025,27 @@ async function onload() {
     } else {
       resultsDiv.innerHTML = `${resultItems.map(result => {
         const artworkUrl100 = result["artworkUrl100"];
-        // Helper to replace only the size segment, preserving bb and extension
-        function fixArtworkUrl(url, size) {
-          // Match the size segment (e.g., 100x100, 300x300-999bb, etc)
+        // Album card artwork: preserve bb and extension, only change size
+        function albumCardArtworkUrl(url, size) {
           return url.replace(/\/(\d+x\d+(-999)?bb?)(?=\.)?/i, `/${size}x${size}bb`)
             .replace(/(\.(jpg|png|webp|tif))($|\?)/i, function(m, ext) {
               if (usePng) return '.png';
               return ext;
             });
         }
-        const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
-        const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
-        const artworkUrl1500 = fixArtworkUrl(artworkUrl100, 1500);
-        const artworkUrl3000 = fixArtworkUrl(artworkUrl100, 3000);
+        // Artwork size buttons: replace with -999, remove bb, preserve extension
+        function artworkButtonUrl(url, size) {
+          return url.replace(/\/(\d+x\d+(-999)?bb?)(?=\.)?/i, `/${size}x${size}-999`)
+            .replace(/bb(?=\.(jpg|png|webp|tif))/i, '')
+            .replace(/(\.(jpg|png|webp|tif))($|\?)/i, function(m, ext) {
+              if (usePng) return '.png';
+              return ext;
+            });
+        }
+        const artworkUrl300 = albumCardArtworkUrl(artworkUrl100, 300);
+        const artworkUrl600 = artworkButtonUrl(artworkUrl100, 600);
+        const artworkUrl1500 = artworkButtonUrl(artworkUrl100, 1500);
+        const artworkUrl3000 = artworkButtonUrl(artworkUrl100, 3000);
         // Integrate custom regex for artworkUrl5000
         let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
         artworkUrl5000 = artworkUrl5000.replace(
