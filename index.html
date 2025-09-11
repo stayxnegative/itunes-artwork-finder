@@ -1135,27 +1135,36 @@ async function onload() {
           e.stopPropagation();
           // Find parent card and extract info
           const card = img.closest('.result');
-          const title = card.querySelector('h2 a') ? card.querySelector('h2 a').textContent : '';
+          const titleEl = card.querySelector('h2 a');
+          const title = titleEl ? titleEl.textContent : '';
+          const viewUrl = titleEl ? titleEl.getAttribute('href') : '#';
           // Get the original artworkUrl100 from the card's image src
           let artworkUrl100 = img.src.replace(/(\d+)x\1-999.*$/, '100x100');
-          // Generate 10000x10000-999.jpg URL
-          let largeSrc = '';
-          if (typeof fixArtworkUrl === 'function') {
-            largeSrc = fixArtworkUrl(artworkUrl100, 10000);
-          } else {
-            largeSrc = img.src.replace(/300x300|300x300-999|300x300\.jpg|300x300\.png/, '10000x10000-999.jpg');
-          }
+          // Generate all artwork sizes
+          let artworkUrls = {
+            600: fixArtworkUrl(artworkUrl100, 600),
+            1500: fixArtworkUrl(artworkUrl100, 1500),
+            3000: fixArtworkUrl(artworkUrl100, 3000),
+            HD: fixArtworkUrl(artworkUrl100, 10000)
+          };
           // Remove any duplicate -999.jpg at the end
-          largeSrc = largeSrc.replace(/(-999\.jpg)+$/, '-999.jpg');
-          // If .png search parameter is used, ensure .png extension
-          if (window.usePng) {
-            largeSrc = largeSrc.replace(/\.jpg(-999)?\.png$/, '.png').replace(/\.jpg$/, '.png');
-          }
+          Object.keys(artworkUrls).forEach(k => {
+            artworkUrls[k] = artworkUrls[k].replace(/(-999\.jpg)+$/, '-999.jpg');
+            if (window.usePng) {
+              artworkUrls[k] = artworkUrls[k].replace(/\.jpg(-999)?\.png$/, '.png').replace(/\.jpg$/, '.png');
+            }
+          });
+          // Modal main image is HD
+          let largeSrc = artworkUrls.HD;
+          // Get .links HTML from card
+          const linksDiv = card.querySelector('.links');
+          const linksHtml = linksDiv ? linksDiv.innerHTML : '';
           const modal = document.getElementById('artworkModal');
           modal.innerHTML = `<div class="modal-content">
             <button class="modal-close" title="Close">&#10006;</button>
             <img class="modal-artwork" src="${largeSrc}" alt="Album Art" />
-            <div class="modal-title">${title}</div>
+            <div class="links">${linksHtml}</div>
+            <div class="modal-title"><a href="${viewUrl}" target="_blank">${title}</a></div>
           </div>`;
           modal.style.display = 'flex';
           // Close modal on click outside or close button
