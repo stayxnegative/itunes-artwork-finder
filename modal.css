@@ -81,19 +81,23 @@
 #artworkModal .modal-title {
   color: #fff;
   font-size: 1.3em;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 0.5em;
-}
-/* Modal styles for large album art popup */
-#artworkModal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.85);
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%);
+  border-radius: 1.2em;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 2px 8px 0 rgba(120,120,120,0.15);
+  padding: 2em 1.5em 1.5em 1.5em;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 260px;
+  max-width: 98vw;
+  max-height: 98vh;
+  margin: auto;
+  z-index: 2;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  overflow: hidden;
   align-items: center;
   justify-content: center;
   z-index: 9999;
