@@ -1027,20 +1027,28 @@ async function onload() {
         const artworkUrl100 = result["artworkUrl100"];
         // Album card artwork: preserve bb and extension, only change size
         function albumCardArtworkUrl(url, size) {
-          return url.replace(/\/(\d+x\d+(-999)?bb?)(?=\.)?/i, `/${size}x${size}bb`)
-            .replace(/(\.(jpg|png|webp|tif))($|\?)/i, function(m, ext) {
-              if (usePng) return '.png';
-              return ext;
-            });
+          // Find the size segment (e.g., 100x100, 300x300-999bb, etc)
+          let match = url.match(/\/([0-9]+x[0-9]+(-999)?bb?)/i);
+          if (!match) return url; // fallback
+          let newUrl = url.replace(match[1], `${size}x${size}bb`);
+          // Extension
+          let extMatch = url.match(/\.(jpg|png|webp|tif)($|\?)/i);
+          let ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
+          if (usePng) ext = 'png';
+          newUrl = newUrl.replace(/\.(jpg|png|webp|tif)($|\?)/i, `.${ext}`);
+          return newUrl;
         }
         // Artwork size buttons: replace with -999, remove bb, preserve extension
         function artworkButtonUrl(url, size) {
-          return url.replace(/\/(\d+x\d+(-999)?bb?)(?=\.)?/i, `/${size}x${size}-999`)
-            .replace(/bb(?=\.(jpg|png|webp|tif))/i, '')
-            .replace(/(\.(jpg|png|webp|tif))($|\?)/i, function(m, ext) {
-              if (usePng) return '.png';
-              return ext;
-            });
+          let match = url.match(/\/([0-9]+x[0-9]+(-999)?bb?)/i);
+          if (!match) return url; // fallback
+          let newUrl = url.replace(match[1], `${size}x${size}-999`);
+          newUrl = newUrl.replace(/bb(?=\.(jpg|png|webp|tif))/i, '');
+          let extMatch = url.match(/\.(jpg|png|webp|tif)($|\?)/i);
+          let ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
+          if (usePng) ext = 'png';
+          newUrl = newUrl.replace(/\.(jpg|png|webp|tif)($|\?)/i, `.${ext}`);
+          return newUrl;
         }
         const artworkUrl300 = albumCardArtworkUrl(artworkUrl100, 300);
         const artworkUrl600 = artworkButtonUrl(artworkUrl100, 600);
