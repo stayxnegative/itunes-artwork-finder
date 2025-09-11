@@ -1028,16 +1028,11 @@ async function onload() {
         // Helper to replace and clean up the URL
         function fixArtworkUrl(url, size) {
           let newUrl = url.replace('100x100', `${size}x${size}-999`);
-          // Remove 'bb' before '.jpg' if present
-          newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
-          // Ensure it ends with .jpg
-          if (!newUrl.endsWith('.jpg')) {
-            newUrl += '.jpg';
-          }
-          // If .png search parameter is used, convert .jpg to .png
-          if (usePng) {
-            newUrl = newUrl.replace(/\.jpg$/, '.png');
-          }
+           // Extract extension from original URL
+           let extMatch = url.match(/\.(jpg|png|webp|tif)$/i);
+           let ext = extMatch ? extMatch[0] : '.jpg';
+           newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
+           newUrl += ext;
           return newUrl;
         }
         const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
