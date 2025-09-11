@@ -136,10 +136,10 @@
 }
 #artworkModal .modal-close {
   position: absolute;
-  top: 0.5em;
-  right: 0.5em;
+  top: 1em;
+  right: 1em;
   background: #232323;
-  color: #fff;
+  color: #e53935;
   border: 2px solid #fff;
   border-radius: 50%;
   font-size: 1.5em;
