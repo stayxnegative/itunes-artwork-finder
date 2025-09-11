@@ -213,14 +213,12 @@ body {
 }
 
 .result {
-  width: 220px;
-  min-width: 220px;
-  max-width: 220px;
+  width: 320px;
   box-sizing: border-box;
-  padding: 12px 8px 6px 8px;
-  margin: 8px;
+  padding: 0.6em 0.4em 0.3em 0.4em;
+  margin: 0.4em;
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: 0.3em;
   background: #1e1e1e;
   border: 1px outset #202020;
   transition: box-shadow 0.2s, transform 0.2s;
@@ -231,38 +229,6 @@ body {
   flex-direction: column;
   justify-content: flex-start;
 }
-.result .artwork {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  padding: 0;
-}
-.result .artwork img {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 180px;
-  height: 180px;
-  object-fit: contain;
-  background: #f0f0f0;
-}
-.result .links {
-  position: static;
-  margin-top: 4px;
-  text-align: center;
-  font-size: 10pt;
-  visibility: visible;
-  margin-bottom: 2px;
-}
-.result h2 {
-  font-size: 13pt;
-  color: #fff;
-  text-align: center;
-  margin-top: 8px;
-  margin-bottom: 6px;
-  font-weight: bold;
-}
 
 .result.selected {
   box-shadow: 0px 12px 18px 0 rgba(200, 200, 200, 0.25), 0 8px 24px 0 rgba(40,40,40,0.35), inset 0 2px 12px 0 rgba(120,120,120,0.18);
@@ -272,12 +238,16 @@ body {
 
 @media(max-width: 1000px) {
   .result {
+    width: 100%;
+    max-width: 320px;
     flex-basis: 33.3%;
   }
 }
 
 @media(max-width: 600px) {
   .result {
+    width: 90vw !important;
+    max-width: 320px !important;
     flex-basis: 100%;
   }
 }
