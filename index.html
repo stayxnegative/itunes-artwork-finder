@@ -1025,35 +1025,30 @@ async function onload() {
     } else {
       resultsDiv.innerHTML = `${resultItems.map(result => {
         const artworkUrl100 = result["artworkUrl100"];
-        // Album card artwork: preserve bb and extension, only change size
-        function albumCardArtworkUrl(url, size) {
-          // Find the size segment (e.g., 100x100, 300x300-999bb, etc)
-          let match = url.match(/\/([0-9]+x[0-9]+(-999)?bb?)/i);
-          if (!match) return url; // fallback
-          let newUrl = url.replace(match[1], `${size}x${size}bb`);
-          // Extension
-          let extMatch = url.match(/\.(jpg|png|webp|tif)($|\?)/i);
-          let ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
-          if (usePng) ext = 'png';
-          newUrl = newUrl.replace(/\.(jpg|png|webp|tif)($|\?)/i, `.${ext}`);
+        // Helper to replace and clean up the URL
+        function fixArtworkUrl(url, size) {
+          let newUrl = url.replace('100x100', `${size}x${size}-999`);
+          // Remove 'bb' before '.jpg' if present
+          newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
+          // Ensure it ends with .jpg
+          if (!newUrl.endsWith('.jpg')) {
+            newUrl += '.jpg';
+          }
+          // If .png search parameter is used, convert .jpg to .png
+          if (usePng) {
+            newUrl = newUrl.replace(/\.jpg$/, '.png');
+          }
+          // Always convert to a1.mzstatic.com HD format
+          newUrl = newUrl.replace(
+            /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png)$/,
+            "https://a1.mzstatic.com/us/r1000/063/$1"
+          );
           return newUrl;
         }
-        // Artwork size buttons: replace with -999, remove bb, preserve extension
-        function artworkButtonUrl(url, size) {
-          let match = url.match(/\/([0-9]+x[0-9]+(-999)?bb?)/i);
-          if (!match) return url; // fallback
-          let newUrl = url.replace(match[1], `${size}x${size}-999`);
-          newUrl = newUrl.replace(/bb(?=\.(jpg|png|webp|tif))/i, '');
-          let extMatch = url.match(/\.(jpg|png|webp|tif)($|\?)/i);
-          let ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
-          if (usePng) ext = 'png';
-          newUrl = newUrl.replace(/\.(jpg|png|webp|tif)($|\?)/i, `.${ext}`);
-          return newUrl;
-        }
-        const artworkUrl300 = albumCardArtworkUrl(artworkUrl100, 300);
-        const artworkUrl600 = artworkButtonUrl(artworkUrl100, 600);
-        const artworkUrl1500 = artworkButtonUrl(artworkUrl100, 1500);
-        const artworkUrl3000 = artworkButtonUrl(artworkUrl100, 3000);
+        const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
+        const artworkUrl600 = fixArtworkUrl(artworkUrl100, 600);
+        const artworkUrl1500 = fixArtworkUrl(artworkUrl100, 1500);
+        const artworkUrl3000 = fixArtworkUrl(artworkUrl100, 3000);
         // Integrate custom regex for artworkUrl5000
         let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
         artworkUrl5000 = artworkUrl5000.replace(
@@ -1128,7 +1123,7 @@ async function onload() {
         }
         return `<div class="result${entity === 'audiobook' ? ' audiobook' : (entity === 'ebook' ? ' ebook' : '')}">
           <div class="artwork">
-            <img src="${artworkUrl300}" />
+            <img src="${artworkUrl5000}" />
           </div>
           <div class="links">
             ${linksHtml}
@@ -1145,17 +1140,13 @@ async function onload() {
           // Find parent card and extract info
           const card = img.closest('.result');
           const title = card.querySelector('h2 a') ? card.querySelector('h2 a').textContent : '';
-          const largeSrc = img.src.replace(/300x300|300x300-999|300x300\.jpg|300x300\.png/, '1500x1500-999');
-          // Use HD link if available
-          let hdLink = '';
+          // Always use HD a1.mzstatic.com url for modal
           const hdA = card.querySelector('.links a:last-child');
-          if (hdA && hdA.href && /HD/i.test(hdA.textContent)) {
-            hdLink = hdA.href;
-          }
+          let hdLink = hdA && hdA.href ? hdA.href : img.src;
           const modal = document.getElementById('artworkModal');
           modal.innerHTML = `<div class="modal-content">
             <button class="modal-close" title="Close">&#10006;</button>
-            <img class="modal-artwork" src="${hdLink || largeSrc}" alt="Album Art" />
+            <img class="modal-artwork" src="${hdLink}" alt="Album Art" />
             <div class="modal-title">${title}</div>
           </div>`;
           modal.style.display = 'flex';
