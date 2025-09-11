@@ -213,12 +213,14 @@ body {
 }
 
 .result {
-  flex-basis: 10%;
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
   box-sizing: border-box;
-  padding: 0.6em 0.4em 0.3em 0.4em;
-  margin: 0.4em;
+  padding: 12px 8px 6px 8px;
+  margin: 8px;
   overflow: hidden;
-  border-radius: 0.3em;
+  border-radius: 6px;
   background: #1e1e1e;
   border: 1px outset #202020;
   transition: box-shadow 0.2s, transform 0.2s;
@@ -228,6 +230,42 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+.result .artwork {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  padding: 0;
+}
+.result .artwork img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  background: #f0f0f0;
+}
+.result .links {
+  position: static;
+  margin-top: 4px;
+  text-align: center;
+  font-size: 10pt;
+  visibility: visible;
+  margin-bottom: 2px;
+}
+.result h2 {
+  font-size: 13pt;
+  color: #fff;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  font-weight: bold;
 }
 
 .result.selected {
