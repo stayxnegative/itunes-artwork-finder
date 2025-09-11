@@ -155,53 +155,7 @@ body {
     color: #e53935 !important;
     box-shadow: 0 2px 8px 0 rgba(120,120,120,0.15) !important;
     transition: background 0.4s, color 0.4s, border 0.4s !important;
-    font-size: 1em !important;
-    border-radius: 50% !important;
-    padding: 0.25em 0.5em !important;
-    width: 2em !important;
-    height: 2em !important;
-    min-width: 2em !important;
-    min-height: 2em !important;
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 2 !important;
-  }
-  button#clearBtn.checkmark,
-  button#clearBtn.checkmark:hover,
-  button#clearBtn.checkmark:active,
-  button#clearBtn.checkmark:focus {
-    background: none !important;
-    border: none !important;
-    color: #97f19d !important;
-    box-shadow: none !important;
-    transition: none !important;
-  }
-  button#clearBtn:hover {
-    background: #212121 !important;
-    color: #fff !important;
-    border-color: #e53935 !important;
-  }
-  button#clearBtn,
-  button#clearBtn:hover,
-  button#clearBtn:active,
-  button#clearBtn:focus {
-    background: #232323 !important;
-    border: 2px solid #fff !important;
-    color: #e53935 !important;
-    box-shadow: 0 2px 8px 0 rgba(120,120,120,0.15) !important;
-    transition: background 0.4s, color 0.4s, border 0.4s !important;
-    font-size: 1em !important;
-    border-radius: 50% !important;
-    padding: 0.25em 0.5em !important;
-    width: 2em !important;
-    height: 2em !important;
-    min-width: 2em !important;
-    min-height: 2em !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 2 !important;
   }
   button#clearBtn.checkmark,
   button#clearBtn.checkmark:hover,
@@ -740,17 +694,7 @@ body {
     color: #e53935 !important;
     box-shadow: 0 2px 8px 0 rgba(120,120,120,0.15) !important;
     transition: background 0.4s, color 0.4s, border 0.4s !important;
-    font-size: 1em !important;
-    border-radius: 50% !important;
-    padding: 0.25em 0.5em !important;
-    width: 2em !important;
-    height: 2em !important;
-    min-width: 2em !important;
-    min-height: 2em !important;
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 2 !important;
   }
   button#clearBtn.checkmark,
   button#clearBtn.checkmark:hover,
@@ -1034,7 +978,7 @@ async function onload() {
   clearBtn.type = 'button';
   clearBtn.innerHTML = '&#10006;';
   inputWrapper.appendChild(clearBtn);
-  clearBtn.style.display = searchInput.value ? "block" : "none";
+  clearBtn.style.display = searchInput.value ? "flex" : "none";
   clearBtn.addEventListener('click', function() {
     searchInput.value = "";
     searchInput.focus();
@@ -1047,7 +991,7 @@ async function onload() {
     }, 1200);
   });
   function toggleClearBtn() {
-    clearBtn.style.display = searchInput.value ? "block" : "none";
+    clearBtn.style.display = searchInput.value ? "flex" : "none";
   }
   searchInput.addEventListener('input', toggleClearBtn);
 
