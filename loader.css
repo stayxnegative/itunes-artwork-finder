@@ -1,0 +1,16 @@
+/* Loader spinner for submit button */
+.submit-loader {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  border: 3px solid #97f19d;
+  border-top: 3px solid #232323;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin: 0 auto;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

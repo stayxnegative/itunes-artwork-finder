@@ -18,6 +18,7 @@
     <meta name="apple-mobile-web-app-title" content="Artwork Finder">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="modal.css">
+  <link rel="stylesheet" href="loader.css">
   <link rel="preload" as="image" href="images/background.jpg">
   <style type="text/css">
 @media (min-width: 1001px) {
@@ -979,11 +980,13 @@ async function onload() {
     const form = document.getElementById('searchForm');
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      submitBtn.value = "✓";
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="submit-loader"></span>';
       submitBtn.classList.add('submit-checkmark');
       setTimeout(function() {
-        submitBtn.value = "Search";
+        submitBtn.innerHTML = "Search";
         submitBtn.classList.remove('submit-checkmark');
+        submitBtn.disabled = false;
         form.submit();
       }, 700);
     });
