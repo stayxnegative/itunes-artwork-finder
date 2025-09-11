@@ -5,16 +5,11 @@
   color: #1a1a1a;
   font-weight: bold;
   text-decoration: none;
-  border: 2px solid rgba(255,255,255,0.18);
+  border: 2px groove #464646;
   font-size: 0.95em;
   border-radius: 0.3em;
   transition: background 0.4s, color 0.4s, border 0.4s;
   box-sizing: border-box;
-  background-clip: padding-box;
-  backdrop-filter: blur(8px) saturate(180%) brightness(1.08);
-  -webkit-backdrop-filter: blur(8px) saturate(180%) brightness(1.08);
-  box-shadow: 0 2px 8px 0 rgba(31,38,135,0.13);
-  position: relative;
 }
 #artworkModal .modal-links a:nth-child(1) {
   background: #97f19d !important;
@@ -149,9 +144,9 @@
   right: 0;
   margin: 0.5em;
   z-index: 2;
-  background: #232323;
+  background: rgba(35,35,35,0.22);
   color: #e53935;
-  border: 2px solid #fff;
+  border: 2px solid rgba(255,255,255,0.7);
   border-radius: 50%;
   font-size: 1.5em;
   width: 2em;
@@ -159,9 +154,13 @@
   cursor: pointer;
   z-index: 20;
   transition: background 0.4s, color 0.4s, border 0.4s;
+  backdrop-filter: blur(8px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(8px) saturate(180%) brightness(1.1);
 }
 #artworkModal .modal-close:hover {
-  background: #212121 !important;
+  background: rgba(33,33,33,0.32) !important;
   color: #fff !important;
-  border-color: #e53935 !important;
+  border-color: rgba(229,57,53,0.7) !important;
+  backdrop-filter: blur(10px) saturate(180%) brightness(1.12) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(180%) brightness(1.12) !important;
 }
