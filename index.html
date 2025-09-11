@@ -872,10 +872,11 @@ async function fetchResults(term, entity, country) {
 async function onload() {
   const searchParams = new URLSearchParams(window.location.search);
   const term = searchParams.get('term');
-  const country = searchParams.get('country') || 'us';
   let entity = 'album';
   let attribute = '';
-  let countryCode = country;
+  let countryCode = 'us';
+  const country = searchParams.get('country');
+  if (country) countryCode = country;
   // Detect .png anywhere in the original term
   let usePng = false;
   let rawTerm = term || "";
@@ -1054,7 +1055,8 @@ async function onload() {
   }
 
   if (term == null || term.length == 0) {
-    return
+    // No term: keep form ready for input, default to album/us
+    return;
   }
 
   const resultsDiv = document.getElementById('results')
