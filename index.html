@@ -942,7 +942,7 @@ async function onload() {
           <div id="inputWrapper">
             <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
           </div>
-          <button id="submitBtn" type="submit">Search</button>
+          <button id="submitBtn" type="submit"></button>
         </div>
       </div>
       <div id="options"></div>
@@ -980,28 +980,38 @@ async function onload() {
   // Add submit button effect
   if (submitBtn) {
     const form = document.getElementById('searchForm');
-    // Add loader span to button if not present
+    // Remove any duplicate .submit-text spans
+    Array.from(submitBtn.querySelectorAll('.submit-text')).forEach((el, idx) => {
+      if (idx > 0) el.remove();
+    });
+    // Remove any duplicate .submit-loader spans
+    Array.from(submitBtn.querySelectorAll('.submit-loader')).forEach((el, idx) => {
+      if (idx > 0) el.remove();
+    });
+    // Ensure button has loader and text
     if (!submitBtn.querySelector('.submit-loader')) {
       const loaderSpan = document.createElement('span');
       loaderSpan.className = 'submit-loader';
       loaderSpan.style.display = 'none';
       submitBtn.appendChild(loaderSpan);
     }
-    // Add text span for button label
     if (!submitBtn.querySelector('.submit-text')) {
       const textSpan = document.createElement('span');
       textSpan.className = 'submit-text';
       textSpan.textContent = 'Search';
       submitBtn.appendChild(textSpan);
     }
+    // Reset button to default state
+    submitBtn.querySelector('.submit-text').style.display = 'inline';
+    submitBtn.querySelector('.submit-loader').style.display = 'none';
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       submitBtn.disabled = true;
       submitBtn.classList.add('submit-checkmark');
-      submitBtn.querySelector('.submit-text').style.display = 'none';
+      submitBtn.querySelector('.submit-text').style.visibility = 'hidden';
       submitBtn.querySelector('.submit-loader').style.display = 'inline-block';
       setTimeout(function() {
-        submitBtn.querySelector('.submit-text').style.display = 'inline';
+        submitBtn.querySelector('.submit-text').style.visibility = 'visible';
         submitBtn.querySelector('.submit-loader').style.display = 'none';
         submitBtn.classList.remove('submit-checkmark');
         submitBtn.disabled = false;
