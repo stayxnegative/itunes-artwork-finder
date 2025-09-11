@@ -978,13 +978,29 @@ async function onload() {
   // Add submit button effect
   if (submitBtn) {
     const form = document.getElementById('searchForm');
+    // Add loader span to button if not present
+    if (!submitBtn.querySelector('.submit-loader')) {
+      const loaderSpan = document.createElement('span');
+      loaderSpan.className = 'submit-loader';
+      loaderSpan.style.display = 'none';
+      submitBtn.appendChild(loaderSpan);
+    }
+    // Add text span for button label
+    if (!submitBtn.querySelector('.submit-text')) {
+      const textSpan = document.createElement('span');
+      textSpan.className = 'submit-text';
+      textSpan.textContent = 'Search';
+      submitBtn.appendChild(textSpan);
+    }
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="submit-loader"></span>';
       submitBtn.classList.add('submit-checkmark');
+      submitBtn.querySelector('.submit-text').style.display = 'none';
+      submitBtn.querySelector('.submit-loader').style.display = 'inline-block';
       setTimeout(function() {
-        submitBtn.innerHTML = "Search";
+        submitBtn.querySelector('.submit-text').style.display = 'inline';
+        submitBtn.querySelector('.submit-loader').style.display = 'none';
         submitBtn.classList.remove('submit-checkmark');
         submitBtn.disabled = false;
         form.submit();
