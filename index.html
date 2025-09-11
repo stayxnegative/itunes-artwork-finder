@@ -72,22 +72,14 @@
 }
 html {
   background-color: #000;
+  min-height: 100vh;
 }
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background-color: #000;
-  position: relative;
+  background: #000 url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
   min-height: 100vh;
-  overflow-x: hidden;
   color: #fff;
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: #000 url('images/background.jpg') center center / cover no-repeat;
-  z-index: -1;
-  pointer-events: none;
 }
 
 #searchForm {
@@ -157,6 +149,11 @@ body::before {
   transition: none !important;
 }
   @media only screen and (max-width: 600px) {
+  body {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
   .result .links a:nth-child(1):hover {
     background: #4e9c5a !important;
     color: #ffffff !important;
