@@ -947,7 +947,63 @@ async function onload() {
       <div id="options"></div>
     </form>
     <div id="results"></div>
+    <div id="artworkModal" style="display:none;"></div>
   `;
+/* Modal styles for large album art popup */
+#artworkModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+#artworkModal .modal-content {
+  background: #181818;
+  border-radius: 1em;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.45);
+  padding: 2em;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+#artworkModal .modal-artwork {
+  max-width: 400px;
+  max-height: 400px;
+  width: 80vw;
+  height: auto;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 16px 0 rgba(120,120,120,0.25);
+  margin-bottom: 1em;
+}
+#artworkModal .modal-title {
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+#artworkModal .modal-close {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: #232323;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5em;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+  z-index: 2;
+}
 
   // Create clear button via JS and add functionality
   const searchInput = document.getElementById('searchInput');
@@ -1127,6 +1183,37 @@ async function onload() {
         </div>`;
       }).join('')}`
       handleCardSelection();
+      // Add click event to artwork images for modal popup
+      document.querySelectorAll('.result .artwork img').forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // Find parent card and extract info
+          const card = img.closest('.result');
+          const title = card.querySelector('h2 a') ? card.querySelector('h2 a').textContent : '';
+          const largeSrc = img.src.replace(/300x300|300x300-999|300x300\.jpg|300x300\.png/, '1500x1500-999');
+          // Use HD link if available
+          let hdLink = '';
+          const hdA = card.querySelector('.links a:last-child');
+          if (hdA && hdA.href && /HD/i.test(hdA.textContent)) {
+            hdLink = hdA.href;
+          }
+          const modal = document.getElementById('artworkModal');
+          modal.innerHTML = `<div class="modal-content">
+            <button class="modal-close" title="Close">&#10006;</button>
+            <img class="modal-artwork" src="${hdLink || largeSrc}" alt="Album Art" />
+            <div class="modal-title">${title}</div>
+          </div>`;
+          modal.style.display = 'flex';
+          // Close modal on click outside or close button
+          modal.onclick = function(ev) {
+            if (ev.target === modal || ev.target.classList.contains('modal-close')) {
+              modal.style.display = 'none';
+              modal.innerHTML = '';
+            }
+          };
+        });
+      });
       // Add JS to force Save As dialog for artwork size buttons
       document.querySelectorAll('.result .links a').forEach(function(link) {
         link.addEventListener('click', function(e) {
