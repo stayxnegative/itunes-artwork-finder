@@ -10,6 +10,13 @@
   vertical-align: middle;
   margin: 0 auto;
 }
+@media only screen and (max-width: 600px) {
+  .submit-loader {
+    width: 0.8em;
+    height: 0.8em;
+    border-width: 2px;
+  }
+}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
