@@ -1038,11 +1038,6 @@ async function onload() {
           if (usePng) {
             newUrl = newUrl.replace(/\.jpg$/, '.png');
           }
-          // Always convert to a1.mzstatic.com HD format
-          newUrl = newUrl.replace(
-            /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png)$/,
-            "https://a1.mzstatic.com/us/r1000/063/$1"
-          );
           return newUrl;
         }
         const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
@@ -1052,7 +1047,7 @@ async function onload() {
         // Integrate custom regex for artworkUrl5000
         let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
         artworkUrl5000 = artworkUrl5000.replace(
-          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png)$/,
+          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png|tif|webp)$/,
           "https://a1.mzstatic.com/us/r1000/063/$1"
         );
         // For ebooks, create a new artworkUrl1467x2200
@@ -1140,13 +1135,12 @@ async function onload() {
           // Find parent card and extract info
           const card = img.closest('.result');
           const title = card.querySelector('h2 a') ? card.querySelector('h2 a').textContent : '';
-          // Always use HD a1.mzstatic.com url for modal
-          const hdA = card.querySelector('.links a:last-child');
-          let hdLink = hdA && hdA.href ? hdA.href : img.src;
+          // Always use a1.mzstatic HD url for modal
+          let hdUrl = img.src;
           const modal = document.getElementById('artworkModal');
           modal.innerHTML = `<div class="modal-content">
             <button class="modal-close" title="Close">&#10006;</button>
-            <img class="modal-artwork" src="${hdLink}" alt="Album Art" />
+            <img class="modal-artwork" src="${hdUrl}" alt="Album Art" />
             <div class="modal-title">${title}</div>
           </div>`;
           modal.style.display = 'flex';
