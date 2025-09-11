@@ -1,3 +1,52 @@
+#artworkModal .modal-links a:nth-child(1) {
+  background: #97f19d !important;
+  color: #1a1a1a !important;
+  border: 2px groove #464646 !important;
+  border-color: #464646 !important;
+}
+#artworkModal .modal-links a:nth-child(2) {
+  background: #f1e697 !important;
+  color: #1a1a1a !important;
+  border: 2px groove #464646 !important;
+  border-color: #464646 !important;
+}
+#artworkModal .modal-links a:nth-child(3) {
+  background: #97c6f1 !important;
+  color: #1a1a1a !important;
+  border: 2px groove #464646 !important;
+  border-color: #464646 !important;
+}
+#artworkModal .modal-links a:nth-child(4) {
+  background: #f1a3a3 !important;
+  color: #1a1a1a !important;
+  border: 2px groove #464646 !important;
+  border-color: #464646 !important;
+}
+#artworkModal .modal-links a:nth-child(1):hover {
+  background: #4e9c5a !important;
+  color: #ffffff !important;
+}
+#artworkModal .modal-links a:nth-child(2):hover {
+  background: #b3a21a !important;
+  color: #ffffff !important;
+}
+#artworkModal .modal-links a:nth-child(3):hover {
+  background: #1a4ab3 !important;
+  color: #ffffff !important;
+}
+#artworkModal .modal-links a:nth-child(4):hover {
+  background: #b33a3a !important;
+  color: #ffffff !important;
+}
+#artworkModal .modal-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+#artworkModal .modal-title a:hover {
+  color: #b0b0b0;
+  text-shadow: 2px 4px 8px #000000;
+}
 #artworkModal .modal-links {
   display: flex;
   flex-direction: row;
