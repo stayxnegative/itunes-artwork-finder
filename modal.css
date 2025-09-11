@@ -99,9 +99,14 @@
   z-index: 9999;
 }
 #artworkModal .modal-content {
-  background: #181818;
+  background: linear-gradient(135deg, #232323 0%, #181818 100%);
   border-radius: 1em;
-  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.45);
+  border: 3px outset #353535;
+  box-shadow:
+    0 8px 32px 0 rgba(0,0,0,0.45),
+    0 2px 8px 0 rgba(120,120,120,0.15),
+    0 0.5em 2em 0 rgba(80,80,80,0.18),
+    inset 0 2px 12px 0 rgba(120,120,120,0.18);
   padding: 2em;
   max-width: 90vw;
   max-height: 90vh;
