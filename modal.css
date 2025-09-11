@@ -86,6 +86,7 @@
   margin-top: 1.2em;
   margin-bottom: 0.2em;
   text-shadow: 2px 3px 8px rgba(0,0,0,0.22);
+}
 /* Modal styles for large album art popup */
 #artworkModal {
   position: fixed;
@@ -93,7 +94,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: transparent;
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
