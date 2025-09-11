@@ -1045,13 +1045,12 @@ async function onload() {
         const artworkUrl3000 = fixArtworkUrl(artworkUrl100, 3000);
         // Integrate custom regex for artworkUrl5000
         let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
-        // Only remove 'bb' after the dimension in the path
         artworkUrl5000 = artworkUrl5000.replace(
-          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*?\/(\d+x\d+))(bb)?\/(.*)\.(jpg|png)$/,
-          function(match, path, dim, bb, rest, ext) {
-            return `https://a1.mzstatic.com/us/r1000/063/${path.replace(/bb$/, '-999')}/${rest}.${ext}`;
-          }
+          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png)$/,
+          "https://a1.mzstatic.com/us/r1000/063/$1"
         );
+        // Remove 'bb' only if it appears after the last / and before .jpg/.png
+        artworkUrl5000 = artworkUrl5000.replace(/\/([^\/]*?)bb(\.(jpg|png|webp|tif))$/, '/$1$2');
         // For ebooks, create a new artworkUrl1467x2200
         let artworkUrl1467x2200 = '';
         if (entity === 'ebook') {
