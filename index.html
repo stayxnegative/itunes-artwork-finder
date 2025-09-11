@@ -344,8 +344,9 @@ button#submitBtn {
   border-radius: 0.5em;
   border: 2px solid #8b8b8b;
   font-weight: bold;
-  font-size: 18pt;
-  padding: 0.5em 1.1em;
+  font-size: 15pt;
+  padding: 0.5em 1em;
+  height: 3.2em;
   transition: background 0.4s, color 0.4s, border 0.4s;
   margin-left: 0.25em;
   margin-top: 0;
@@ -837,7 +838,7 @@ async function fetchResults(term, entity, country) {
   const url = buildUrl(term, entity, country)
   const response = await fetch(url)
   if (!response.ok) {
-    console.log(response)
+  // console.log(response) // Removed for production
     return null
   }
   return response.json()
@@ -1038,11 +1039,11 @@ async function onload() {
   let results
   window.attribute = attribute;
   try {
-    results = await fetchResults(searchTerm, entity, countryCode)
-    console.log(results)
+  results = await fetchResults(searchTerm, entity, countryCode)
+  // console.log(results) // Removed for production
   } catch(e) {
-    error = e.message
-    console.log(e)
+  error = e.message
+  // console.log(e) // Removed for production
   }
 
   if (results == null) {
