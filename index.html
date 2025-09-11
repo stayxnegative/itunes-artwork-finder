@@ -40,11 +40,11 @@
   background: rgba(255,255,255,0.15);
   border-radius: 1em;
   border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  box-shadow: none;
   transform: translateY(-12px) scale(1.04);
   transition: box-shadow 0.3s, transform 0.3s;
-  backdrop-filter: blur(16px) saturate(180%) brightness(1.1);
-  -webkit-backdrop-filter: blur(16px) saturate(180%) brightness(1.1);
+  backdrop-filter: blur(32px) saturate(180%) brightness(1.18);
+  -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(1.18);
   overflow: hidden;
   border-top: 1px solid rgba(255,255,255,0.3);
   border-left: 1px solid rgba(255,255,255,0.3);
@@ -452,7 +452,7 @@ button#submitBtn:disabled:hover {
   background: rgba(255,255,255,0.15);
   border-radius: 1em;
   border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  box-shadow: none;
   transform: translateY(-12px) scale(1.04);
   transition: box-shadow 0.3s, transform 0.3s;
   cursor: pointer;
@@ -472,16 +472,29 @@ button#submitBtn:disabled:hover {
 
 .result.selected {
   box-shadow:
-    0 0 0 8px rgba(255,255,255,0.08),
-    0 8px 32px 0 rgba(31,38,135,0.37),
-    0 -8px 32px 0 rgba(255,0,128,0.18),   /* top pink */
-    8px 0 32px 0 rgba(0,255,255,0.18),    /* right cyan */
-    0 8px 32px 0 rgba(255,255,0,0.18),    /* bottom yellow */
-    -8px 0 32px 0 rgba(0,255,128,0.18),   /* left green */
-    8px 8px 48px 0 rgba(128,0,255,0.18),  /* bottom right purple */
-    -8px -8px 48px 0 rgba(255,128,0,0.18);/* top left orange */
+    0 0 0 4px rgba(255,255,255,0.08),
+    0 4px 16px 0 rgba(31,38,135,0.28),
+    0 -4px 16px 0 rgba(255,0,128,0.12),   /* top pink */
+    4px 0 16px 0 rgba(0,255,255,0.12),    /* right cyan */
+    0 4px 16px 0 rgba(255,255,0,0.12),    /* bottom yellow */
+    -4px 0 16px 0 rgba(0,255,128,0.12),   /* left green */
+    4px 4px 24px 0 rgba(128,0,255,0.12),  /* bottom right purple */
+    -4px -4px 24px 0 rgba(255,128,0,0.12);/* top left orange */
+  z-index: 2;
+}
+
+.result:hover {
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,0.18), /* glass border, more visible */
+    0 4px 16px 0 rgba(31,38,135,0.28),
+    0 -4px 16px 0 rgba(255,0,128,0.12),   /* top pink */
+    4px 0 16px 0 rgba(0,255,255,0.12),    /* right cyan */
+    0 4px 16px 0 rgba(255,255,0,0.12),    /* bottom yellow */
+    -4px 0 16px 0 rgba(0,255,128,0.12),   /* left green */
+    4px 4px 24px 0 rgba(128,0,255,0.12),  /* bottom right purple */
+    -4px -4px 24px 0 rgba(255,128,0,0.12);/* top left orange */
   transform: translateY(-4px) scale(1.03);
-  z-index: 1;
+  z-index: 2;
 }
 
 @media(max-width: 1000px) {

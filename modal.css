@@ -148,19 +148,19 @@
   color: #e53935;
   border: 2px solid rgba(255,255,255,0.7);
   border-radius: 50%;
-  font-size: 1.5em;
-  width: 2em;
-  height: 2em;
+  font-size: 1.35em;
+  width: 1.8em;
+  height: 1.8em;
   cursor: pointer;
   z-index: 20;
   transition: background 0.4s, color 0.4s, border 0.4s;
-  backdrop-filter: blur(32px) saturate(180%) brightness(1.18);
-  -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(1.18);
+  backdrop-filter: blur(60px) saturate(180%) brightness(1.28);
+  -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.28);
 }
 #artworkModal .modal-close:hover {
   background: rgba(255,255,255,0.32) !important;
   color: #fff !important;
   border-color: rgba(229,57,53,0.7) !important;
-  backdrop-filter: blur(40px) saturate(180%) brightness(1.22) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.22) !important;
+  backdrop-filter: blur(80px) saturate(180%) brightness(1.32) !important;
+  -webkit-backdrop-filter: blur(80px) saturate(180%) brightness(1.32) !important;
 }
