@@ -1028,11 +1028,16 @@ async function onload() {
         // Helper to replace and clean up the URL
         function fixArtworkUrl(url, size) {
           let newUrl = url.replace('100x100', `${size}x${size}-999`);
-           // Extract extension from original URL
-           let extMatch = url.match(/\.(jpg|png|webp|tif)$/i);
-           let ext = extMatch ? extMatch[0] : '.jpg';
-           newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
-           newUrl += ext;
+          // Remove 'bb' before '.jpg' if present
+          newUrl = newUrl.replace(/bb(?=\.jpg)/, '');
+          // Ensure it ends with .jpg
+          if (!newUrl.endsWith('.jpg')) {
+            newUrl += '.jpg';
+          }
+          // If .png search parameter is used, convert .jpg to .png
+          if (usePng) {
+            newUrl = newUrl.replace(/\.jpg$/, '.png');
+          }
           return newUrl;
         }
         const artworkUrl300 = fixArtworkUrl(artworkUrl100, 300);
@@ -1042,7 +1047,7 @@ async function onload() {
         // Integrate custom regex for artworkUrl5000
         let artworkUrl5000 = fixArtworkUrl(artworkUrl100, 10000);
         artworkUrl5000 = artworkUrl5000.replace(
-          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png|tif|webp)$/,
+          /^https:\/\/.*?\.mzstatic\.com\/image\/thumb\/(.*)\/.*\.(jpg|png)$/,
           "https://a1.mzstatic.com/us/r1000/063/$1"
         );
         // For ebooks, create a new artworkUrl1467x2200
@@ -1113,7 +1118,7 @@ async function onload() {
         }
         return `<div class="result${entity === 'audiobook' ? ' audiobook' : (entity === 'ebook' ? ' ebook' : '')}">
           <div class="artwork">
-            <img src="${artworkUrl5000}" />
+            <img src="${artworkUrl300}" />
           </div>
           <div class="links">
             ${linksHtml}
@@ -1130,12 +1135,17 @@ async function onload() {
           // Find parent card and extract info
           const card = img.closest('.result');
           const title = card.querySelector('h2 a') ? card.querySelector('h2 a').textContent : '';
-          // Always use a1.mzstatic HD url for modal
-          let hdUrl = img.src;
+          const largeSrc = img.src.replace(/300x300|300x300-999|300x300\.jpg|300x300\.png/, '1500x1500-999');
+          // Use HD link if available
+          let hdLink = '';
+          const hdA = card.querySelector('.links a:last-child');
+          if (hdA && hdA.href && /HD/i.test(hdA.textContent)) {
+            hdLink = hdA.href;
+          }
           const modal = document.getElementById('artworkModal');
           modal.innerHTML = `<div class="modal-content">
             <button class="modal-close" title="Close">&#10006;</button>
-            <img class="modal-artwork" src="${hdUrl}" alt="Album Art" />
+            <img class="modal-artwork" src="${hdLink || largeSrc}" alt="Album Art" />
             <div class="modal-title">${title}</div>
           </div>`;
           modal.style.display = 'flex';
