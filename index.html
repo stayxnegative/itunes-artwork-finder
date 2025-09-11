@@ -1127,6 +1127,30 @@ async function onload() {
         </div>`;
       }).join('')}`
       handleCardSelection();
+      // Add JS to force Save As dialog for artwork size buttons
+      document.querySelectorAll('.result .links a').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const url = link.getAttribute('href');
+          const filename = link.textContent + (url.endsWith('.png') ? '.png' : '.jpg');
+          fetch(url, {mode: 'cors'})
+            .then(response => response.blob())
+            .then(blob => {
+              const blobUrl = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.style.display = 'none';
+              a.href = blobUrl;
+              a.download = filename;
+              document.body.appendChild(a);
+              a.click();
+              window.URL.revokeObjectURL(blobUrl);
+              document.body.removeChild(a);
+            })
+            .catch(() => {
+              window.open(url, '_blank');
+            });
+        });
+      });
     }
   }
 }
