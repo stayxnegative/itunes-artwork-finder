@@ -1132,7 +1132,12 @@ async function onload() {
         link.addEventListener('click', function(e) {
           e.preventDefault();
           const url = link.getAttribute('href');
-          const filename = link.textContent + (url.endsWith('.png') ? '.png' : '.jpg');
+          // Extract filename from URL
+          let filename = url.split('/').pop().split('?')[0];
+          // Fallback: use link text if filename is empty
+          if (!filename || filename.length < 5) {
+            filename = link.textContent + (url.endsWith('.png') ? '.png' : '.jpg');
+          }
           fetch(url, {mode: 'cors'})
             .then(response => response.blob())
             .then(blob => {
