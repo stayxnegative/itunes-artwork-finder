@@ -15,8 +15,6 @@
     width: 1.1em;
     height: 1.1em;
     border-width: 2.5px;
-    margin: 0 auto !important;
-    display: block !important;
   }
 }
 @keyframes spin {
