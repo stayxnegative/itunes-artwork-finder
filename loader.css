@@ -12,9 +12,11 @@
 }
 @media only screen and (max-width: 600px) {
   .submit-loader {
-    width: 0.8em;
-    height: 0.8em;
-    border-width: 2px;
+    width: 1.1em;
+    height: 1.1em;
+    border-width: 2.5px;
+    margin: 0 auto !important;
+    display: block !important;
   }
 }
 @keyframes spin {
