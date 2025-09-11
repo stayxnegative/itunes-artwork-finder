@@ -179,16 +179,14 @@ body {
     background: #6ad6a3 !important;
     color: #fff !important;
   }
-  html, body {
-    height: 100% !important;
-    width: 100% !important;
+  body {
     min-height: 100vh !important;
-    min-width: 100vw !important;
     background-color: #000 !important;
     background-image: url('images/background.jpg') !important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
   }
   .result .links a:nth-child(1) {
     color: #1a1a1a !important;
@@ -932,34 +930,22 @@ async function onload() {
     }
   }
 
-  document.body.innerHTML = `
-  <header class="site-header"></header>
-  <div class="site-logo"></div>
-  <form id="searchForm" method="GET">
-      <div id="searchField">
-        <h1 id="title" style="text-align:center;cursor:pointer;">iTunes Artwork Finder</h1>
-        <div class="input-row">
-          <div id="inputWrapper">
-            <input id="searchInput" type="text" name="term" value="${term || ""}" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
-          </div>
-          <input id="submitBtn" type="submit" value="Search" />
-        </div>
-      </div>
-      <div id="options"></div>
-    </form>
-    <div id="results"></div>
-    <div id="artworkModal" style="display:none;"></div>
-  `;
+  // Populate initial input value if term exists
+  const existingInput = document.getElementById('searchInput');
+  if (existingInput && term) existingInput.value = term;
 
   // Create clear button via JS and add functionality
   const searchInput = document.getElementById('searchInput');
   const inputWrapper = document.getElementById('inputWrapper');
   const submitBtn = document.getElementById('submitBtn');
-  let clearBtn = document.createElement('button');
-  clearBtn.id = 'clearBtn';
-  clearBtn.type = 'button';
-  clearBtn.innerHTML = '&#10006;';
-  inputWrapper.appendChild(clearBtn);
+  let clearBtn = document.getElementById('clearBtn');
+  if (!clearBtn) {
+    clearBtn = document.createElement('button');
+    clearBtn.id = 'clearBtn';
+    clearBtn.type = 'button';
+    clearBtn.innerHTML = '&#10006;';
+    inputWrapper.appendChild(clearBtn);
+  }
   clearBtn.style.display = searchInput.value ? "block" : "none";
   clearBtn.addEventListener('click', function() {
     searchInput.value = "";
@@ -1204,5 +1190,22 @@ function handleCardSelection() {
 }
     </script>
   </head>
-  <body onload="onload()"></body>
+  <body onload="onload()">
+    <header class="site-header"></header>
+    <div class="site-logo"></div>
+    <form id="searchForm" method="GET">
+      <div id="searchField">
+        <h1 id="title" style="text-align:center;cursor:pointer;">iTunes Artwork Finder</h1>
+        <div class="input-row">
+          <div id="inputWrapper">
+            <input id="searchInput" type="text" name="term" value="" placeholder="Enter search term here" style="width:100%;padding-right:2em;" />
+          </div>
+          <input id="submitBtn" type="submit" value="Search" />
+        </div>
+      </div>
+      <div id="options"></div>
+    </form>
+    <div id="results"></div>
+    <div id="artworkModal" style="display:none;"></div>
+  </body>
 </html>
