@@ -929,6 +929,33 @@ button#submitBtn:disabled:hover {
   font-size: 1.7em;
 }
 
+/* --- iOS Safari workaround for fixed wallpaper --- */
+html, body {
+  height: 100%;
+}
+body {
+  position: relative;
+  min-height: 100vh;
+  background: transparent !important;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: none;
+}
+@supports (-webkit-touch-callout: none) {
+  body::before {
+    background-attachment: scroll !important;
+    will-change: transform;
+  }
+}
+
     </style>
   <script>
 'use strict'
