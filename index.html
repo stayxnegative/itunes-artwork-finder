@@ -26,7 +26,8 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 1em;
-  }
+  }  
+
   .result {
   flex-basis: 10%;
   margin: 1em;
@@ -97,13 +98,55 @@ body {
 }
 
 #searchForm {
-  max-width: 50em;
-  margin: 3em auto;
-  padding: 0 3em;
-  border-radius: 0.75em;
-  box-shadow: none;
-  border: none;
-  /* background: #181818; */
+  max-width: 32em;
+  margin: 2.2em auto 1.2em auto;
+  padding: 0.7em 1.2em 0.7em 1.2em;
+  border-radius: 1em;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.13);
+  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  box-shadow: 0 2px 12px -2px rgba(31,38,135,0.13), 0 0 0 1px rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.22);
+  border-left: 1px solid rgba(255,255,255,0.22);
+  border-right: 1px solid rgba(255,255,255,0.09);
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+}
+
+#searchForm::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 60%),
+              linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+#searchForm:focus-within {
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,0.18), /* glass border, more visible */
+    0 4px 16px 0 rgba(31,38,135,0.28),
+    0 -4px 16px 0 rgba(255,0,128,0.12),   /* top pink */
+    4px 0 16px 0 rgba(0,255,255,0.12),    /* right cyan */
+    0 4px 16px 0 rgba(255,255,0,0.12),    /* bottom yellow */
+    -4px 0 16px 0 rgba(0,255,128,0.12),   /* left green */
+    4px 4px 24px 0 rgba(128,0,255,0.12),  /* bottom right purple */
+    -4px -4px 24px 0 rgba(255,128,0,0.12);/* top left orange */
+  border: 2.5px solid rgba(255,255,255,0.28);
+  border-radius: 1em;
+  transition: box-shadow 0.22s, border-color 0.22s;
+  z-index: 3;
+}
+
+@media (max-width: 700px) {
+  #searchForm {
+    padding: 0 1.4em 1.9em 1.4em;
+    margin: 2em 1em;
+    border-radius: 0.9em;
+  }
 }
 
 #searchField {
@@ -135,16 +178,15 @@ body {
   right: 0.3em;
   top: 50%;
   transform: translateY(-50%);
-  background: #232323;
-  border: 2px solid #fff !important;
+  background: rgba(255,255,255,0.22);
+  border: 2px solid rgba(255,255,255,0.7) !important;
   color: #e53935 !important;
-  font-size: 1em;
+  font-size: 1.15em;
   border-radius: 50%;
-  padding: 0.25em 0.5em;
   cursor: pointer;
   line-height: 1;
   transition: background 0.4s, color 0.4s, border 0.4s;
-  box-shadow: 0 2px 8px 0 rgba(120,120,120,0.15);
+  box-shadow: 0 2px 8px 0 rgba(31,38,135,0.13), 0 0 0 1px rgba(255,255,255,0.08);
   width: 2em;
   height: 2em;
   min-width: 2em;
@@ -154,6 +196,8 @@ body {
   justify-content: center;
   padding: 0;
   z-index: 2;
+  backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
+  -webkit-backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
 }
   #clearBtn.checkmark {
   background: none !important;
@@ -309,15 +353,25 @@ body::before {
     border: 2px groove #464646 !important;
     border-color: #464646 !important;
   }
-    button#clearBtn,
+    button#clearBtn {
+      background: rgba(255,255,255,0.22) !important;
+      border: 2px solid rgba(255,255,255,0.7) !important;
+      color: #e53935 !important;
+      box-shadow: 0 2px 8px 0 rgba(31,38,135,0.13), 0 0 0 1px rgba(255,255,255,0.08) !important;
+      transition: background 0.4s, color 0.4s, border 0.4s !important;
+      backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
+      -webkit-backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
+    }
     button#clearBtn:hover,
     button#clearBtn:active,
     button#clearBtn:focus {
-      background: #232323 !important;
-      border: 2px solid #fff !important;
-      color: #e53935 !important;
-      box-shadow: 0 2px 8px 0 rgba(120,120,120,0.15) !important;
+      background: rgba(255,255,255,0.32) !important;
+      border: 2px solid rgba(229,57,53,0.7) !important;
+      color: #fff !important;
+      box-shadow: 0 4px 16px 0 rgba(31,38,135,0.18), 0 0 0 1.5px rgba(255,255,255,0.12) !important;
       transition: background 0.4s, color 0.4s, border 0.4s !important;
+      backdrop-filter: blur(60px) saturate(180%) brightness(1.22);
+      -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.22);
     }
     button#clearBtn.checkmark,
     button#clearBtn.checkmark:hover,
@@ -332,13 +386,16 @@ body::before {
     button#submitBtn,
     button#submitBtn:active,
     button#submitBtn:focus {
-      background: #3a3a3a !important;
+      background: rgba(255,255,255,0.16) !important;
       color: #fff !important;
-      border: 2px solid #8b8b8b !important;
+      border: 2px solid rgba(255,255,255,0.38) !important;
       border-radius: 0.5em !important;
       font-weight: bold !important;
       font-size: 18pt !important;
-      transition: background 0.4s, color 0.4s, border 0.4s !important;
+      box-shadow: 0 2px 12px -2px rgba(31,38,135,0.13), 0 0 0 1px rgba(255,255,255,0.08) !important;
+      backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+      -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+      transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
     }
     button#submitBtn.submit-checkmark,
     button#submitBtn.submit-checkmark:hover,
@@ -359,9 +416,11 @@ body::before {
   transition: none !important;
   }
 #clearBtn:hover {
-  background: #212121 !important;
+  background: rgba(255,255,255,0.32) !important;
   color: #fff !important;
-  border-color: #e53935 !important;
+  border-color: rgba(229,57,53,0.7) !important;
+  backdrop-filter: blur(60px) saturate(180%) brightness(1.22) !important;
+  -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.22) !important;
 }
 
 #searchForm input {
@@ -371,18 +430,26 @@ body::before {
   box-sizing: border-box;
   font-size: 18pt;
   margin: 0;
-  padding: 0.5em;
-  border: 3px groove #8b8b8b;
-  font-weight: bold;
-  background: #000;
+  padding: 0.5em 1em;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  font-weight: 500;
+  background: rgba(255,255,255,0.16);
   color: #fff;
-  border-radius: 0.5em;
-  box-shadow: inset 0 4px 24px 0 rgba(120,120,120,0.25);
+  border-radius: 0.7em;
+  backdrop-filter: blur(12px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.08);
+  box-shadow: inset 0 6px 32px 0 rgba(31,38,135,0.18), 0 1px 6px -2px rgba(0,0,0,0.08);
+  transition: box-shadow 0.18s, border-color 0.18s;
 }
 
 #searchForm input[name=term] {
   width: 100%;
   min-width: 0;
+  box-shadow: inset 0 8px 36px 0 rgba(31,38,135,0.22), 0 2px 12px -2px rgba(0,0,0,0.10);
+  border-bottom: 2.5px solid rgba(255,255,255,0.28);
+  border-top: 1px solid rgba(255,255,255,0.10);
+  border-left: 1px solid rgba(255,255,255,0.10);
+  border-right: 1px solid rgba(255,255,255,0.10);
 }
 
 button#submitBtn {
@@ -402,9 +469,13 @@ button#submitBtn {
 }
 
 button#submitBtn:hover {
-  background: #212121;
-  color: #97f19d;
-  border-color: #97f19d;
+  background: rgba(255,255,255,0.28) !important;
+  color: #f8fcff !important;
+  text-shadow: 0 1px 8px rgba(255,255,255,0.22), 0 0 2px #b0c4d8;
+  border-color: rgba(255,255,255,0.38) !important;
+  box-shadow: 0 4px 18px 0 rgba(31,38,135,0.15), 0 0 0 2px rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(38px) saturate(180%) brightness(1.16);
+  -webkit-backdrop-filter: blur(38px) saturate(180%) brightness(1.16);
   cursor: pointer;
   z-index: 1003;
 }
@@ -1055,6 +1126,8 @@ async function onload() {
             <style>
               #searchInput::placeholder {
                 text-align: center;
+                color: #c5ccdb;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.15);
               }
               #searchInput {
                 text-align: left;
