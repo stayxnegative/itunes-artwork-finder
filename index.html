@@ -172,24 +172,38 @@ body {
     overflow: auto !important;
     position: relative !important;
   }
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
-    background-size: cover;
-    background-attachment: scroll;
-    width: 100vw;
-    height: 100vh;
-    min-width: 100vw;
-    min-height: 100vh;
-    display: block;
+}
+
+@media only screen and (max-width: 1000px) {
+  body {
+    background: none !important;
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: auto !important;
+    position: relative !important;
   }
-  }
+}
+
+/* This must be outside any media query */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: scroll;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: block;
+}
   .result .links a:nth-child(1):hover {
     background: #4e9c5a !important;
     color: #ffffff !important;
@@ -859,8 +873,6 @@ button#submitBtn:disabled:hover {
   .result.audiobook .links a:nth-child(1) {
     background: #e6baff !important;
     color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
   }
   .result.audiobook .links a:nth-child(2) {
     background: #baffd6 !important;
