@@ -929,56 +929,6 @@ button#submitBtn:disabled:hover {
   font-size: 1.7em;
 }
 
-/* --- iOS Safari workaround for fixed wallpaper --- */
-html, body {
-  height: 100%;
-}
-body {
-  position: relative;
-  min-height: 100vh;
-  background: transparent !important;
-  overflow: auto !important;
-}
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
-  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  pointer-events: none;
-}
-@supports (-webkit-touch-callout: none) {
-  body {
-    overflow: auto !important;
-    background: transparent !important;
-  }
-  body::before {
-    position: fixed !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background-attachment: scroll !important;
-    will-change: transform;
-  }
-}
-
-/* Fixed wallpaper for iOS and all browsers */
-#fixed-wallpaper {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  pointer-events: none;
-}
     </style>
   <script>
 'use strict'
@@ -1461,30 +1411,7 @@ function handleCardSelection() {
     });
   });
 }
-
-// iOS scroll lock workaround for overlays/modals
-let scrollPos = 0;
-function lockBodyScroll() {
-  scrollPos = window.scrollY || window.pageYOffset;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${scrollPos}px`;
-  document.body.style.width = '100%';
-  document.body.style.height = '100%';
-  document.body.style.overflow = 'hidden';
-}
-function unlockBodyScroll() {
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
-  document.body.style.height = '';
-  document.body.style.overflow = '';
-  window.scrollTo(0, scrollPos);
-}
-// Example usage: lockBodyScroll() when opening modal, unlockBodyScroll() when closing
     </script>
   </head>
-  <body onload="onload()">
-<!-- Fixed wallpaper for iOS and all browsers -->
-<div id="fixed-wallpaper"></div>
-</body>
+  <body onload="onload()"></body>
 </html>
