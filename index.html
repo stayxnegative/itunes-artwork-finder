@@ -164,10 +164,15 @@ body {
 }
   @media only screen and (max-width: 600px) {
   body {
-    background: #000 url('images/test_wallpaper.jpg') no-repeat center center !important;
+    background: #000 url('images/background.jpg') no-repeat center center fixed !important;
     background-size: cover !important;
     background-position: center center !important;
     background-attachment: scroll !important;
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: auto !important;
   }
   .result .links a:nth-child(1):hover {
     background: #4e9c5a !important;
