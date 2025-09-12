@@ -143,9 +143,14 @@ body {
 
 @media (max-width: 700px) {
   #searchForm {
-    padding: 0 1.4em 1.9em 1.4em;
-    margin: 2em 1em;
-    border-radius: 0.9em;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 2em 0 1.2em 0 !important;
+    padding: 0.7em 0.5em 1.2em 0.5em !important;
+    border-radius: 0.7em !important;
+    box-sizing: border-box !important;
+    left: 0 !important;
+    right: 0 !important;
   }
 }
 
@@ -415,6 +420,8 @@ body::before {
   padding: 0.5em 1em;
   border: 1.5px solid rgba(255,255,255,0.22);
   font-weight: 500;
+  
+  #searchForm {
   background: rgba(255,255,255,0.16);
   color: #fff;
   border-radius: 0.7em;
@@ -424,6 +431,23 @@ body::before {
   transition: box-shadow 0.18s, border-color 0.18s;
 }
 
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll;
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: block;
+  }
 #searchForm input[name=term] {
   width: 100%;
   min-width: 0;
@@ -1416,8 +1440,8 @@ async function onload() {
           });
         });
       });
-      // Add JS to force Save As dialog for artwork size buttons
-      document.querySelectorAll('.result .links a').forEach(function(link) {
+      // Only apply Save As dialog for artwork size/download links
+      document.querySelectorAll('.result .links a[download], .modal-links a[download]').forEach(function(link) {
         link.addEventListener('click', function(e) {
           e.preventDefault();
           const url = link.getAttribute('href');
