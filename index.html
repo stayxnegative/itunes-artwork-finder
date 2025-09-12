@@ -91,12 +91,13 @@ html {
 }
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
+  background: #000 url('images/test_wallpaper.jpg') no-repeat center center fixed;
   background-size: cover;
-  min-height: 100vh;
   margin: 0;
   padding: 0;
   color: #fff;
+  /* Allow natural document height so content scrolls over fixed wallpaper */
+  min-height: 100vh; /* only minimum, not forcing fixed height */
 }
 
 #searchForm {
@@ -211,24 +212,16 @@ body {
 }
   @media only screen and (max-width: 600px) {
     body {
-      background: #000 url('images/test_wallpaper.jpg') no-repeat center center !important;
-      background-size: cover !important;
-      min-height: 100vh !important;
-      margin: 0;
-      padding: 0;
-      background-attachment: scroll !important;
+      /* Keep same fixed wallpaper on mobile; some mobile browsers ignore fixed */
+      background-attachment: fixed; /* will gracefully degrade where unsupported */
     }
     /* ...existing code for mobile styles... */
   }
 
 @media only screen and (max-width: 1000px) {
   body {
-      background: #000 url('images/test_wallpaper.jpg') no-repeat center center !important;
-      background-size: cover !important;
-      min-height: 100vh !important;
-      margin: 0;
-      padding: 0;
-      background-attachment: scroll !important;
+    /* Preserve fixed wallpaper; remove overriding attachment */
+    background-attachment: fixed;
   }
 }
 
@@ -832,39 +825,14 @@ button#submitBtn:disabled:hover {
     object-fit: contain !important;
     background: #f0f0f0 !important;
   }
-  /* Styles from 430px breakpoint, for extra small screens */
-  @media only screen and (max-width: 430px) {
-    .result .links a:nth-child(1):hover { background: #4e9c5a !important; color: #ffffff !important; }
-    .result .links a:nth-child(2):hover { background: #b3a21a !important; color: #ffffff !important; }
-    .result .links a:nth-child(3):hover { background: #1a4ab3 !important; color: #ffffff !important; }
-    .result .links a:nth-child(4):hover { background: #b33a3a !important; color: #ffffff !important; }
-    .result.audiobook .links a:nth-child(1):hover { background: #a36ad6 !important; color: #fff !important; }
-    .result.audiobook .links a:nth-child(2):hover { background: #1ad68b !important; color: #fff !important; }
-    .result.ebook .links a:nth-child(1):hover { background: #d6a36a !important; color: #fff !important; }
-    .result.ebook .links a:nth-child(2):hover { background: #6ad6a3 !important; color: #fff !important; }
-    .result .links a:nth-child(1),
-    .result .links a:nth-child(2),
-    .result .links a:nth-child(3),
-    .result .links a:nth-child(4),
-    .result.audiobook .links a:nth-child(1),
-    .result.audiobook .links a:nth-child(2),
-    .result.ebook .links a:nth-child(1),
-    .result.ebook .links a:nth-child(2) {
-      color: #1a1a1a !important;
-    }
-    .result .links a:nth-child(1) { background: #97f19d !important; border: 2px groove #464646 !important; border-color: #464646 !important; }
-    .result .links a:nth-child(2) { background: #f1e697 !important; border: 2px groove #464646 !important; border-color: #464646 !important; }
-    .result .links a:nth-child(3) { background: #97c6f1 !important; border: 2px groove #464646 !important; border-color: #464646 !important; }
-    .result .links a:nth-child(4) { background: #f1a3a3 !important; border: 2px groove #464646 !important; border-color: #464646 !important; }
-    .result.audiobook .links a:nth-child(1) { background: #e6baff !important; }
-    .result.audiobook .links a:nth-child(2) { background: #baffd6 !important; border: 2px groove #464646 !important; border-color: #464646 !important; }
-    .result.ebook .links a:nth-child(1) { background: #ffe6ba !important; border: 2px groove #464646 !important; border-color: #464646 !important; }
-    .result.ebook .links a:nth-child(2) { background: #bae6ff !important; border: 2px groove #464646 !important; border-color: #464646 !important; }
-    #results { margin: 0.1em !important; }
-    .result { width: 96vw !important; max-width: 260px !important; margin: 0.8em auto !important; padding: 0.2em 0.05em !important; min-width: 0 !important; }
-    .result .artwork { width: 100% !important; padding-bottom: 100% !important; position: relative !important; }
-    .result .artwork img { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; object-fit: contain !important; background: #f0f0f0 !important; }
-  }
+  /* 430px overrides moved to standalone media query below */
+}
+
+/* Extra small devices <=430px */
+@media only screen and (max-width: 430px) {
+  #results { margin: 0.1em !important; }
+  .result { width: 96vw !important; max-width: 260px !important; margin: 0.8em auto !important; padding: 0.2em 0.05em !important; }
+  .result .artwork img { object-fit: contain !important; }
 }
 
 #title {
