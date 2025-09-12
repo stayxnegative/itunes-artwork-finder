@@ -212,8 +212,9 @@ body {
 }
   @media only screen and (max-width: 600px) {
     body {
-      /* Keep same fixed wallpaper on mobile; some mobile browsers ignore fixed */
-      background-attachment: fixed; /* will gracefully degrade where unsupported */
+      background-attachment: fixed; /* wallpaper stays fixed, content scrolls */
+      min-height: 100vh; /* allow scrolling, do not force height */
+      overflow: auto; /* ensure scrolling is enabled */
     }
     /* ...existing code for mobile styles... */
   }
