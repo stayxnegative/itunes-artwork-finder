@@ -1461,6 +1461,26 @@ function handleCardSelection() {
     });
   });
 }
+
+// iOS scroll lock workaround for overlays/modals
+let scrollPos = 0;
+function lockBodyScroll() {
+  scrollPos = window.scrollY || window.pageYOffset;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollPos}px`;
+  document.body.style.width = '100%';
+  document.body.style.height = '100%';
+  document.body.style.overflow = 'hidden';
+}
+function unlockBodyScroll() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  document.body.style.height = '';
+  document.body.style.overflow = '';
+  window.scrollTo(0, scrollPos);
+}
+// Example usage: lockBodyScroll() when opening modal, unlockBodyScroll() when closing
     </script>
   </head>
   <body onload="onload()">
