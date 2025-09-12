@@ -966,6 +966,19 @@ body::before {
   }
 }
 
+/* Fixed wallpaper for iOS and all browsers */
+#fixed-wallpaper {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: none;
+}
     </style>
   <script>
 'use strict'
@@ -1450,5 +1463,8 @@ function handleCardSelection() {
 }
     </script>
   </head>
-  <body onload="onload()"></body>
+  <body onload="onload()">
+<!-- Fixed wallpaper for iOS and all browsers -->
+<div id="fixed-wallpaper"></div>
+</body>
 </html>
