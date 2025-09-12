@@ -1,13 +1,18 @@
-/* Strong bottom-right drop shadow for modal artwork size button text */
+/* Modal stylesheet cleanup (2025-09-12):
+   - Removed duplicate #artworkModal .modal-links a blocks
+   - Consolidated conflicting text-shadow declarations
+   - Preserved frosted glass + neon prism glow + icy artwork border
+   - Removed redundant padding/transition duplicates
+*/
+
+/* Strong bottom-right drop shadow & icy outline for modal artwork size button text */
 #artworkModal .modal-links a span {
-  /* Spread-out icy/dark outline around font */
   text-shadow:
     0 0 4px #2a3a44,
     0 0 8px #2a3a44,
     0 0 2px #7fdcff,
     0 0 6px #7fdcff,
-    3px 4px 12px rgba(0,0,0,0.38);
-  text-shadow: 3px 4px 12px rgba(0,0,0,0.55);
+    3px 4px 12px rgba(0,0,0,0.55);
 }
 /* Rounded corners and icy glass border for modal artwork image */
 #artworkModal .modal-artwork {
@@ -18,42 +23,34 @@
   background-clip: padding-box, border-box;
   box-shadow: 0 4px 18px 0 rgba(127,220,255,0.07);
 }
+/* Base button (glass + prism glow) */
 #artworkModal .modal-links a {
-  display: inline-block;
-  float: none;
-  padding: 0.45em 0.8em;
-  color: #1a1a1a;
-  font-weight: bold;
-  text-decoration: none;
-  border: 2px solid rgba(255,255,255,0.38) !important;
-  font-size: 0.95em;
-  border-radius: 0.3em;
-  transition: background 0.4s, color 0.4s, border 0.4s;
-  box-sizing: border-box;
   position: relative;
-  overflow: hidden;
-  border-radius: 0.5em !important;
-  border: 2px solid rgba(255,255,255,0.38) !important;
-  font-weight: bold !important;
-  font-size: 18pt !important;
-  color: #fff !important;
-  background: rgba(255,255,255,0.16) !important;
-  box-shadow:
-    0 0 4px 1px #ff00cc99,   /* neon pink */
-    0 0 4px 1px #00ffe799,   /* neon cyan */
-    0 0 4px 1px #fff70099,   /* neon yellow */
-    0 0 4px 1px #00ff8a99,   /* neon green */
-    0 0 4px 1px #a700ff99,   /* neon purple */
-    0 0 4px 1px #ff800099;   /* neon orange */
-  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
-  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
-  transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
-  padding: 0.45em 0.8em !important;
-  min-width: 3em;
-  min-height: 2.2em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0.45em 0.8em;
+  min-width: 3em;
+  min-height: 2.2em;
+  font-size: 18pt !important;
+  font-weight: bold !important;
+  color: #fff !important;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+  border-radius: 0.5em !important;
+  background: rgba(255,255,255,0.16) !important;
+  box-shadow:
+    0 0 4px 1px #ff00cc99,
+    0 0 4px 1px #00ffe799,
+    0 0 4px 1px #fff70099,
+    0 0 4px 1px #00ff8a99,
+    0 0 4px 1px #a700ff99,
+    0 0 4px 1px #ff800099;
+  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 #artworkModal .modal-links a:nth-child(1) {
   background: #97f19d !important;
@@ -204,33 +201,8 @@
   backdrop-filter: blur(80px) saturate(180%) brightness(1.32) !important;
   -webkit-backdrop-filter: blur(80px) saturate(180%) brightness(1.32) !important;
 }
-/* Glass effect for modal artwork buttons, matching submit button style */
-#artworkModal .modal-links a {
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.5em !important;
-  border: 2px solid rgba(255,255,255,0.38) !important;
-  font-weight: bold !important;
-  font-size: 18pt !important;
-  color: #fff !important;
-  background: rgba(255,255,255,0.16) !important;
-  box-shadow:
-    0 0 4px 1px #ff00cc99,   /* neon pink */
-    0 0 4px 1px #00ffe799,   /* neon cyan */
-    0 0 4px 1px #fff70099,   /* neon yellow */
-    0 0 4px 1px #00ff8a99,   /* neon green */
-    0 0 4px 1px #a700ff99,   /* neon purple */
-    0 0 4px 1px #ff800099;   /* neon orange */ !important;
-  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
-  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
-  transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
-  padding: 0.45em 0.8em !important;
-  min-width: 3em;
-  min-height: 2.2em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
+/* (Removed duplicate block above) */
+
 #artworkModal .modal-links a:hover {
   background: rgba(255,255,255,0.28) !important;
   color: #f8fcff !important;
