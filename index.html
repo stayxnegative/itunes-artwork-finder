@@ -206,13 +206,31 @@ body {
 }
   @media only screen and (max-width: 600px) {
   body {
-    background: none !important;
+    background: #000 url('images/test_wallpaper.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
     min-height: 100vh !important;
     min-width: 100vw !important;
     width: 100vw !important;
     height: 100vh !important;
     overflow: auto !important;
     position: relative !important;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll;
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: block;
   }
 }
 
@@ -420,8 +438,6 @@ body::before {
   padding: 0.5em 1em;
   border: 1.5px solid rgba(255,255,255,0.22);
   font-weight: 500;
-  
-  #searchForm {
   background: rgba(255,255,255,0.16);
   color: #fff;
   border-radius: 0.7em;
@@ -431,23 +447,6 @@ body::before {
   transition: box-shadow 0.18s, border-color 0.18s;
 }
 
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
-    background-size: cover;
-    background-attachment: scroll;
-    width: 100vw;
-    height: 100vh;
-    min-width: 100vw;
-    min-height: 100vh;
-    display: block;
-  }
 #searchForm input[name=term] {
   width: 100%;
   min-width: 0;
