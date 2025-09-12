@@ -202,8 +202,10 @@ body {
   transform: translateY(-50%);
   background: rgba(255,255,255,0.22);
   border: 2px solid rgba(255,255,255,0.7) !important;
-  color: #e53935 !important;
+  color: #8d8f90d6 !important; /* dark icy gray */
+  text-shadow: 0 2px 6px #7a8a99, 0 0px 2px #dbe6ee; /* icy gray shadow */
   font-size: 1.15em;
+  font-weight: bold !important;
   border-radius: 50%;
   cursor: pointer;
   line-height: 1;
@@ -421,10 +423,12 @@ body {
     button#clearBtn:hover,
     button#clearBtn:active,
     button#clearBtn:focus {
-      background: rgba(255,255,255,0.32) !important;
-      border: 2px solid rgba(229,57,53,0.7) !important;
-      color: #fff !important;
-      box-shadow: 0 4px 16px 0 rgba(31,38,135,0.18), 0 0 0 1.5px rgba(255,255,255,0.12) !important;
+  background: rgba(255,255,255,0.16) !important;
+  border: 2px solid rgba(160,160,160,0.7) !important; /* a little bit darker, still transparent */
+  color: #eaeaeacc !important; /* lighter shade of #3a4952 for X on hover */
+  font-weight: bold !important;
+  text-shadow: none !important;
+      box-shadow: 0 4px 16px 0 rgba(127,220,255,0.18), 0 0 0 1.5px rgba(255,255,255,0.12) !important;
       transition: background 0.4s, color 0.4s, border 0.4s !important;
       backdrop-filter: blur(60px) saturate(180%) brightness(1.22);
       -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.22);
@@ -443,31 +447,6 @@ body {
       -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
       transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
     }
-    button#submitBtn.submit-checkmark,
-    button#submitBtn.submit-checkmark:hover,
-    button#submitBtn.submit-checkmark:active,
-    button#submitBtn.submit-checkmark:focus {
-      background: none !important;
-      border: none !important;
-      color: #97f19d !important;
-      box-shadow: none !important;
-      transition: none !important;
-    }
-    
-  #submitBtn.submit-checkmark {
-  background: none !important;
-  border: none !important;
-  color: #97f19d !important;
-  box-shadow: none !important;
-  transition: none !important;
-  }
-#clearBtn:hover {
-  background: rgba(255,255,255,0.32) !important;
-  color: #fff !important;
-  border-color: rgba(229,57,53,0.7) !important;
-  backdrop-filter: blur(60px) saturate(180%) brightness(1.22) !important;
-  -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.22) !important;
-}
 
 #searchForm input {
   -webkit-appearance: none;
