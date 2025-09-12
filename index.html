@@ -21,12 +21,13 @@
   <link rel="stylesheet" href="loader.css">
   <link rel="preload" as="image" href="images/test_wallpaper.jpg">
   <style type="text/css">
+
 @media (min-width: 1001px) {
   #results {
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1em;
-  }  
+    gap: 1em;|
+
 
   .result {
   flex-basis: 10%;
@@ -199,13 +200,6 @@ body {
   backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
   -webkit-backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
 }
-  #clearBtn.checkmark {
-  background: none !important;
-  border: none !important;
-  color: #97f19d !important;
-  box-shadow: none !important;
-  transition: none !important;
-}
   @media only screen and (max-width: 600px) {
   body {
     background: none !important;
@@ -354,13 +348,12 @@ body::before {
     border-color: #464646 !important;
   }
     button#clearBtn {
-      background: rgba(255,255,255,0.22) !important;
-      border: 2px solid rgba(255,255,255,0.7) !important;
-      color: #e53935 !important;
-      box-shadow: 0 2px 8px 0 rgba(31,38,135,0.13), 0 0 0 1px rgba(255,255,255,0.08) !important;
-      transition: background 0.4s, color 0.4s, border 0.4s !important;
-      backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
-      -webkit-backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
+  background: rgba(255,255,255,0.16) !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+  box-shadow: 0 2px 12px -2px rgba(31,38,135,0.13), 0 0 0 1px rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
     }
     button#clearBtn:hover,
     button#clearBtn:active,
@@ -372,16 +365,6 @@ body::before {
       transition: background 0.4s, color 0.4s, border 0.4s !important;
       backdrop-filter: blur(60px) saturate(180%) brightness(1.22);
       -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.22);
-    }
-    button#clearBtn.checkmark,
-    button#clearBtn.checkmark:hover,
-    button#clearBtn.checkmark:active,
-    button#clearBtn.checkmark:focus {
-      background: none !important;
-      border: none !important;
-      color: #97f19d !important;
-      box-shadow: none !important;
-      transition: none !important;
     }
     button#submitBtn,
     button#submitBtn:active,
@@ -1156,13 +1139,9 @@ async function onload() {
   clearBtn.addEventListener('click', function() {
     searchInput.value = "";
     searchInput.focus();
-    clearBtn.innerHTML = "&#10003;";
-    clearBtn.classList.add('checkmark');
-    setTimeout(function() {
-      clearBtn.innerHTML = "&#10006;";
-      clearBtn.classList.remove('checkmark');
-      clearBtn.style.display = "none";
-    }, 1200);
+    clearBtn.value = "";
+    clearBtn.focus();
+    clearBtn.style.display = "none";
   });
   function toggleClearBtn() {
     clearBtn.style.display = searchInput.value ? "block" : "none";
