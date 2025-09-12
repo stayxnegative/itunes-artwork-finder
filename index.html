@@ -1194,9 +1194,9 @@ async function onload() {
   }
 
   document.body.innerHTML = `
-  <header class="site-header"></header>
-  <div class="site-logo"></div>
-  <form id="searchForm" method="GET">
+    <header class="site-header"></header>
+    <div class="site-logo"></div>
+    <form id="searchForm" method="GET">
       <div id="searchField">
         <h1 id="title" style="text-align:center;cursor:pointer;">iTunes Artwork Finder</h1>
         <div class="input-row">
@@ -1219,8 +1219,13 @@ async function onload() {
       <div id="options"></div>
     </form>
     <div id="results"></div>
-  <div id="artworkModal" style="display:none;"></div>
+    <div id="artworkModal" style="display:none;"></div>
+    <footer class="site-footer">
+  © <span id="footer-year"></span> Tyrrtech, Inc. All Rights Reserved.
+    </footer>
   `;
+  // Set current year in footer
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
 
   // Create clear button via JS and add functionality
   const searchInput = document.getElementById('searchInput');
@@ -1557,5 +1562,16 @@ function handleCardSelection() {
 }
     </script>
   </head>
-  <body onload="onload()"></body>
+  <body onload="onload()">
+    <!-- ...existing page content... -->
+    <footer class="site-footer">
+      <span id="footer-year"></span> © Tyrrtech, Inc. All Rights Reserved
+    </footer>
+    <script>
+      // Set current year in footer after DOM is loaded
+      window.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
 </html>
