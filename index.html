@@ -211,11 +211,11 @@ body {
   body {
     background: #000 url('images/test_wallpaper.jpg') no-repeat center center fixed !important;
     background-size: cover !important;
-  min-height: 100vh !important;
-  min-width: 100vw !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  /* overflow and position restored to default */
+    min-height: 100vh !important;
+    min-width: 100vw !important;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
   }
   body::before {
     content: "";
@@ -234,7 +234,6 @@ body {
     min-height: 100vh;
     display: block;
   }
-}
 
 @media only screen and (max-width: 1000px) {
   body {
@@ -259,7 +258,7 @@ body::before {
   z-index: -1;
   background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
   background-size: cover;
-  background-attachment: scroll;
+  background-attachment: fixed;
   width: 100vw;
   height: 100vh;
   min-width: 100vw;
