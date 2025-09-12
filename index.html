@@ -937,12 +937,15 @@ body {
   position: relative;
   min-height: 100vh;
   background: transparent !important;
+  overflow: auto !important;
 }
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: -1;
+  width: 100vw;
+  height: 100vh;
   background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -950,7 +953,14 @@ body::before {
   pointer-events: none;
 }
 @supports (-webkit-touch-callout: none) {
+  body {
+    overflow: auto !important;
+    background: transparent !important;
+  }
   body::before {
+    position: fixed !important;
+    width: 100vw !important;
+    height: 100vh !important;
     background-attachment: scroll !important;
     will-change: transform;
   }
