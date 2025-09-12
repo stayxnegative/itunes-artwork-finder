@@ -1,3 +1,7 @@
+/* Slight dark drop shadow for artwork size button text */
+.result .links a span {
+  text-shadow: 3px 4px 12px rgba(0,0,0,0.55);
+}
 /* Move artwork size buttons down in album card */
 .result .links {
   margin-top: 0.75em !important;
@@ -61,3 +65,4 @@ body {
       linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
   padding: 0.45em 0.8em;
   font-family: inherit;
+}

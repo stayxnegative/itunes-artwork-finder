@@ -1,3 +1,14 @@
+/* Strong bottom-right drop shadow for modal artwork size button text */
+#artworkModal .modal-links a span {
+  /* Spread-out icy/dark outline around font */
+  text-shadow:
+    0 0 4px #2a3a44,
+    0 0 8px #2a3a44,
+    0 0 2px #7fdcff,
+    0 0 6px #7fdcff,
+    3px 4px 12px rgba(0,0,0,0.38);
+  text-shadow: 3px 4px 12px rgba(0,0,0,0.55);
+}
 /* Rounded corners and icy glass border for modal artwork image */
 #artworkModal .modal-artwork {
   border-radius: 1em;
