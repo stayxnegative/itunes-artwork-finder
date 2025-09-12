@@ -750,79 +750,121 @@ button#submitBtn:disabled:hover {
   font-size: 0.95em;
 }
 
+/* --- Glass effect, border, background, color, box-shadow, and hover for album card artwork size nth-child buttons (identical to modal.css, size adjusted for index.html) --- */
+.result .links a:nth-child(1),
+.result .links a:nth-child(2),
+.result .links a:nth-child(3),
+.result .links a:nth-child(4),
+.result.audiobook .links a:nth-child(1),
+.result.audiobook .links a:nth-child(2),
+.result.ebook .links a:nth-child(1),
+.result.ebook .links a:nth-child(2) {
+  display: inline-block;
+  float: none;
+  padding: 0.45em 0.8em !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+  font-size: 0.95em !important;
+  border-radius: 0.5em !important;
+  transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.16) !important;
+  box-shadow:
+    0 0 4px 1px #ff00cc99,
+    0 0 4px 1px #00ffe799,
+    0 0 4px 1px #fff70099,
+    0 0 4px 1px #00ff8a99,
+    0 0 4px 1px #a700ff99,
+    0 0 4px 1px #ff800099 !important;
+  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  min-width: 3em;
+  min-height: 2.2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .result .links a:nth-child(1) {
-  background: #97f19d;
+  background: #97f19d !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
 }
-
 .result .links a:nth-child(2) {
-  background: #f1e697;
+  background: #f1e697 !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
 }
-
 .result .links a:nth-child(3) {
-  background: #97c6f1;
+  background: #97c6f1 !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
 }
-
 .result .links a:nth-child(4) {
-  background: #f1a3a3;
+  background: #f1a3a3 !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
 }
-
-.result .links a:nth-child(4):hover {
-  background: #b33a3a;
-  color: #ffffff;
-}
-
-
 .result .links a:nth-child(1):hover {
-  background: #4e9c5a;
-  color: #ffffff;
+  background: rgba(78,220,120,0.45) !important;
+  color: #fff !important;
 }
-
 .result .links a:nth-child(2):hover {
-  background: #b3a21a;
-  color: #ffffff;
+  background: rgba(255,230,80,0.45) !important;
+  color: #fff !important;
 }
-
-
 .result .links a:nth-child(3):hover {
-  background: #1a4ab3;
-  color: #ffffff;
+  background: rgba(80,170,255,0.45) !important;
+  color: #fff !important;
 }
-
-.result .links a:hover {
-  background: #212121;
-  color: #ffffff;
+.result .links a:nth-child(4):hover {
+  background: rgba(255,80,80,0.45) !important;
+  color: #fff !important;
 }
-
+.result .links a span {
+  position: relative;
+  z-index: 1;
+}
 /* Audiobook buttons: 3000 and HD */
 .result.audiobook .links a:nth-child(1) {
-  background: #e6baff;
+  background: #e6baff !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
 }
 .result.audiobook .links a:nth-child(2) {
-  background: #baffd6;
+  background: #baffd6 !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
 }
 .result.audiobook .links a:nth-child(1):hover {
-  background: #a36ad6;
-  color: #fff;
+  background: rgba(78,220,120,0.45) !important;
+  color: #fff !important;
 }
 .result.audiobook .links a:nth-child(2):hover {
-  background: #1ad68b;
-  color: #fff;
+  background: rgba(255,230,80,0.45) !important;
+  color: #fff !important;
 }
-
 /* Ebook buttons: 2200 and HD */
 .result.ebook .links a:nth-child(1) {
-  background: #ffe6ba;
+  background: #ffe6ba !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
 }
 .result.ebook .links a:nth-child(2) {
-  background: #bae6ff;
+  background: #bae6ff !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
 }
 .result.ebook .links a:nth-child(1):hover {
-  background: #d6a36a;
-  color: #fff;
+  background: rgba(80,170,255,0.45) !important;
+  color: #fff !important;
 }
 .result.ebook .links a:nth-child(2):hover {
-  background: #6ad6a3;
-  color: #fff;
+  background: rgba(255,80,80,0.45) !important;
+  color: #fff !important;
 }
 
 #error, #progress {
@@ -928,7 +970,6 @@ button#submitBtn:disabled:hover {
   margin-bottom: 0.5em;
   font-size: 1.7em;
 }
-
 /* --- iOS Safari workaround for fixed wallpaper --- */
 html, body {
   height: 100%;
@@ -964,6 +1005,71 @@ body::before {
     background-attachment: scroll !important;
     will-change: transform;
   }
+}
+
+/* --- Glass effect, border, hover, subtle glow for album card artwork size buttons --- */
+.result .links a:nth-child(1),
+.result .links a:nth-child(2),
+.result .links a:nth-child(3),
+.result .links a:nth-child(4),
+.result.audiobook .links a:nth-child(1),
+.result.audiobook .links a:nth-child(2),
+.result.ebook .links a:nth-child(1),
+.result.ebook .links a:nth-child(2) {
+  background: rgba(255,255,255,0.16) !important;
+  color: #fff !important;
+  border-radius: 0.5em !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+}
+
+.result .links a:nth-child(1):hover {
+  background: rgba(78,220,120,0.45) !important;
+  color: #fff !important;
+  border: 2px solid rgba(78,220,120,0.45) !important;
+}
+.result .links a:nth-child(2):hover {
+  background: rgba(255,230,80,0.45) !important;
+  color: #fff !important;
+  border: 2px solid rgba(255,230,80,0.45) !important;
+}
+.result .links a:nth-child(3):hover {
+  background: rgba(80,170,255,0.45) !important;
+  color: #fff !important;
+  border: 2px solid rgba(80,170,255,0.45) !important;
+}
+.result .links a:nth-child(4):hover {
+  background: rgba(255,80,80,0.45) !important;
+  color: #fff !important;
+  border: 2px solid rgba(255,80,80,0.45) !important;
+}
+.result.audiobook .links a:nth-child(1):hover {
+  background: rgba(78,220,120,0.45) !important;
+  color: #fff !important;
+  border: 2px solid rgba(78,220,120,0.45) !important;
+}
+.result.audiobook .links a:nth-child(2):hover {
+  background: rgba(255,230,80,0.45) !important;
+  color: #fff !important;
+  border: 2px solid rgba(255,230,80,0.45) !important;
+}
+.result.ebook .links a:nth-child(1):hover {
+  background: rgba(80,170,255,0.45) !important;
+  color: #fff !important;
+  border: 2px solid rgba(80,170,255,0.45) !important;
+}
+.result.ebook .links a:nth-child(2):hover {
+  background: rgba(255,80,80,0.45) !important;
+  color: #fff !important;
+  border: 2px solid rgba(255,80,80,0.45) !important;
+}
+
+/* Ensure text stays visible and centered */
+.result .links a span {
+  position: relative;
+  z-index: 2;
+  color: inherit !important;
+  font-weight: inherit !important;
+  font-size: inherit !important;
 }
 
     </style>
@@ -1303,8 +1409,8 @@ async function onload() {
             artworkUrl3000Audiobook = artworkUrl3000Audiobook.replace(/\.jpg$/, '.png');
           }
           linksHtml = `
-            <a href="${artworkUrl3000Audiobook}" download>3000</a>
-            <a href="${artworkUrl5000}" download>HD</a>
+            <a href="${artworkUrl3000Audiobook}" download><span>3000</span></a>
+            <a href="${artworkUrl5000}" download><span>HD</span></a>
           `;
         } else if (entity === 'ebook') {
           let artworkUrl1467x2200Ebook = artworkUrl1467x2200;
@@ -1312,15 +1418,15 @@ async function onload() {
             artworkUrl1467x2200Ebook = artworkUrl1467x2200Ebook.replace(/\.jpg$/, '.png');
           }
           linksHtml = `
-            <a href="${artworkUrl1467x2200Ebook}" download>2200</a>
-            <a href="${artworkUrl5000}" download>HD</a>
+            <a href="${artworkUrl1467x2200Ebook}" download><span>2200</span></a>
+            <a href="${artworkUrl5000}" download><span>HD</span></a>
           `;
         } else {
           linksHtml = `
-            <a href="${artworkUrl600}" download>600</a>
-            <a href="${artworkUrl1500}" download>1500</a>
-            <a href="${artworkUrl3000}" download>3000</a>
-            <a href="${artworkUrl5000}" download>HD</a>
+            <a href="${artworkUrl600}" download><span>600</span></a>
+            <a href="${artworkUrl1500}" download><span>1500</span></a>
+            <a href="${artworkUrl3000}" download><span>3000</span></a>
+            <a href="${artworkUrl5000}" download><span>HD</span></a>
           `;
         }
         return `<div class="result${entity === 'audiobook' ? ' audiobook' : (entity === 'ebook' ? ' ebook' : '')}">
