@@ -91,9 +91,11 @@ html {
 }
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background: #000 url('images/test_wallpaper.jpg') no-repeat center center fixed;
+  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
   background-size: cover;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
   color: #fff;
 }
 
@@ -208,44 +210,29 @@ body {
   -webkit-backdrop-filter: blur(38px) saturate(180%) brightness(1.18);
 }
   @media only screen and (max-width: 600px) {
-  body {
-   background: #000 url('images/background.jpg') no-repeat center center !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-attachment: scroll !important;
-  }
+    body {
+      background: #000 url('images/background.jpg') no-repeat center center !important;
+      background-size: cover !important;
+      min-height: 100vh !important;
+      margin: 0;
+      padding: 0;
+      background-attachment: scroll !important;
+    }
+    /* ...existing code for mobile styles... */
   }
 
 @media only screen and (max-width: 1000px) {
   body {
-    background: none !important;
-    min-height: 100vh !important;
-    min-width: 100vw !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    overflow: auto !important;
-    position: relative !important;
+      background: #000 url('images/background.jpg') no-repeat center center !important;
+      background-size: cover !important;
+      min-height: 100vh !important;
+      margin: 0;
+      padding: 0;
+      background-attachment: scroll !important;
   }
 }
 
-/* This must be outside any media query */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed;
-  width: 100vw;
-  height: 100vh;
-  min-width: 100vw;
-  min-height: 100vh;
-  display: block;
-}
+/* body::before removed; background handled by body and media queries */
   .result .links a:nth-child(1):hover {
     background: #4e9c5a !important;
     color: #ffffff !important;
