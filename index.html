@@ -209,14 +209,31 @@ body {
 }
   @media only screen and (max-width: 600px) {
   body {
-    background: #000 url('images/test_wallpaper.jpg') repeat !important;
-    background-size: auto !important;
+    background: #000 url('images/test_wallpaper.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
     min-height: 100vh !important;
     min-width: 100vw !important;
     width: 100vw !important;
     height: 100vh !important;
     overflow: auto !important;
     position: relative !important;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: block;
   }
 }
 
@@ -232,6 +249,24 @@ body {
   }
 }
 
+/* This must be outside any media query */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: #000 url('images/test_wallpaper.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: scroll;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: block;
+}
   .result .links a:nth-child(1):hover {
     background: #4e9c5a !important;
     color: #ffffff !important;
