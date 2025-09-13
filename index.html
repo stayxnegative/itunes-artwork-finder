@@ -364,54 +364,6 @@ body {
   .result.ebook .links a:nth-child(2) {
     color: #1a1a1a !important;
   }
-  .result .links a:nth-child(1) {
-    background: #97f19d !important;
-    color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
-  }
-  .result .links a:nth-child(2) {
-    background: #f1e697 !important;
-    color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
-  }
-  .result .links a:nth-child(3) {
-    background: #97c6f1 !important;
-    color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
-  }
-  .result .links a:nth-child(4) {
-    background: #f1a3a3 !important;
-    color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
-  }
-  .result.audiobook .links a:nth-child(1) {
-    background: #e6baff !important;
-    color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
-  }
-  .result.audiobook .links a:nth-child(2) {
-    background: #baffd6 !important;
-    color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
-  }
-  .result.ebook .links a:nth-child(1) {
-    background: #ffe6ba !important;
-    color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
-  }
-  .result.ebook .links a:nth-child(2) {
-    background: #bae6ff !important;
-    color: #1a1a1a !important;
-    border: 2px groove #464646 !important;
-    border-color: #464646 !important;
-  }
     button#clearBtn {
   background: rgba(255,255,255,0.16) !important;
   border: 2px solid rgba(255,255,255,0.38) !important;
@@ -659,11 +611,16 @@ button#submitBtn:disabled:hover {
   color: inherit;
   text-decoration: none;
   transition: color 0.2s, text-shadow 0.2s;
+  text-shadow:
+    1.5px 1.5px 0px rgba(0,0,0,0.68), /* solid, tight bottom right for small font */
+    2px 2px 1px rgba(0,0,0,0.32); /* subtle, tight bottom right */
 }
 
 .result h2 a:hover {
-  color: #e9f8ff7a;
-  text-shadow: 2px 4px 8px #000000;
+  color: #e9f8ffdb;
+  text-shadow:
+    1.5px 1.5px 0px rgba(0,0,0,0.78), /* more solid, tight bottom right */
+    2px 2px 1px rgba(0,0,0,0.38); /* subtle, tight bottom right */
 }
 
 .result .artwork {
@@ -803,10 +760,6 @@ button#submitBtn:disabled:hover {
 .result .links a:nth-child(4):hover {
   background: rgba(255,80,80,0.45) !important;
   color: #fff !important;
-}
-.result .links a span {
-  position: relative;
-  z-index: 1;
 }
 /* Audiobook buttons: 3000 and HD */
 .result.audiobook .links a:nth-child(1) {
@@ -1050,6 +1003,9 @@ body::before {
   color: inherit !important;
   font-weight: inherit !important;
   font-size: inherit !important;
+  text-shadow:
+    1px 1.5px 1px rgba(34,34,34,0.65), /* softer, tighter bottom shadow */
+    1.5px 2px 1px rgba(68,68,68,0.38); /* very subtle, tight bottom shadow */
 }
 
     </style>
