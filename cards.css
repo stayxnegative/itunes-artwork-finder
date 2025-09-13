@@ -1,0 +1,131 @@
+/* Card Layout Stylesheet
+   - Album/artwork card styling
+   - Glass effect card containers
+   - Responsive layout behavior
+*/
+
+/* Desktop card styling (large screens) */
+@media (min-width: 1001px) {
+  body {
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow: auto;
+  }
+  #results {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  .result {
+    flex-basis: 10%;
+    margin: 1em;
+    padding: 0.6em 0.4em 0.3em 0.4em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 200px;
+    max-width: 400px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 1em;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: none;
+    transform: translateY(-12px) scale(1.04);
+    transition: box-shadow 0.3s, transform 0.3s;
+    backdrop-filter: blur(32px) saturate(180%) brightness(1.18);
+    -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(1.18);
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    border-left: 1px solid rgba(255,255,255,0.3);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .result .artwork {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+  }
+  
+  .result .artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .result .links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25em;
+    margin-top: 8px;
+    margin-bottom: 0.1em;
+    font-size: 0.65em;
+    position: static;
+    visibility: visible;
+  }
+  
+  .result .links a {
+    flex: 0 0 auto;
+    padding: 0.35em 0.6em;
+    font-size: 0.9em;
+    white-space: nowrap;
+    min-width: 0;
+    max-width: 22%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Mobile card styling */
+@media (max-width: 1024px) {
+  .result {
+    background: rgba(255,255,255,0.15);
+    border-radius: 1em;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: none;
+    transform: translateY(-12px) scale(1.04);
+    transition: box-shadow 0.3s, transform 0.3s;
+    backdrop-filter: blur(32px) saturate(180%) brightness(1.18);
+    -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(1.18);
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.22);
+    border-left: 1px solid rgba(255,255,255,0.22);
+    border-right: 1px solid rgba(255,255,255,0.09);
+    border-bottom: 1px solid rgba(255,255,255,0.09);
+  }
+}
+
+/* Card hover effects */
+.result:hover {
+  box-shadow: 
+    0 0 0 4px rgba(255,255,255,0.18),
+    0 4px 32px 0 rgba(31,38,135,0.32),
+    0 8px 64px 0 rgba(0,0,0,0.18);
+}
+
+/* Card title styling */
+.result h2 {
+  font-size: 0.85em;
+  margin: 0.5em 0 0 0;
+  text-align: center;
+  color: #fff;
+  text-shadow: 
+    2px 2px 0px rgba(0,0,0,0.72),
+    3px 3px 1px rgba(0,0,0,0.38);
+}
+
+.result h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.result h2 a:hover {
+  color: #e9f8ffdb;
+}
