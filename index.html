@@ -29,15 +29,34 @@
 
   </head>
   <body>
-    <!-- ...existing page content... -->
+    <form id="searchForm">
+      <div id="searchField">
+        <h1 id="title">iTunes Artwork Finder</h1>
+        <div class="input-row">
+          <div id="inputWrapper">
+            <input name="term" id="searchInput" type="text" placeholder="Search for albums, songs, movies, audiobooks, ebooks, or apps..." autocomplete="off">
+            <button type="button" id="clearBtn">×</button>
+          </div>
+          <button type="submit" id="submitBtn">Search</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="results"></div>
+
+    <div id="artworkModal" style="display:none;">
+      <div class="modal-content">
+        <div class="modal-close">×</div>
+        <img class="modal-artwork" src="" alt="">
+        <div class="modal-title">
+          <a href="" target="_blank"></a>
+        </div>
+        <div class="modal-links"></div>
+      </div>
+    </div>
+
     <footer class="site-footer">
       <span id="footer-year"></span> © Tyrrtech, Inc. All Rights Reserved
     </footer>
-    <script>
-      // Set current year in footer after DOM is loaded
-      window.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('footer-year').textContent = new Date().getFullYear();
-      });
-    </script>
   </body>
 </html>

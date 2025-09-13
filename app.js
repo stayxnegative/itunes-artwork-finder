@@ -207,7 +207,10 @@ async function onload() {
   `;
   
   // Set current year in footer
-  document.getElementById('footer-year').textContent = new Date().getFullYear();
+  const footerYearEl = document.getElementById('footer-year');
+  if (footerYearEl) {
+    footerYearEl.textContent = new Date().getFullYear();
+  }
 
   // Initialize form controls
   initializeFormControls();
