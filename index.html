@@ -1427,6 +1427,11 @@ async function onload() {
           // Add Save As dialog logic to modal artwork size buttons
           modal.querySelectorAll('.modal-links a').forEach(function(link) {
             link.addEventListener('click', function(e) {
+              if (window.matchMedia('(max-width: 600px)').matches) {
+                // On small screens, open in new tab
+                link.setAttribute('target', '_blank');
+                return;
+              }
               e.preventDefault();
               const url = link.getAttribute('href');
               let filename = url.split('/').pop().split('?')[0];
@@ -1456,6 +1461,11 @@ async function onload() {
       // Only apply Save As dialog for artwork size/download links
       document.querySelectorAll('.result .links a[download], .modal-links a[download]').forEach(function(link) {
         link.addEventListener('click', function(e) {
+          if (window.matchMedia('(max-width: 600px)').matches) {
+            // On small screens, open in new tab
+            link.setAttribute('target', '_blank');
+            return;
+          }
           e.preventDefault();
           const url = link.getAttribute('href');
           // Extract filename from URL
