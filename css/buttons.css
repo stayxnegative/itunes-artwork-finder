@@ -1,0 +1,126 @@
+/* Artwork Size Buttons Stylesheet
+   - Glass effect buttons with prism glow
+   - Hover effects for all button types
+   - Responsive button behavior
+*/
+
+/* Glass effect, border, background, color, box-shadow for artwork size buttons */
+.result .links a:nth-child(1),
+.result .links a:nth-child(2),
+.result .links a:nth-child(3),
+.result .links a:nth-child(4),
+.result.audiobook .links a:nth-child(1),
+.result.audiobook .links a:nth-child(2),
+.result.ebook .links a:nth-child(1),
+.result.ebook .links a:nth-child(2),
+.result.movie .links a:nth-child(1),
+.result.app .links a:nth-child(1) {
+  display: inline-block;
+  float: none;
+  padding: 0.45em 0.8em !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+  font-size: 0.95em !important;
+  border-radius: 0.5em !important;
+  transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.16) !important;
+  box-shadow:
+    0 0 4px 1px #ff00cc99,
+    0 0 4px 1px #00ffe799,
+    0 0 4px 1px #fff70099,
+    0 0 4px 1px #00ff8a99,
+    0 0 4px 1px #a700ff99,
+    0 0 4px 1px #ff800099 !important;
+  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  min-width: 3em;
+  min-height: 2.2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Default button colors (liquid glass background for all) - higher specificity */
+div.result .links a:nth-child(1),
+div.result .links a:nth-child(2),
+div.result .links a:nth-child(3),
+div.result .links a:nth-child(4) {
+  background: rgba(255,255,255,0.16) !important;
+  color: #fff !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+}
+
+/* Hover effects - removes rainbow prism and adds colored transparent backgrounds */
+div.result .links a:nth-child(1):hover {
+  background: rgba(78,220,120,0.45) !important;
+  color: #fff !important;
+}
+div.result .links a:nth-child(2):hover {
+  background: rgba(255,230,80,0.45) !important;
+  color: #fff !important;
+}
+div.result .links a:nth-child(3):hover {
+  background: rgba(80,170,255,0.45) !important;
+  color: #fff !important;
+}
+div.result .links a:nth-child(4):hover {
+  background: rgba(255,80,80,0.45) !important;
+  color: #fff !important;
+}
+
+/* Audiobook buttons: 3000 and HD - uniform liquid glass background */
+div.result.audiobook .links a:nth-child(1),
+div.result.audiobook .links a:nth-child(2) {
+  background: rgba(255,255,255,0.16) !important;
+  color: #fff !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+}
+div.result.audiobook .links a:nth-child(1):hover {
+  background: rgba(78,220,120,0.45) !important;
+  color: #fff !important;
+}
+div.result.audiobook .links a:nth-child(2):hover {
+  background: rgba(255,230,80,0.45) !important;
+  color: #fff !important;
+}
+
+/* Ebook buttons: 2200 and HD - uniform liquid glass background */
+div.result.ebook .links a:nth-child(1),
+div.result.ebook .links a:nth-child(2) {
+  background: rgba(255,255,255,0.16) !important;
+  color: #fff !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+}
+div.result.ebook .links a:nth-child(1):hover {
+  background: rgba(78,220,120,0.45) !important;
+  color: #fff !important;
+}
+div.result.ebook .links a:nth-child(2):hover {
+  background: rgba(255,230,80,0.45) !important;
+  color: #fff !important;
+}
+
+/* Movie button: HD - uses transparent glass background from main selector */
+/* Movie hover override - must come AFTER nth-child rules to override green */
+div.result.movie .links a:nth-child(1):hover {
+  background: rgba(180, 120, 255, 0.45) !important;
+  color: #fff !important;
+}
+
+/* TV button: HD - uses bright liquid glass cyan style (same as movie but different color) */
+div.result.tv .links a:nth-child(1):hover {
+  background: rgba(30, 180, 255, 0.45) !important;
+  color: #fff !important;
+}
+
+/* App button: HD - uses bright liquid glass orange style */
+/* App hover override - higher specificity to ensure it overrides general rules */
+div.result.app .links a:nth-child(1):hover {
+  background: rgba(255, 120, 30, 0.5) !important;
+  color: #fff !important;
+}

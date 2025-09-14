@@ -1,0 +1,90 @@
+/* Loader spinner for submit button - standalone styling, does NOT inherit button styles */
+.submit-loader {
+  display: none;
+  width: 2.1em;
+  height: 2.1em;
+  border: 5px solid rgba(255,255,255,0.22);
+  border-top: 5px solid #7fdcff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin: 0 auto;
+  backdrop-filter: blur(8px) saturate(180%) brightness(1.09);
+  -webkit-backdrop-filter: blur(8px) saturate(180%) brightness(1.09);
+}
+@media only screen and (max-width: 600px) {
+  .submit-loader {
+    width: 2.2em;
+    height: 2.2em;
+    border-width: 4px;
+  }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* When button shows loader, completely hide button visuals and show only loader */
+button#submitBtn.loading {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: transparent !important;
+  text-shadow: none !important;
+  cursor: wait !important;
+  outline: none !important;
+  width: var(--original-width) !important;
+  height: var(--original-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin-left: 0.25em !important;
+  margin-top: 0 !important;
+  z-index: 1002 !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Disable ALL hover effects when loading */
+button#submitBtn.loading:hover {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: transparent !important;
+  text-shadow: none !important;
+  z-index: 1002 !important;
+  outline: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Force disable any pseudo-elements that might show glass effects */
+button#submitBtn.loading:before,
+button#submitBtn.loading:after,
+button#submitBtn.loading:hover:before,
+button#submitBtn.loading:hover:after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Ensure button text is completely hidden when loading */
+button#submitBtn.loading .submit-text {
+  display: none !important;
+}
+
+/* Ensure loader is visible and properly positioned when loading */
+button#submitBtn.loading .submit-loader {
+  display: block !important;
+  margin: 0 !important;
+}

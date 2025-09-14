@@ -1,0 +1,276 @@
+/* Modal stylesheet cleanup (2025-09-12):
+   - Removed duplicate #artworkModal .modal-links a blocks
+   - Consolidated conflicting text-shadow declarations
+   - Preserved frosted glass + neon prism glow + icy artwork border
+   - Removed redundant padding/transition duplicates
+*/
+
+/* Strong bottom-right drop shadow & icy outline for modal artwork size button text */
+#artworkModal .modal-links a span {
+  text-shadow:
+    0 0 4px #2a3a44,
+    0 0 8px #2a3a44,
+    0 0 2px #7fdcff,
+    0 0 6px #7fdcff,
+    3px 4px 12px rgba(0,0,0,0.55);
+}
+/* Rounded corners and icy glass border for modal artwork image */
+#artworkModal .modal-artwork {
+  border-radius: 1em;
+  border: 4px solid rgba(127,220,255,0.28);
+  background-image:
+    linear-gradient(135deg, rgba(127,220,255,0.16) 0%, rgba(233,248,255,0.10) 100%);
+  background-clip: padding-box, border-box;
+  box-shadow: 0 4px 18px 0 rgba(127,220,255,0.07);
+}
+/* Base button (glass + prism glow) */
+#artworkModal .modal-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45em 0.8em;
+  min-width: 3em;
+  min-height: 2.2em;
+  font-size: 18pt !important;
+  font-weight: bold !important;
+  color: #fff !important;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+  border-radius: 0.5em !important;
+  background: rgba(255,255,255,0.16) !important;
+  box-shadow:
+    0 0 4px 1px #ff00cc99,
+    0 0 4px 1px #00ffe799,
+    0 0 4px 1px #fff70099,
+    0 0 4px 1px #00ff8a99,
+    0 0 4px 1px #a700ff99,
+    0 0 4px 1px #ff800099;
+  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s !important;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+#artworkModal .modal-links a:nth-child(1) {
+  background: #97f19d !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+}
+#artworkModal .modal-links a:nth-child(2) {
+  background: #f1e697 !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+}
+#artworkModal .modal-links a:nth-child(3) {
+  background: #97c6f1 !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+}
+#artworkModal .modal-links a:nth-child(4) {
+  background: #f1a3a3 !important;
+  color: #1a1a1a !important;
+  border: 2px solid rgba(255,255,255,0.38) !important;
+}
+/* Default modal button hover effects */
+#artworkModal .modal-links a:nth-child(1):hover {
+  background: rgba(78, 220, 120, 0.45) !important;
+  color: #ffffff !important;
+}
+#artworkModal .modal-links a:nth-child(2):hover {
+  background: rgba(255, 230, 80, 0.45) !important;
+  color: #ffffff !important;
+}
+#artworkModal .modal-links a:nth-child(3):hover {
+  background: rgba(80, 170, 255, 0.45) !important;
+  color: #ffffff !important;
+}
+#artworkModal .modal-links a:nth-child(4):hover {
+  background: rgba(255, 80, 80, 0.45) !important;
+  color: #ffffff !important;
+}
+
+/* TV Modal - cyan hover for TV content with maximum specificity */
+html body div#artworkModal.is-tv .modal-links a:nth-child(1):hover,
+html body div#artworkModal.is-tv .modal-links a:nth-child(2):hover,
+html body div#artworkModal.is-tv .modal-links a:nth-child(3):hover,
+html body div#artworkModal.is-tv .modal-links a:nth-child(4):hover,
+#artworkModal.is-tv .modal-links a:hover {
+  background: rgba(30, 180, 255, 0.45) !important;
+  color: #ffffff !important;
+}
+
+/* Movie Modal - purple hover for movie content with maximum specificity */
+html body div#artworkModal.is-movie .modal-links a:nth-child(1):hover,
+html body div#artworkModal.is-movie .modal-links a:nth-child(2):hover,
+html body div#artworkModal.is-movie .modal-links a:nth-child(3):hover,
+html body div#artworkModal.is-movie .modal-links a:nth-child(4):hover,
+#artworkModal.is-movie .modal-links a:hover {
+  background: rgba(180, 120, 255, 0.45) !important;
+  color: #ffffff !important;
+}
+
+/* App Modal - orange hover for app content with maximum specificity */
+html body div#artworkModal.is-app .modal-links a:nth-child(1):hover,
+html body div#artworkModal.is-app .modal-links a:nth-child(2):hover,
+html body div#artworkModal.is-app .modal-links a:nth-child(3):hover,
+html body div#artworkModal.is-app .modal-links a:nth-child(4):hover,
+#artworkModal.is-app .modal-links a:hover {
+  background: rgba(255, 120, 30, 0.45) !important;
+  color: #ffffff !important;
+}
+#artworkModal .modal-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+  max-width: 90vw;
+  display: inline-block;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: normal;
+  text-shadow:
+    2px 2px 0px rgba(0,0,0,0.72), /* very solid, tight bottom right */
+    3px 3px 1px rgba(0,0,0,0.38); /* subtle, tight bottom right */
+}
+#artworkModal .modal-title a:hover {
+  color: #e9f8ffdb;
+  text-shadow:
+    2px 2px 0px rgba(0,0,0,0.72), /* very solid, tight bottom right */
+    3px 3px 1px rgba(0,0,0,0.38); /* subtle, tight bottom right */
+}
+#artworkModal .modal-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-size: 1em;
+}
+#artworkModal .modal-links a {
+  flex: 0 0 auto;
+  padding: 0.45em 0.8em;
+  font-size: 1em;
+  white-space: nowrap;
+  border-radius: 0.3em;
+}
+#artworkModal .modal-title {
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1.2em;
+  margin-bottom: 0.2em;
+  text-shadow: 2px 3px 14px rgba(0,0,0,0.45);
+}
+/* Modal styles for large album art popup */
+#artworkModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#artworkModal.show {
+  display: flex;
+}
+#artworkModal .modal-content {
+  background: rgba(255,255,255,0.15);
+  border-radius: 1em;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 8px 32px 0 rgba(31,38,135,0.32), /* softer blue shadow, less spread */
+    0 4px 24px 0 rgba(0,0,0,0.62),      /* more solid, tighter black shadow */
+    0 0.5px 16px 0 rgba(255,255,255,0.22); /* brighter, wider white highlight for glass pop */
+  transform: translateY(-12px) scale(1.04);
+  transition: box-shadow 0.3s, transform 0.3s;
+  padding: 2em;
+  max-width: 500px;
+  word-break: break-all;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  backdrop-filter: blur(16px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(180%) brightness(1.1);
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  border-left: 1px solid rgba(255,255,255,0.3);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+#artworkModal .modal-artwork {
+  max-width: 400px;
+  max-height: 400px;
+  width: 80vw;
+  height: auto;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 16px 0 rgba(120,120,120,0.25);
+  margin-bottom: 1em;
+}
+
+#artworkModal .modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.5em;
+  z-index: 2;
+  background: rgba(255,255,255,0.22);
+  color: #4a5862;
+  text-shadow: 0 2px 8px rgba(74,88,98,0.32), 0 0px 2px rgba(255,255,255,0.18);
+  border: 2px solid rgba(255,255,255,0.38);
+  box-shadow: 0 2px 8px 0 rgba(31,38,135,0.13), 0 0 0 1px rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.09);
+  border-radius: 50%;
+  font-size: 1.35em;
+  width: 1.8em;
+  height: 1.8em;
+  cursor: pointer;
+  z-index: 20;
+  transition: background 0.4s, color 0.4s, border 0.4s;
+  backdrop-filter: blur(60px) saturate(180%) brightness(1.28);
+  -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.28);
+}
+#artworkModal .modal-close:hover {
+  background: rgba(255,255,255,0.32) !important;
+  color: #ff3b4e !important; /* bright liquid glass red */
+  text-shadow: 0 2px 8px rgba(255,59,78,0.32), 0 0px 2px rgba(255,255,255,0.18) !important;
+  border-color: rgba(255,255,255,0.58) !important; /* brighter glass effect */
+  backdrop-filter: blur(80px) saturate(180%) brightness(1.32) !important;
+  -webkit-backdrop-filter: blur(80px) saturate(180%) brightness(1.32) !important;
+}
+/* (Removed duplicate block above) */
+
+#artworkModal .modal-links a:hover {
+  background: rgba(255,255,255,0.28) !important;
+  color: #f8fcff !important;
+  box-shadow: 0 4px 18px 0 rgba(31,38,135,0.15),
+    0 0 0 2px rgba(255,255,255,0.18) !important;
+  border-color: rgba(255,255,255,0.38) !important;
+  backdrop-filter: blur(38px) saturate(180%) brightness(1.16);
+  -webkit-backdrop-filter: blur(38px) saturate(180%) brightness(1.16);
+}
+#artworkModal .modal-links a span {
+  position: relative;
+  z-index: 1;
+}
+/* Remove nth-child color backgrounds for pure glass look */
+#artworkModal .modal-links a:nth-child(1),
+#artworkModal .modal-links a:nth-child(2),
+#artworkModal .modal-links a:nth-child(3),
+#artworkModal .modal-links a:nth-child(4) {
+  background: rgba(255,255,255,0.16) !important;
+  color: #fff !important;
+}
+/* Removed duplicate hover rules - using content-specific colors instead */

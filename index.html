@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="bingbot" content="noindex, nofollow">
+  <meta name="yahoobot" content="noindex, nofollow">
+  <meta name="duckduckbot" content="noindex, nofollow">
+  <meta name="Baiduspider" content="noindex, nofollow">
+  <meta name="yandex" content="none">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://itunes.apple.com; object-src 'none';">
+  <meta name="theme-color" content="#000000">
+  <meta name="msapplication-navbutton-color" content="#000000">
+  <meta name="application-name" content="Artwork Finder">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Artwork Finder">
+  <title>iTunes Artwork Finder</title>
+  <link rel="manifest" href="assets/favicon/site.webmanifest">
+  <link rel="icon" type="image/ico" href="assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="512x512" href="assets/favicon/apple-touch-icon-512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon-180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body onload="onload()">
+  <header class="site-header"></header>
+  <div class="site-logo"></div>
+  <main>
+    <form id="searchForm" method="GET" autocomplete="off">
+      <section id="searchField">
+        <h1 id="title">iTunes Artwork Finder</h1>
+        <div class="input-row">
+          <div id="inputWrapper">
+            <input id="searchInput" type="text" name="term" placeholder="Enter search term here" />
+            <button id="clearBtn" type="button" aria-label="Clear search">&#10006;</button>
+          </div>
+          <button id="submitBtn" type="submit">Search</button>
+        </div>
+      </section>
+      <div id="options"></div>
+    </form>
+    <section id="results"></section>
+    <section id="artworkModal"></section>
+  </main>
+  <footer class="site-footer">
+    <span id="footer-year"></span> &copy; Tyrrtech, Inc. All Rights Reserved
+  </footer>
+  <script src="js/app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('footer-year').textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
