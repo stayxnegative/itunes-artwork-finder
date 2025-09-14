@@ -313,10 +313,3 @@ vercel dev  # for API proxy
 </div>
 
 ---
-
-## 🚀 Live Demo
-
-> **Access the app here:**
-> [https://art.tyrrtechinc.com](https://art.tyrrtechinc.com)
-
----
